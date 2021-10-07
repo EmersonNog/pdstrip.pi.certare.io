@@ -19,13 +19,13 @@ export const environment = {
         measurementId: "G-934X55YFC9"
     },
     prod: {
-        apiKey: "AIzaSyDjNGGP0-qoSsubxiK1LfdYowR2q_TftC4",
-        authDomain: "pav-detect.firebaseapp.com",
-        databaseURL: "https://pav-detect.firebaseio.com",
-        projectId: "pav-detect",
-        storageBucket: "pav-detect.appspot.com",
-        messagingSenderId: "429516311726",
-        appId: "1:429516311726:web:956d0a7d77e86c2434713f",
-        measurementId: "G-8LKTDTVZV0"
+        apiKey: "AIzaSyCJRFe087LiR4Vca0lZcBVp-V6V7IwnBjg",
+        authDomain: "pav-detect-dev.firebaseapp.com",
+        databaseURL: "https://pav-detect-dev-default-rtdb.firebaseio.com",
+        projectId: "pav-detect-dev",
+        storageBucket: "pav-detect-dev.appspot.com",
+        messagingSenderId: "363085076310",
+        appId: "1:363085076310:web:1624c6c943f28fe6ce68f7",
+        measurementId: "G-934X55YFC9"
     }
 };
