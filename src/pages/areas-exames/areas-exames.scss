@@ -1,0 +1,148 @@
+page-areas-exames {
+
+    font-family: 'Roboto';
+
+  .header-icon {
+    color: #007AFF;
+  }
+
+  .content {
+    background: #fff;
+
+    .btn-infowindow {
+      width: 120px;
+      height: 35px;
+      margin-top: 5px;
+      margin-left: 15%;
+      border-radius: 5px;
+      background-color: #2467b6;
+      color: #fff;
+      font-weight: bold;
+      font-size: 12pt;
+    }
+
+    .col-img {
+      text-align: center;
+      
+      img {
+        height: 350px;
+      }
+    }
+
+    .list {
+      margin-top: 10px;
+      max-width: 100%;
+      max-height: 280px;
+      overflow-y: scroll;
+      border: 1px solid #c2c2c2;
+
+      ion-item {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .title {
+        font-size: 11px;
+        color: #787878;
+        text-align: left;
+      }
+
+      .label {
+        font-size: 11px;
+        color: #787878;
+        text-align: left;
+        padding: 0;
+      }
+    }
+
+    .abas {
+      padding: 0;
+      border-bottom: 1px solid #eee;
+
+      ion-row {
+        background-color: #fff;
+        
+        ion-col {
+          cursor: pointer;
+          
+          .item-label {
+            background-color: #fff;
+            left: 0;
+            text-align: center;
+            
+            .label {
+              font-size: 10pt;
+              // color: #fff;
+              color: #2d324f;
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+    }
+
+    .map-grid {
+      // margin-top: 30px;
+      height: 100%;
+
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+
+      .btn-options {
+        position: absolute;
+        bottom: 3%;
+        right: 1%;
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+
+        ion-icon {
+          font-size: 3em;
+          color: #fff;
+        }
+      }
+    }
+
+    .data-grid {
+      // margin-top: 30px;
+      padding-top: 20px;
+      height: 100%;
+      background: #fff;
+
+      .btn-action {
+        // background: color($colors, logo);
+      }
+    }
+  }
+
+  .footer {
+    ion-input, ion-select, ion-datetime {
+      padding: 5px 10px 5px 10px;
+      color: #747474;
+      font-size: 13px;
+      border: 1px solid #c2c2c2;
+      border-radius: 3px;
+      margin-left: 20px;
+    }
+
+    ion-col {
+      padding: 0;
+
+      ion-item {
+        padding: 0;
+      }
+
+      ion-label {
+        padding: 0;
+        p {
+          padding: 0;
+          margin: 0;
+          font-size: 11px;
+        }
+      }
+    }
+  }
+  
+}

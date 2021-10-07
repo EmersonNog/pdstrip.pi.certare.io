@@ -1,0 +1,43 @@
+page-users {
+  
+  .header-icon {
+    color: #fff;
+  }
+
+  .content {
+    font-family: 'Roboto';
+
+    ion-label {
+      text-align: left;
+    }
+
+    .btn-search {
+      margin: 25px 0;
+      // font-family: 'Nunito-Bold';
+      @include respond-to(xl) { width: 100px; height: 30px;}
+    }
+
+    .list-users {
+      text-align: center;
+
+      ion-row {
+        border-bottom: 1px solid #fff !important;
+      }
+
+      .text1 {
+        text-align: left;
+        // color: #8c8c8c;
+        font-weight: bold;
+      }
+      .text2 {
+        color: #666;
+      }
+
+      button {
+        text-transform: none;
+      }
+
+    }
+  }
+
+}

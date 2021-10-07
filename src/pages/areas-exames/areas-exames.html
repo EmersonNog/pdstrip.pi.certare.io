@@ -1,0 +1,46 @@
+<ion-header no-border>
+  <ion-navbar color="white" class="navbar">
+    <button ion-button icon-only menuToggle>
+      <ion-icon class="header-icon" name="menu"></ion-icon>
+    </button>
+
+    <ion-title text-center>
+      <ion-label>Áreas de Exames</ion-label>
+    </ion-title>
+
+    <!-- <ion-buttons end>
+      <button ion-button icon-only (click)="openFilterPage()" title="Filtrar">
+        <ion-icon class="header-icon" name="ios-funnel"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content">
+
+  <button ion-button id="btn-show-estacionar-page-2" (click)="openImagensPage($event)" [style.display]="'none'"></button>
+
+  <!-- <ion-grid class="abas">
+    <ion-row align-items-center>
+      <ion-col col-6 (click)="showMap()" align-self-center>
+        <ion-item no-lines no-border class="item-label">
+          <label class="label-map" [style.color]="selected == 'map' ? '#2d324f' : '#ccc'">Mapa</label>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6 (click)="showData()" align-self-center>
+        <ion-item no-lines no-border class="item-label">
+          <label class="label" [style.color]="selected == 'data' ? '#2d324f' : '#ccc'">Dados</label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+  <ion-grid class="map-grid" no-padding [style.display]="selected == 'map' ? 'block' : 'none'">
+    <div #map id="map"></div>
+  </ion-grid>
+
+  <ion-grid class="data-grid" no-padding [style.display]="selected == 'data' ? 'block' : 'none'">
+    
+  </ion-grid>
+  
+</ion-content>

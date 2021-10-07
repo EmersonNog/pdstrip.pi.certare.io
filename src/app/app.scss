@@ -1,0 +1,112 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+@import "../theme/mixins";
+@import "../theme/responsive.scss";
+@import "../theme/menu.scss";
+@import "../theme/footer.scss";
+
+body {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.header-icon {
+    color: #007AFF !important;
+}
+
+.alert {
+    background-color: transparent;
+    color: color($colors, primary);
+
+    .btn-cancel {
+        color: #f8071d;
+    }
+
+    .btn-ok {
+        color: #0080fa;
+    }
+}
+
+
+.language {
+    $text-color: #8aa4af;
+    background-color: transparent;
+
+    .text-label {
+        color: $text-color;
+        font-weight: normal;
+        font-size: 11pt;
+        text-align: left;
+    }
+
+    .select-md {
+        padding: 5px 8px 5px 5px;
+    }
+
+    ion-select {
+        border: 1px solid #949494;
+        border-radius: 6px;
+        background-color: #fff;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        font-size: 0.8em;
+        width: 100%;
+        // height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+
+        .select-text {
+            color: #575757;
+            margin-left: 11px;
+        }
+    }
+}
+
+.select-searchable-page {
+
+    .select-searchable-item {
+        ion-icon {
+            color: #575757;
+        }
+
+        ion-label {
+            color: #575757;
+            text-align: left;
+        }
+    }
+
+}
+
+.navbar {
+    // box-shadow: 0px 0px 1px 3px #ccc;
+    // box-shadow: inset 0 0 10px #000000;
+    box-shadow: 0 8px 6px -6px #ccc;
+
+    .toolbar-content {
+        .toolbar-title {
+            ion-label {
+                font-weight:bold;
+                float: left;
+                color: #0d7939;
+                padding-left: 20px;
+            }
+        }
+    }
+}
+

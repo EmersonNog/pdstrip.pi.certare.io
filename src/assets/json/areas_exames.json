@@ -1,0 +1,90 @@
+[
+  {
+    "id": "baturite",
+    "photo": "baturite.jpg",
+    "lng": -38.8517932461324,
+    "lat": -4.3547111227464,
+    "municipio": "Baturité",
+    "area": 21586
+  },
+  {
+    "id": "crateus",
+    "photo": "crateus.jpg",
+    "lng": -40.6821588253112,
+    "lat": -5.19810845371837,
+    "municipio": "Crateús",
+    "area": 30364
+  },
+  {
+    "id": "tiangua",
+    "photo": "tiangua.jpg",
+    "lng": -41.0033957574948,
+    "lat": -3.72345290270783,
+    "municipio": "Tianguá",
+    "area": 26381
+  },
+  {
+    "id": "quixada",
+    "photo": "quixada.jpg",
+    "lng": -39.0554344637225,
+    "lat": -4.95872486357341,
+    "municipio": "Quixadá",
+    "area": 42201
+  },
+  {
+    "id": "russas",
+    "photo": "russas.jpg",
+    "lng": -37.9986054524225,
+    "lat": -4.90716738845038,
+    "municipio": "Russas",
+    "area": 30101
+  },
+  {
+    "id": "sobral",
+    "photo": "sobral.jpg",
+    "lng": -40.374075421135,
+    "lat": -3.67071535436359,
+    "municipio": "Sobral",
+    "area": 17598
+  },
+  {
+    "id": "taua",
+    "photo": "taua.jpg",
+    "lng": -40.2567730399457,
+    "lat": -5.97947605353433,
+    "municipio": "Tauá",
+    "area": 21317
+  },
+  {
+    "id": "iguatu",
+    "photo": "iguatu.jpg",
+    "lng": -39.3242998957666,
+    "lat": -6.34596488363358,
+    "municipio": "Iguatu",
+    "area": 29880
+  },
+  {
+    "id": "itapipoca",
+    "photo": "itapipoca.jpg",
+    "lng": -39.5288818483943,
+    "lat": -3.48171328713134,
+    "municipio": "Itapipoca",
+    "area": 30155
+  },
+  {
+    "id": "juazeirodonorte",
+    "photo": "juazeirodonorte.jpg",
+    "lng": -39.3510505875918,
+    "lat": -7.26615165779008,
+    "municipio": "Juazeiro do Norte",
+    "area": 37088
+  },
+  {
+    "id": "moradanova",
+    "photo": "moradanova.jpg",
+    "lng": -38.3637972484516,
+    "lat": -5.09047917378281,
+    "municipio": "Morada Nova",
+    "area": 25216
+  }
+]

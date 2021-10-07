@@ -1,0 +1,35 @@
+page-user-information {
+  .header-icon {
+    color: #fff;
+  }
+  .informacoes-body {
+
+    .informacoes-body-header {
+      background-color: #cccccc;
+      padding-top: 30px;
+
+      .title-header-body {
+        text-align: left;
+        color: #5f5f5f;
+        margin-left: 10px;
+      }
+    }
+
+    .informacoes-body-list {
+      width: 100%;
+      .informacoes-body-list-item {
+        margin-left: 10px;
+
+        h6 {
+          text-align: left;
+          color: #8c8c8c;
+          font-weight: bold;
+        }
+        h2 {
+          text-align: left;
+          color: #5f5f5f;
+        }
+      }
+    }
+  }
+}

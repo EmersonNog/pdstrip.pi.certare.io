@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar color="header">
+    <ion-title text-center>
+      <ion-label>Informações</ion-label>
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeUserInformation()">
+        <ion-icon class="header-icon" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-row class="informacoes-body">
+    <ion-item class="informacoes-body-header">
+      <ion-label class="title-header-body">INFORMAÇÕES DO USUÁRIO</ion-label>
+    </ion-item>
+    <ion-list class="informacoes-body-list">
+      <ion-item class="informacoes-body-list-item">
+        <h6>Nome</h6>
+        <h2>{{user?.name}}</h2>
+      </ion-item>
+      <ion-item class="informacoes-body-list-item">
+        <h6>Data de Nascimento</h6>
+        <h2>{{user?.dateOfBirth | date: "dd/MM/yyyy"}}</h2>
+      </ion-item>
+      <ion-item class="informacoes-body-list-item">
+        <h6>Email</h6>
+        <h2>{{user?.email}}</h2>
+      </ion-item>
+      <ion-item class="informacoes-body-list-item">
+        <h6>Perfil</h6>
+        <h2>{{user?.profile}}</h2>
+      </ion-item>
+      <ion-item class="informacoes-body-list-item">
+        <h6>Telefone</h6>
+        <h2>{{user?.phone}}</h2>
+      </ion-item>
+      <ion-item class="informacoes-body-list-item">
+        <h6>Sexo</h6>
+        <h2>{{user?.sex}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-row>
+</ion-content>

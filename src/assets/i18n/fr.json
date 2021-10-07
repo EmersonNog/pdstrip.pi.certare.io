@@ -1,0 +1,344 @@
+{
+    "loading": {
+      "title": "Attendre..."
+    },
+
+    "alert": {
+      "title": "Avertissement"
+    },
+
+    "btn": {
+      "ok": "D'accord",
+      "cancel": "Annuler",
+      "yes": "Oui",
+      "no": "Non",
+      "save": "Sauver",
+      "search": "Chercher",
+      "clear": "Nettoyer",
+      "noinfo": "Aucun résultat trouvé."
+    },
+
+    "dates": {
+      "monthShortNames": "Jan, Fév, Mar, Avr, Mai, Jun, Jul, Aou, Sep, Oct, Nov, Déc"
+    },
+
+    "datatable": {
+      "list_total": "pistes",
+      "list_no_results": "Aucune piste à afficher"
+    },
+
+    "menu": {
+      "home": "Accueil",
+      "profile": "Profil",
+      "classificacoes": "Classification",
+      "iri_equacoes": "Équation IRI",
+      "users": "Usager",
+      "groups": "Grupos",
+      "import-csv": "Importação de Dados",
+      "reports": "Downloads",
+      "logout": "Se déconnecter",
+      "logout_desc": "Voulez-vous vraiment quitter Inventhus?"
+    },
+
+    "home": {
+      "title": "Accueil",
+      "tab": {
+        "map": {
+          "title": "Carte"
+        },
+        "data": {
+          "title": "Data",
+          "track": "PISTE",
+          "hour": "HEURE",
+          "speed": "AVG Vitesse (km/h)",
+          "classification": "CLASSIFICATION",
+          "lat_ini": "LAT. BEGIN",
+          "lng_ini": "LNG. BEGIN",
+          "lat_end": "FIN LAT.",
+          "lng_end": "FIN LNG.",
+          "distance": "DISTANCE (m)",
+          "iri": "IRI (m/km)",
+          "rms": "RMS"
+        }
+      },
+      "btn_last_data": "Ouvrir la dernière piste",
+      "btn_filter": "Chercher",
+      "btn_edit_name": "Éditer",
+      "btn_edit_desc": "Modifier le nom de la piste",
+      "btn_resume": "Reprendre",
+      "btn_export": {
+        "csv": "Télécharger le fichier CSV",
+        "excel": "Téléchargez le fichier Excel",
+        "pdf": "Téléchargez le fichier PDF",
+        "kml": "Téléchargez le fichier KML"
+      },
+      "alert": {
+        "resume": "Il n'y a pas de résumé pour cette enquête"
+      },
+      "prompt": {
+        "track_title": "Réviser",
+        "track_desc": "Entrez le nom de l'extrait ci-dessous pour mettre à jour",
+        "track_placeholder": "Nom de la piste"
+      }
+    },
+
+    "filter": {
+      "title": "Filtre",
+      "group": {
+        "label": "Groupe"
+      },
+      "user": {
+        "label": "Usager",
+        "status": "Utilisateurs Actifs",
+        "select_all": "Tout sélectionner"
+      },
+      "device": {
+        "label": "Dispositif"
+      },
+      "track": {
+        "label": "Piste"
+      },
+      "btn": {
+        "filter": "Filtre",
+        "submit": "Soumettre",
+        "download_all": "Tout télécharger"
+      },
+      "alert_download_all": {
+        "title": "Tout télécharger?",
+        "msg": "Cette opération peut prendre du temps, car elle téléchargera toutes les enquêtes de la base de données. Êtes-vous sur de vouloir continuer?",
+        "result": "Attendez que le téléchargement soit terminé!"
+      }
+    },
+
+    "profile": {
+      "title": "Profil",
+      "profile_edit": "Modifier le profil",
+      "qtd": {
+        "device": "Dispositifs)",
+        "track": "Des pistes)"
+      },
+      "user": {
+        "info": "INFORMATIONS UTILISATEUR",
+        "name": "Nom",
+        "email": "E-mail",
+        "phone": "Phone"
+      },
+      "alert": {
+        "image": "Insérez une image de taille 200x200"
+      }
+    },
+
+    "profile_edit": {
+      "title": "Modifier le profil",
+      "user": {
+        "info": "INFORMATIONS UTILISATEUR",
+        "name": "Nom",
+        "email": "E-mail",
+        "phone": "Phone"
+      },
+      "submit": "Soumettre",
+      "alert": {
+        "save_data": "L'utilisateur a été mis à jour avec succès!"
+      }
+    },
+
+    "classification": {
+      "title": "Classifications",
+      "btn_new": {
+        "label": "Nouveau",
+        "desc": "Créez votre propre classification"
+      },
+      "status": {
+        "selected": "Choisi",
+        "set": "Définit"
+      },
+      "info": "Informations de classification",
+      "btn_edit": "Modifier la classification",
+      "btn_remove": "Retirer Classification",
+      "alert": {
+        "set": "Définit",
+        "set_text_part1": "Voulez-vous vraiment définir la classification ",
+        "set_text_part2": " par défaut?",
+        "remove": "Retirer",
+        "set_text2_part1": "Voulez-vous vraiment supprimer la classification "
+      }
+    },
+
+    "iri_equacoes": {
+      "title": "Équation IRI",
+      "btn_new": {
+        "label": "Nouveau",
+        "desc": "Créez votre propre équation"
+      },
+      "status": {
+        "selected": "Simulation",
+        "set": "Simuler"
+      },
+      "info": "Informations de équation",
+      "btn_edit": "Modifier la équation",
+      "btn_remove": "Retirer équation",
+      "update": "Mise à jour",
+      "alert": {
+        "set": "Définit",
+        "set_text_part1": "Voulez-vous vraiment définir la équation ",
+        "set_text_part2": " par défaut?",
+        "remove": "Retirer",
+        "set_text2_part1": "Voulez-vous vraiment supprimer la équation "
+      }
+    },
+
+    "classification_info": {
+      "title": "Info",
+      "info": "INFORMATIONS DE CLASSIFICATION",
+      "categories": {
+        "excelente": "Excellent",
+        "bom": "Bien",
+        "regular": "Ordinaire",
+        "ruim": "Mal"
+      }
+    },
+
+    "classification_new": {
+      "title": "Classification",
+      "new": "NOUVELLE CLASSIFICATION",
+      "name": "Nom de la classification",
+      "submit": "Soumettre",
+      "alert": {
+        "valid_name": "Entrez un nom valide pour cette classification.",
+        "save_data": "La classification a bien été enregistrée."
+      }
+    },
+
+    "iri_equacoes_new": {
+      "title": "Équation",
+      "new": "NOUVELLE",
+      "eq": "Équation",
+      "name": "Nom (7 caractères max.)",
+      "submit": "Soumettre",
+      "alert": {
+        "valid_name": "Entrez un nom valide pour cette équation.",
+        "save_data": "La équation a bien été enregistrée.",
+        "save_error": "Erreur de syntaxe d'équation."
+      }
+    },
+
+    "users": {
+      "title": "Usager",
+      "enable": "Activer",
+      "disable": "Désactiver",
+      "device_info": "Info appareil",
+      "alert": {
+        "part1": "Es-tu sûr que tu veux ",
+        "part2": " accès depuis ",
+        "part3": " dans Inventhus?"
+      }
+    },
+
+    "reports": {
+      "title": "Rapports"
+    },
+
+    "device_info": {
+      "title": "Info",
+      "info": "INFO APPAREIL",
+      "device": "Dispositif",
+      "equipament": "Équipement",
+      "user_info": "INFORMATIONS UTILISATEUR",
+      "classification_info": "ÉQUATION IRI",
+      "eq_iri_passeio": "Passeio",
+      "eq_iri_4wd": "4WD",
+      "eq_iri_suv": "SUV",
+      "submit": "Soumettre",
+      "name": "Nom",
+      "dateOfBirth": "Anniversaire",
+      "email": "E-mail",
+      "profile": "Profil",
+      "phone": "Phone",
+      "expirationDate": "Date d'expiration",
+      "expirationDate_submit": "Définir",
+      "expirationDate_remove": "Supprimer",
+      "expirationDate_remove_desc": "Voulez-vous vraiment supprimer?",
+      "sex": "Sexe",
+      "cancel": "Annuler",
+      "alert": {
+        "save_data": "L'appareil a été mis à jour avec succès!"
+      }
+    },
+
+    "devices": {
+      "title": "Dispositifs"
+    },
+
+    "resume": {
+      "title": "Reprendre",
+      "info": "INFO PISTE",
+      "date": "Date / heure",
+      "speed": "AVG Vitesse",
+      "distance": "Distance",
+      "iri": "IRI moyen",
+      "excelent": "Excelent",
+      "good": "Bien",
+      "regular": "Ordinaire",
+      "bad": "Mal",
+      "below_standard": "En dessous de la norme",
+      "conforming": "Conforme",
+      "not_conforming": "Non conforme"
+    },
+
+    "login": {
+      "title": "Se connecter",
+      "email": "E-mail",
+      "email_desc": "E-mail non valide",
+      "pass": "Mot de passe",
+      "pass_desc": "Mot de passe incorrect (Minimum 6 caractères)",
+      "submit": "Se connecter",
+      "not_account": "Vous n'avez pas de compte?",
+      "signup": "S'inscrire",
+      "forgotpass": "Mot de passe oublié?",
+      "browsers": "Nous vous recommandons d'utiliser le système dans les navigateurs suivants:",
+      "alert": {
+        "not_authorized": "Utilisateur non autorisé!",
+        "auth_wrong": "E-mail ou le mot de passe est incorrect."
+      }
+    },
+
+    "forgotpass": {
+      "title": "Mot de passe oublié",
+      "email": "E-mail",
+      "email_desc": "E-mail non valide",
+      "info": "Entrez votre adresse e-mail que vous avez utilisée pour vous inscrire. Nous vous enverrons un e-mail avec un lien pour vous permettre de réinitialiser votre mot de passe.",
+      "submit": "Soumettre",
+      "help1": "Si vous avez encore besoin d'aide, contactez votre ",
+      "help2": "Prise en charge de Inventhus",
+      "signup": "S'inscrire",
+      "has_account": "Avoir un compte? ",
+      "btn_login": "Se connecter",
+      "alert": {
+        "success": "Vous recevrez un e-mail avec des instructions pour récupérer votre mot de passe.",
+        "default_err": "Nous n'avons pas pu restaurer votre mot de passe!",
+        "no_user_err": "L'utilisateur n'est pas enregistré!",
+        "invalid_email_err": "Entrez un e-mail valide pour récupérer votre mot de passe!"
+      }
+    },
+
+    "signup": {
+      "title": "S'inscrire",
+      "name": "Nom",
+      "name_desc": "Nom incorrect",
+      "email": "E-mail",
+      "email_desc": "E-mail non valide",
+      "pass": "Mot de passe",
+      "pass_desc": "Mot de passe incorrect (Minimum 6 caractères)",
+      "submit": "S'inscrire",
+      "help1": "Je suis d'accord avec le",
+      "help2": " termes et conditions ",
+      "help3": "de Inventhus",
+      "has_account": "Avoir un compte? ",
+      "btn_login": "Se connecter",
+      "alert": {
+        "terms": "Vous devez accepter les termes et conditions de Inventhus.",
+        "success": "Inscription réussi!"
+      }
+    }
+}
+  

@@ -1,0 +1,18 @@
+{
+  "name": "invent-cloud-web",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/middleware_cors/ws.php",
+      "proxyUrl": "http://localhost"
+    },
+    {
+      "path": "/identidade/api/permissions-token/CERTARE",
+      "proxyUrl": "https://sistemas.detran.ce.gov.br"
+    }
+  ]
+
+}

@@ -1,0 +1,137 @@
+.split-pane-side {
+    // @include respond-to(xl) { max-width: 180px !important; }
+    @include respond-to(xl) { max-width: 20% !important; }
+    @include respond-to(lg) { max-width: 20% !important; }
+  .menu {
+    // Variaveis
+    //363441
+    $background-color: #0d7939;
+    $text-color: #fff;
+    $font-family: 'Roboto';
+    $font-size: 14px;
+
+    color: $text-color;
+    font-family: $font-family;
+
+    // background-color: $background-color;
+
+    .img-logo-menu {
+      // height: 100%;
+      // width: 100%;
+      // position: absolute; 
+      bottom: 0;
+      // margin-top: 15px;
+      background-color: #fff;
+      padding: 0 0 15px 0;
+
+      .row {
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      ion-col {
+        text-align: center;
+        padding: 0;
+      }
+
+      img {
+        margin-top: 5px;
+      }
+
+      .color-div-menu {
+        background-color: #DCBF00 !important; 
+
+        ion-label {
+          margin: 0 0 12px 0;
+        }
+      }
+      
+      .img-logo1-menu {
+        img{
+          width: 140px;
+          height: auto;
+          // width: 65%;
+          // height: 30%;
+        }
+      }
+      
+      .img-logo3-menu {
+        margin-top: 15px;
+
+        img{
+          width: 60px;
+          height: auto;
+          // width: 30%;
+          // height: 30%;
+        }
+      }
+
+      .img-logo2-menu {
+        img{
+          width: 60%;
+          // height: 30%;
+          background: #fff;
+          border-radius: 5px;
+          padding: 5px 15px;
+        }
+      }
+    }
+
+    .default-padding {
+      margin: 0 20px;
+    }
+
+    .list {
+      margin-top: 0px;
+      margin-bottom: 50px;
+    }
+
+    .menu-item:hover{
+      cursor: pointer;
+      background-color: #5e9273;
+    }
+
+    .menu-item-logout {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    .menu-item-divider {
+      font-family: 'Roboto';
+      font-weight: 500;
+      font-size: 11px;
+      color: #4b646f;
+      background-color: $background-color;
+      text-transform: uppercase;
+    }
+
+
+    .menu-item {
+      background-color: $background-color;
+      color: #fff;
+      font-family: 'Roboto';
+      font-weight: 500;
+      font-size: $font-size;
+
+      ion-icon {
+        min-width: 14px;
+        font-size: 2.1rem;
+        min-height: 100%;
+        margin: 0;
+      }
+
+      .text-menu {
+        font-family: 'Roboto';
+        font-weight: 500;
+        font-size: 14px;
+      }
+    }
+
+  }
+
+  .versao {
+    color: #0d7939;
+    text-align: center;
+    font-size: 13px;
+  }
+}

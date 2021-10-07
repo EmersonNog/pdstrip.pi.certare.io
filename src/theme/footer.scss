@@ -1,0 +1,53 @@
+.footer {
+    // ion-title {
+    //     padding: 0;
+
+    //     .toolbar-title {
+    //         font-weight: normal;
+    //         font-size: 1.3rem;
+    //         font-style: italic;
+    //         color: #ececed;
+    //         text-align: center;
+            
+    //         pointer-events: none;
+    //     }
+    // }
+    
+    .custom-toolbar {
+        min-height: 22px;
+
+        .toolbar-background {
+            background-color: #f2f2f2;
+        }
+        
+        .toolbar-title {
+            font-size: 1.5rem;
+            font-style: normal;
+            color: #2d324f;
+            font-weight: bold;
+            // text-transform: capitalize;
+            padding: 0 12px;
+        }
+    }
+}
+
+.footer-versao {
+    
+    .custom-toolbar {
+        min-height: 22px;
+
+        .toolbar-background {
+            background-color: transparent;
+        }
+        
+        .toolbar-title {
+            font-size: 1.2rem;
+            font-style: normal;
+            color: #b2b2b2;
+            font-weight: normal;
+            // text-transform: capitalize;
+            padding: 0 12px;
+        }
+    }
+
+}

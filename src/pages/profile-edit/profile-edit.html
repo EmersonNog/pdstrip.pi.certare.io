@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar color="header">
+    <ion-title text-center>
+      <ion-label>{{'profile_edit.title' | translate}}</ion-label>
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon class="header-icon" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid class="grid-profile">
+    <ion-row class="informacoes-body">
+      <ion-item class="informacoes-body-header">
+        <ion-label class="title-header-body">{{'profile_edit.user.info' | translate}}</ion-label>
+      </ion-item>
+      <form class="informacoes-body-list">
+        <ion-item class="informacoes-body-list-item" no-lines>
+          <ion-label stacked>{{'profile_edit.user.name' | translate}}</ion-label>
+          <ion-input type="text" #name id="name" [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}"></ion-input>
+        </ion-item>
+        <ion-item class="informacoes-body-list-item" no-lines>
+          <ion-label stacked>{{'profile_edit.user.email' | translate}}</ion-label>
+          <ion-input type="email" #email [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" [disabled]="true"></ion-input>
+        </ion-item>
+        <!--
+          <ion-item class="informacoes-body-list-item" no-lines>
+            <ion-label stacked>Data de Nascimento:</ion-label>
+            <ion-datetime #dateOfBirth id="dateOfBirth" displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="user.dateOfBirth" [ngModelOptions]="{standalone: true}" cancelText="Cancelar" doneText="Definir"></ion-datetime>
+          </ion-item>
+        -->
+        <ion-item class="informacoes-body-list-item" no-lines>
+          <ion-label stacked>{{'profile_edit.user.phone' | translate}}</ion-label>
+          <ion-input type="text" #phone [(ngModel)]="user.phone" [ngModelOptions]="{standalone: true}"></ion-input>
+        </ion-item>
+        <!-- <ion-item class="informacoes-body-list-item" no-lines>
+          <ion-label stacked>Sexo</ion-label>
+          <ion-select [(ngModel)]="user.sex" [ngModelOptions]="{standalone: true}">
+            <ion-option value="Feminino">Feminino</ion-option>
+            <ion-option value="Masculino">Masculino</ion-option>
+          </ion-select>
+        </ion-item > -->
+        <ion-item class="btn-row" no-lines>
+          <button ion-button (click)="updateData()" class="btn" block>{{'profile_edit.submit' | translate}}</button>
+        </ion-item>
+      </form>
+    </ion-row>
+
+
+
+  </ion-grid>
+
+</ion-content>

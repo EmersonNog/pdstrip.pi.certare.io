@@ -1,0 +1,48 @@
+ion-icon {
+
+    &[class*="custom-"] {
+        mask-size: contain;
+        mask-position: 50% 50%;
+        mask-repeat: no-repeat;
+        background: currentColor;
+        width: 1em;
+        height: 1em;
+    }
+
+    &[class*="custom-home"] {
+        mask-image: url(../assets/icon/ico-home.svg);
+    }
+
+    &[class*="custom-logout"] {
+        mask-image: url(../assets/icon/ico-logout.svg);
+    }
+
+    &[class*="custom-ia"] {
+        mask-image: url(../assets/icon/ico-ia.svg);
+    }
+
+    &[class*="custom-info-rod"] {
+        mask-image: url(../assets/icon/ico-info-rod.svg);
+    }
+
+    &[class*="custom-exames"] {
+        mask-image: url(../assets/icon/ico-exames.svg);
+    }
+
+    &[class*="custom-perfil"] {
+        mask-image: url(../assets/icon/ico-perfil.svg);
+    }
+
+    &[class*="custom-users"] {
+        mask-image: url(../assets/icon/ico-users.svg);
+    }
+
+    &[class*="custom-groups"] {
+        mask-image: url(../assets/icon/ico-groups.svg);
+    }
+
+    &[class*="custom-import"] {
+        mask-image: url(../assets/icon/ico-import.svg);
+    }
+
+}

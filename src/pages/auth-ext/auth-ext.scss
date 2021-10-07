@@ -1,0 +1,66 @@
+page-auth-ext {
+    
+    .login {
+      background: url('../assets/imgs/bg-login.jpg') no-repeat center center/cover transparent;
+      font-family: 'Roboto';
+
+      .logo {
+        padding: 1.5em 3.5em 0em 3.5em;
+        margin-top: 90px;
+
+        .img {
+          $valWidth: 320px;
+
+          @include respond-to(xs) { width: $valWidth; }
+          @include respond-to(sm) { width: $valWidth; }
+          @include respond-to(md) { width: $valWidth; }
+          @include respond-to(lg) { width: $valWidth; }
+          @include respond-to(xl) { width: $valWidth; }
+        }
+
+        .img-certare {
+          $valWidth: 200px;
+          margin-top: 10px !important;
+
+          @include respond-to(xs) { width: $valWidth; }
+          @include respond-to(sm) { width: $valWidth; }
+          @include respond-to(md) { width: $valWidth; }
+          @include respond-to(lg) { width: $valWidth; }
+          @include respond-to(xl) { width: $valWidth; }
+        }
+
+        .img-centralize {
+          position: relative;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+        }
+      }
+
+      .grid {
+        margin-top: 50px;
+        
+        loading-spinner {
+          // background-color: white;
+        }
+      }
+    }
+
+    .msg {
+      ion-label {
+        font-size: 13px;
+      }
+      .btn-link {
+        cursor: pointer;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.7) !important;
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+
+    .center {
+      text-align: center;
+    }
+
+}

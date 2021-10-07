@@ -1,0 +1,190 @@
+page-profile {
+
+  .header-icon {
+    color: #fff
+  }
+
+  .edit-icon {
+    width: 28px;
+  }
+
+  .content {
+    background: url('../assets/imgs/perfil-bg.jpg') no-repeat center center/cover transparent;;
+    font-family: 'Roboto';
+
+    .grid-profile {
+      background-color: #fff;
+      margin-top: 20%;
+      min-height: 660px;
+
+      .centralize {
+        margin: 0 auto;
+        margin-top: -60px;
+
+        .profile-img {
+
+          div {
+            position: relative;
+
+            .img {
+              @include respond-to(xs) {
+                width: 105px;
+              }
+              @include respond-to(sm) {
+                width: 105px;
+              }
+              @include respond-to(md) {
+                width: 105px;
+              }
+              @include respond-to(lg) {
+                width: 105px;
+              }
+              @include respond-to(xl) {
+                width: 105px;
+              }
+
+              border-radius: 100%;
+              border: 2px solid white;
+            }
+
+            .icon-img {
+              background-color: #0791cf;
+              height: 30px;
+              width: 30px;
+              border-radius: 100%;
+              border: 2px solid white;
+              position: absolute;
+              top: 70%;
+              left: 70%;
+
+              .camera-icon {
+                font-size: 26pt;
+                color: #fff;
+                position: absolute;
+                top: -4px;
+                left: -3px;
+              }
+            }
+          }
+        }
+      }
+
+      .row-form {
+        .informacoes-body-list {
+          width: 100%;
+
+          .mbottom {
+            margin-bottom: 20px;
+          }
+          
+          .informacoes-body-list-item {
+            $bgColor: #e5e5e5;
+            $textColor: #666;
+
+            ion-input {
+              background-color: $bgColor !important;
+              border: none !important;
+              border-radius: 5px;
+              padding-left: 7px;
+              color: $textColor;
+            }
+
+            ::placeholder {
+              color: $textColor;
+            }
+
+            ::-webkit-input-placeholder { /* WebKit browsers */
+              color: $textColor;
+            }
+
+            :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+              color: $textColor;
+            }
+
+            ::-moz-placeholder { /* Mozilla Firefox 19+ */
+              color: $textColor;
+            }
+
+            :-ms-input-placeholder { /* Internet Explorer 10+ */
+              color: $textColor;
+            }
+          }
+        }
+      }
+
+      .informacoes-header  {
+        background-color: #fff;
+        height: 100%;
+        padding-bottom: 20px;
+
+        div {
+
+          .text-name {
+            color: #666;
+            font-size: 14pt;
+            text-align: center;
+            font-weight: 600;
+            white-space: pre-wrap;
+          }
+
+          .text-email {
+            color: #666;
+            font-size: 10pt;
+            text-align: center;
+          }
+        }
+      }
+
+      .informacoes-header-itens {
+        border-top: 2px solid #cccccc;
+
+        .informacoes-header-item {
+          .text-qtd {
+            font-size: 20pt;
+            font-weight: normal;
+            color: #2b2a32;
+            cursor: pointer;
+          }
+
+          .text-item {
+            font-size: 12pt;
+            font-weight: normal;
+            color: #8c8c8c;
+          }
+        }
+      }
+
+      .text {
+        margin-top: -25px;
+      }
+
+      .informacoes-body {
+
+        .informacoes-body-header {
+          background-color: #e8e8e8;
+          padding-top: 30px;
+
+          .title-header-body {
+            text-align: left;
+            color: #5f5f5f;
+            margin-left: 10px;
+            font-weight: normal;
+            font-size: 10pt;
+          }
+        }
+      }
+
+    }
+
+    .btn {
+      border: none !important;
+      border-radius: 5px;
+      background: #007AFF;
+      height: 40px;
+      font-weight: 700;
+      text-transform: none;
+      margin-top: 30px;
+    }
+    
+  }
+}

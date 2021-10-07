@@ -1,0 +1,344 @@
+{
+    "loading": {
+      "title": "Waiting..."
+    },
+
+    "alert": {
+      "title": "Warning"
+    },
+
+    "btn": {
+      "ok": "Ok",
+      "cancel": "Cancel",
+      "yes": "Yes",
+      "no": "No",
+      "save": "Save",
+      "search": "Search",
+      "clear": "Clear",
+      "noinfo": "No items."
+    },
+
+    "dates": {
+      "monthShortNames": "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Set, Oct, Nov, Dec"
+    },
+
+    "datatable": {
+      "list_total": "tracks",
+      "list_no_results": "No tracks to display"
+    },
+
+    "menu": {
+      "home": "Home",
+      "profile": "Profile",
+      "classificacoes": "Classifications",
+      "iri_equacoes": "IRI formulas",
+      "users": "Users",
+      "groups": "Groups",
+      "import-csv": "Importação de Dados",
+      "reports": "Downloads",
+      "logout": "Logout",
+      "logout_desc": "Are you sure you want to exit Inventhus?"
+    },
+
+    "home": {
+      "title": "Home",
+      "tab": {
+        "map": {
+          "title": "Map"
+        },
+        "data": {
+          "title": "Data",
+          "track": "TRACK",
+          "hour": "HOUR",
+          "speed": "AVG Speed (km/h)",
+          "classification": "CLASSIFICATION",
+          "lat_ini": "LAT. BEGIN",
+          "lng_ini": "LNG. BEGIN",
+          "lat_end": "LAT. END",
+          "lng_end": "LNG. END",
+          "distance": "DISTANCE (m)",
+          "iri": "IRI (m/km)",
+          "rms": "RMS"
+        }
+      },
+      "btn_last_data": "Open Last Track",
+      "btn_filter": "Search",
+      "btn_edit_name": "Edit",
+      "btn_edit_desc": "Edit track name",
+      "btn_resume": "Resume",
+      "btn_export": {
+        "csv": "Download CSV file",
+        "excel": "Download Excel file",
+        "pdf": "Download PDF file",
+        "kml": "Download KML file"
+      },
+      "alert": {
+        "resume": "There is no summary for this survey"
+      },
+      "prompt": {
+        "track_title": "Update",
+        "track_desc": "Enter the snippet name below to update",
+        "track_placeholder": "Track Name"
+      }
+    },
+
+    "filter": {
+      "title": "Filter",
+      "group": {
+        "label": "Group"
+      },
+      "user": {
+        "label": "User",
+        "status": "Active Users",
+        "select_all": "Select all"
+      },
+      "device": {
+        "label": "Device"
+      },
+      "track": {
+        "label": "Track"
+      },
+      "btn": {
+        "filter": "Submit",
+        "submit": "Submit",
+        "download_all": "Download All"
+      },
+      "alert_download_all": {
+        "title": "Download All?",
+        "msg": "This operation can be time consuming, as it will download all surveys from the database. Are you sure you want to proceed?",
+        "result": "Wait while the download is being completed!"
+      }
+    },
+
+    "profile": {
+      "title": "Profile",
+      "profile_edit": "Profile Edit",
+      "qtd": {
+        "device": "Device(s)",
+        "track": "Track(s)"
+      },
+      "user": {
+        "info": "USER INFO",
+        "name": "Name",
+        "email": "E-mail",
+        "phone": "Phone"
+      },
+      "alert": {
+        "image": "Insert a 200x200 size image"
+      }
+    },
+
+    "profile_edit": {
+      "title": "Profile Edit",
+      "user": {
+        "info": "USER INFO",
+        "name": "Name",
+        "email": "E-mail",
+        "phone": "Phone"
+      },
+      "submit": "Submit",
+      "alert": {
+        "save_data": "User updated successfully!"
+      }
+    },
+
+    "classification": {
+      "title": "Classifications",
+      "btn_new": {
+        "label": "New",
+        "desc": "Create your own classification"
+      },
+      "status": {
+        "selected": "Selected",
+        "set": "Define"
+      },
+      "info": "Classification Info",
+      "btn_edit": "Edit Classification",
+      "btn_remove": "Remove Classification",
+      "alert": {
+        "set": "Define",
+        "set_text_part1": "Are you sure you want to set the classification ",
+        "set_text_part2": " as default?",
+        "remove": "Remove",
+        "set_text2_part1": "Are you sure you want to remove the classification "
+      }
+    },
+
+    "iri_equacoes": {
+      "title": "IRI Equation",
+      "btn_new": {
+        "label": "New",
+        "desc": "Create your own equation"
+      },
+      "status": {
+        "selected": "Simulating",
+        "set": "Simulate"
+      },
+      "info": "Equation Info",
+      "btn_edit": "Edit Equation",
+      "btn_remove": "Remove Equation",
+      "update": "Update",
+      "alert": {
+        "set": "Define",
+        "set_text_part1": "Are you sure you want to set the equation ",
+        "set_text_part2": " as default?",
+        "remove": "Remove",
+        "set_text2_part1": "Are you sure you want to remove the equation "
+      }
+    },
+
+    "classification_info": {
+      "title": "Info",
+      "info": "CLASSIFICATION INFO",
+      "categories": {
+        "excelente": "Excellent",
+        "bom": "Good",
+        "regular": "Regular",
+        "ruim": "Bad"
+      }
+    },
+
+    "classification_new": {
+      "title": "Classification",
+      "new": "NEW CLASSIFICATION",
+      "name": "Classification Name",
+      "submit": "Submit",
+      "alert": {
+        "valid_name": "Enter a valid name for this classification.",
+        "save_data": "Classification saved successfully."
+      }
+    },
+
+    "iri_equacoes_new": {
+      "title": "Equation",
+      "new": "NEW",
+      "eq": "Equation",
+      "name": "Name (Max. 7 characters)",
+      "submit": "Submit",
+      "alert": {
+        "valid_name": "Enter a valid name for this Equation.",
+        "save_data": "Equation saved successfully.",
+        "save_error": "Equation syntax error."
+      }
+    },
+
+    "users": {
+      "title": "Users",
+      "enable": "Enable",
+      "disable": "Disable",
+      "device_info": "Device Info",
+      "alert": {
+        "part1": "Are you sure you want ",
+        "part2": " access from ",
+        "part3": " in Inventhus?"
+      }
+    },
+
+    "reports": {
+      "title": "Reports"
+    },
+
+    "device_info": {
+      "title": "Info",
+      "info": "DEVICE INFO",
+      "device": "Device",
+      "equipament": "Equipament",
+      "user_info": "USER INFO",
+      "classification_info": "IRI EQUATION",
+      "eq_iri_passeio": "Passeio",
+      "eq_iri_4wd": "4WD",
+      "eq_iri_suv": "SUV",
+      "submit": "Submit",
+      "name": "Name",
+      "dateOfBirth": "Birthday",
+      "email": "Email",
+      "profile": "Profile",
+      "phone": "Phone",
+      "expirationDate": "Expiration",
+      "expirationDate_submit": "Set",
+      "expirationDate_remove": "Remove",
+      "expirationDate_remove_desc": "Are you sure you want to remove?",
+      "sex": "Sex",
+      "cancel": "Cancel",
+      "alert": {
+        "save_data": "Device updated successfully!"
+      }
+    },
+
+    "devices": {
+      "title": "Devices"
+    },
+
+    "resume": {
+      "title": "Resume",
+      "info": "TRACK INFO",
+      "date": "Date/Hour",
+      "speed": "AVG Speed",
+      "distance": "Distance",
+      "iri": "Medium IRI",
+      "excelent": "Excelent",
+      "good": "Good",
+      "regular": "Regular",
+      "bad": "Bad",
+      "below_standard": "Below Standard",
+      "conforming": "Conforming",
+      "not_conforming": "Not Conforming"
+    },
+
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "email_desc": "Invalid e-mail",
+      "pass": "Password",
+      "pass_desc": "Invalid password (Minimum 6 characters)",
+      "submit": "Login",
+      "not_account": "Don't have account?",
+      "signup": "SignUp",
+      "forgotpass": "Forgot Password?",
+      "browsers": "We recommend using the system in the following browsers:",
+      "alert": {
+        "not_authorized": "Usuário não autorizado!",
+        "auth_wrong": "E-mail ou senha incorretos."
+      }
+    },
+
+    "forgotpass": {
+      "title": "Forgot Password",
+      "email": "Email",
+      "email_desc": "Invalid e-mail",
+      "info": "Enter your email address that you used to register. We will send you an email with a link for you to reset your password.",
+      "submit": "Submit",
+      "help1": "If you still need help, contact your ",
+      "help2": "Inventhus support",
+      "signup": "SignUp",
+      "has_account": "Have an account? ",
+      "btn_login": "Login",
+      "alert": {
+        "success": "You will receive an email with instructions to recover your password.",
+        "default_err": "We were unable to restore your password!",
+        "no_user_err": "The user is not registered!",
+        "invalid_email_err": "Enter a valid email to recover your password!"
+      }
+    },
+
+    "signup": {
+      "title": "Cadastro",
+      "name": "Nome",
+      "name_desc": "Invalid name",
+      "email": "Email",
+      "email_desc": "Invalid e-mail",
+      "pass": "Password",
+      "pass_desc": "Invalid password (Minimum 6 characters)",
+      "submit": "Signup",
+      "help1": "I agree with the",
+      "help2": " terms and conditions ",
+      "help3": "of Inventhus",
+      "has_account": "Have an account? ",
+      "btn_login": "Login",
+      "alert": {
+        "terms": "You must accept the Inventhus terms and conditions.",
+        "success": "Registration successful!"
+      }
+    }
+}
+  

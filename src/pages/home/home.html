@@ -1,0 +1,139 @@
+<ion-header no-border>
+  <ion-navbar color="white" class="navbar">
+    <button ion-button icon-only menuToggle>
+      <ion-icon class="header-icon" name="menu"></ion-icon>
+    </button>
+
+    <ion-title text-center>
+      <ion-label>{{'home.title' | translate}}</ion-label>
+    </ion-title>
+
+    <!-- <ion-buttons end>
+      <button ion-button icon-only (click)="openFilterPage()" [disabled]="!canFilter" title="{{'home.btn_filter' | translate}}">
+        <ion-icon class="header-icon" name="icon-buscar"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content">
+
+  <ion-grid class="grid-content">
+    
+    <ion-row class="top-content">
+
+      <ion-col col-lg-3 col-xl-3 col-12 class="item1">
+        <ion-card>
+          <ion-card-header>
+            {{qtdDefensas}}
+          </ion-card-header>
+        
+          <ion-card-content>
+            Defensas
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-lg-3 col-xl-3 col-12 class="item2">
+        <ion-card>
+          <ion-card-header>
+            {{qtdPorticos}}
+          </ion-card-header>
+        
+          <ion-card-content>
+            Pórticos
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-lg-3 col-xl-3 col-12 class="item3">
+        <ion-card>
+          <ion-card-header>
+            {{qtdSemiporticos}}
+          </ion-card-header>
+        
+          <ion-card-content>
+            Semi-Pórticos
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-lg-3 col-xl-3 col-12 class="item4">
+        <ion-card>
+          <ion-card-header>
+            {{qtdAcidentes}}
+          </ion-card-header>
+        
+          <ion-card-content>
+            Acidentes
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+
+  <ion-grid class="data-grid" no-padding>
+
+    <ion-row>
+      <ion-col col-lg-7 col-xl-7 col-12>
+        <div class="table-responsive">
+
+          <ngx-datatable class="bootstrap" 
+              [rows]="rows" 
+              [columns]="columns"
+              [columnMode]="'force'" 
+              headerHeight="50"
+              footerHeight="50"
+              rowHeight="auto"
+              [limit]="10"
+              [scrollbarH]="true"
+              [messages]="my_messages" >
+
+          </ngx-datatable>
+
+        </div>
+      </ion-col>
+      
+      <ion-col col-lg-1 col-xl-1 col-12></ion-col>
+
+      <ion-col col-lg-4 col-xl-4 col-12>
+
+        <ion-card class="consultas-content">
+          <ion-list>
+            <button ion-item class="pacientes-pendentes">
+              <ion-icon name="alert" item-start></ion-icon>
+              <p class="texto">Acidentes CE-040</p>
+              <p class="valor">{{qtdAcidentesCE040}} </p>
+            </button>
+        
+            <button ion-item class="consultas-canceladas">
+              <ion-icon name="alert" item-start></ion-icon>
+              <p class="texto">Acidentes CE-085</p>
+              <p class="valor">{{qtdAcidentesCE085}} </p>
+            </button>
+        
+            <button ion-item class="consultas-pendentes">
+              <ion-icon name="pin" item-start></ion-icon>
+              <p class="texto">Acidentes em Fortaleza</p>
+              <p class="valor">{{qtdAcidentesFortaleza}} </p>
+            </button>
+        
+            <button ion-item class="profissionais-pendentes">
+              <ion-icon name="logo-usd" item-start></ion-icon>
+              <p class="texto">Custo de Acidentes</p>
+              <p class="valor">{{custo | currency: 'BRL'}} </p>
+            </button>
+        
+          </ion-list>
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

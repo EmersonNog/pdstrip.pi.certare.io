@@ -1,0 +1,52 @@
+<ion-header no-border>
+  <ion-navbar color="white" class="navbar">
+    <button ion-button icon-only menuToggle>
+      <ion-icon class="header-icon" name="menu"></ion-icon>
+    </button>
+
+    <ion-title text-center>
+      <ion-label>{{'users.title' | translate}}</ion-label>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  
+  <ion-grid class="list-users">
+    <ion-row *ngFor="let user of users">
+
+      <ion-col col-12>
+        <ion-item>
+          <h6 class="text1" [style.color]="user.status ? '#666666' : '#007AFF'">{{user?.name}}</h6>
+          <h2 class="text2">{{user?.email}}</h2>
+
+          <button mode="ios" ion-button item-end (click)="updateStatus(user)" [color]="user.status ? 'light-grey' : 'default'">
+            <span *ngIf="!user.status">{{'users.enable' | translate}}</span>
+            <span *ngIf="user.status">{{'users.disable' | translate}}</span>
+          </button>
+
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row *ngFor="let user of usersInativos">
+
+      <ion-col col-12>
+        <ion-item>
+          <h6 class="text1">{{user?.name}}</h6>
+          <h2 class="text2">{{user?.email}}</h2>
+
+          <button ion-button item-end (click)="updateStatus(user)" [color]="user.status ? 'light-grey' : 'default'">
+            <span *ngIf="!user.status">Habilitar</span>
+            <span *ngIf="user.status">Desabilitar</span>
+          </button>
+
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

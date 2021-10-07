@@ -1,0 +1,238 @@
+page-home {
+
+    .header-icon {
+      color: #007AFF;
+    }
+  
+    .content {
+  
+      .grid-content {
+        
+        .top-content {
+  
+          ion-card {
+            background-color: #eee !important;
+            color: #1f2d3d;
+  
+            ion-card-header {
+              font-size: 3.2rem;
+              font-weight: bold;
+            }
+  
+            ion-card-content {
+              font-size: 2.0rem;
+            }
+          }
+          
+          .item1 {
+            ion-card {
+              background-color: #17a2b8 !important;
+              
+              ion-card-header {
+                color: #fff !important;
+              }
+              
+              ion-card-content {
+                color: #fff !important;
+              }
+            }
+          }
+          
+          .item2 {
+            ion-card {
+              background-color: #28a745 !important;
+              
+              ion-card-header {
+                color: #fff !important;
+              }
+              
+              ion-card-content {
+                color: #fff !important;
+              }
+            }
+  
+          }
+          
+          .item3 {
+            ion-card {
+              background-color: #ffc107 !important;
+              
+              ion-card-header {
+                color: #1f2d3d !important;
+              }
+              
+              ion-card-content {
+                color: #1f2d3d !important;
+              }
+            }
+  
+          }
+          
+          .item4 {
+            ion-card {
+              background-color: #dc3545 !important;
+              
+              ion-card-header {
+                color: #fff !important;
+              }
+              
+              ion-card-content {
+                color: #fff !important;
+              }
+            }
+  
+          }
+  
+        }
+  
+      }
+  
+      .data-grid {
+        // margin-top: 30px;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 100%;
+        background: #fff;
+  
+        .custom-table {
+          background: #fff;
+          
+          .header-text {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 8pt;
+            text-align: center;
+            border: 1px solid #ccc;
+  
+            @include respond-to(xs) { display: none; }
+            @include respond-to(sm) { display: none; }
+            @include respond-to(md) { display: none; }
+            @include respond-to(lg) { display: inherit; }
+            @include respond-to(xl) { display: inherit; }
+          }
+          
+          .body-text {
+            margin: 0 10px;
+            font-weight: normal;
+            font-size: 8pt;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+  
+            @include respond-to(xs) { border-left: 0 solid #ccc; border-right: 0 solid #ccc; }
+            @include respond-to(sm) { border-left: 0 solid #ccc; border-right: 0 solid #ccc; }
+            @include respond-to(md) { border-left: 0 solid #ccc; border-right: 0 solid #ccc; }
+            @include respond-to(lg) { border-left: 1px solid #ccc; border-right: 1px solid #ccc; }
+            @include respond-to(xl) { border-left: 1px solid #ccc; border-right: 1px solid #ccc; } 
+  
+            .title {
+              font-weight: bold;
+  
+              @include respond-to(xs) { display: block; }
+              @include respond-to(sm) { display: block; }
+              @include respond-to(md) { display: block; }
+              @include respond-to(lg) { display: none; }
+              @include respond-to(xl) { display: none; } 
+            }
+          }
+        }
+  
+        .consultas-content {
+  
+          ion-icon {
+            background-color: #17a2b8 !important;
+            color: #fff;
+            padding: 20px;
+            width: 64px !important;
+            height: 64px !important;
+            border-radius: 10px;
+          }
+  
+          .valor {
+            font-size: 15px;
+            font-weight: bold;
+          }
+  
+          .texto {
+            font-size: 12px;
+          }
+  
+          .consultas-confirmadas {
+            ion-icon {
+              background-color: #28a745 !important;
+              color: #fff;
+            }
+  
+            .valor {
+              
+            }
+            .texto {
+  
+            }
+          }
+  
+          .consultas-canceladas {
+            ion-icon {
+              background-color: #dc3545 !important;
+              color: #fff;
+            }
+  
+            .valor {
+              
+            }
+            .texto {
+  
+            }
+          }
+  
+          .consultas-pendentes {
+            ion-icon {
+              background-color: #ffc107 !important;
+              color: #1f2d3d;
+            }
+  
+            .valor {
+              
+            }
+            .texto {
+  
+            }
+          }
+  
+          .profissionais-pendentes {
+            ion-icon {
+              background-color: #17a2b8 !important;
+              color: #1f2d3d;
+            }
+  
+            .valor {
+              
+            }
+            .texto {
+  
+            }
+          }
+  
+          .pacientes-pendentes {
+            ion-icon {
+              background-color: #1f2d3d !important;
+              color: #f2f2f2;
+            }
+  
+            .valor {
+              
+            }
+            .texto {
+  
+            }
+          }
+  
+        }
+  
+  
+      }
+  
+    }
+
+  
+}

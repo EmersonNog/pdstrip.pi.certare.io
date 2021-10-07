@@ -1,0 +1,35 @@
+<ion-header>
+  
+  <ion-toolbar color="default" class="header">
+    <ion-title>
+      <h2 class="title">{{titulo}}</h2>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon class="header-icon" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <button ion-button icon-only clear icon-end (click)="openExternal(foto)">
+    <ion-icon name="open"></ion-icon>
+  </button>
+
+  <img src="{{foto}}">
+
+</ion-content>
+
+<ion-footer class="footer" mode="md">
+  <ion-toolbar class="custom-toolbar" mode="md">
+    <ion-row align-items-center justify-content-start mode="md">
+      <ion-col col-12 align-self-start mode="md">
+        <ion-title mode="md">{{rodape}}</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

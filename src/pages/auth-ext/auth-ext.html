@@ -1,0 +1,44 @@
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content class="login">
+
+  <div class="logo">
+    <ion-grid class="img img-centralize">
+      <img src="assets/imgs/logo.png" />
+    </ion-grid>
+    <ion-grid class="img-certare img-centralize">
+      <img src="assets/imgs/logo-certare-branca.png" />
+    </ion-grid>
+  </div>
+
+  <ion-grid class="grid">
+    
+    <ion-row align-items-center justify-content-center *ngIf="isAguardando === true">
+      <loading-spinner></loading-spinner>
+    </ion-row>
+
+    <!-- <ion-row class="msg" align-items-center justify-content-center *ngIf="msgerro !== undefined"> -->
+    <ion-row class="msg" align-items-center justify-content-center *ngIf="msgerro !== undefined">
+      <p class="center btn-link">{{msgerro?.title}}</p>
+    </ion-row>
+
+    <ion-row class="msg" align-items-center justify-content-center *ngIf="msgerro !== undefined">
+      <p class="center btn-link">{{msgerro?.desc}}</p>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer mode="ios" class="footer-versao">
+  <ion-toolbar mode="ios" class="custom-toolbar">
+    <ion-title mode="ios" class="toolbar-title">Versão: {{versao}}{{isDev}}</ion-title>
+  </ion-toolbar>
+</ion-footer>
