@@ -14,7 +14,7 @@ import {Constants} from "../../environments/constants";
 @Injectable()
 export class UserService {
 
-  static APP_NAME: string = 'invent-cloud-web_';
+  static APP_NAME: string = 'invent-onu-web_';
 
   currentUser: Observable<any>;
   routes: any[];

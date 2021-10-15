@@ -4,7 +4,7 @@ export class Constants {
   //Constants used to display pages
   public static HOME_PAGE = {id: 'home', name: 'HomePage', title: 'Início', icon: 'custom-home'};
   public static AUTH_EXT_PAGE = {id: 'auth-ext', name: 'AuthExtPage', title: 'Autenticação', icon: 'home'};
-  public static AREAS_EXAMES_PAGE = {id: 'areas-exames', name: 'AreasExamesPage', title: 'Áreas de Exames', icon: 'custom-exames'};
+  public static AREAS_EXAMES_PAGE = {id: 'areas-exames', name: 'AreasExamesPage', title: 'Áreas', icon: 'custom-exames'};
   public static LOGIN_PAGE = {id: 'login', name: 'LoginPage', title: 'Login'};
   public static PROFILE_PAGE = {id: 'profile', name: 'ProfilePage', title: 'Perfil', icon: 'custom-perfil'};
   public static PROFILE_EDIT_PAGE = {id: 'edit', name: 'ProfileEditPage', title: 'Editar Perfil'};

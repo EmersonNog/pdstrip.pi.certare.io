@@ -27,6 +27,7 @@ export class MapUtil {
 
   addInfoWindow(poly, content, map, infowindow) {
     infowindow = new google.maps.InfoWindow();
+
     google.maps.event.addListener(poly, 'click', function(event) {
       // infowindow.content = content;
       infowindow.setContent(content);
@@ -34,14 +35,16 @@ export class MapUtil {
       // infowindow.position = event.latLng;
       infowindow.setPosition(event.latLng);
       infowindow.open(map);
-  });google.maps.event.addListener(poly, 'click', function(event) {
-    // infowindow.content = content;
-    infowindow.setContent(content);
+    });
 
-    // infowindow.position = event.latLng;
-    infowindow.setPosition(event.latLng);
-    infowindow.open(map);
-});
+    // google.maps.event.addListener(poly, 'click', function(event) {
+    //   // infowindow.content = content;
+    //   infowindow.setContent(content);
+
+    //   // infowindow.position = event.latLng;
+    //   infowindow.setPosition(event.latLng);
+    //   infowindow.open(map);
+    // });
   }
   
 
@@ -55,10 +58,10 @@ export class MapUtil {
 
     if(itemArr.length > 0 && hasPoints) {
       let indexCenter = (itemArr.length/2 | 0); // cast para int
-    //   console.log('center', indexCenter);
+      console.log('center', {lat: itemArr[indexCenter].lat, long: itemArr[indexCenter].lng});
 
       map.setCenter({lat: itemArr[indexCenter].lat, long: itemArr[indexCenter].lng});
-      map.setZoom(7);
+      map.setZoom(12);
 
       for(let i = 0; i < itemArr.length; i++) {
 
@@ -71,11 +74,9 @@ export class MapUtil {
           }else if(itemArr[i].ocupacao === 'Terreno'){
             cor = '#FF0000'
           }
+          
           polyline = new google.maps.Polyline(this.createPolylineBall(itemArr[i], cor));
           this.addInfoWindow(polyline, 'Tipo de ocupação: ' + itemArr[i].ocupacao  +'<br/>' + 'Área do terreno: ' + itemArr[i].area_terreno + 'm²', map, new google.maps.InfoWindow());
-          
-          
-          
 
         } else {
 
@@ -124,37 +125,37 @@ export class MapUtil {
           // });
 
         } else {
-          let infoWindowContent;
+          // let infoWindowContent;
 
-          if(type && type === 'fotossensor') {
-            infoWindowContent = this.createInfoWindowFE(itemArr[i], showBtnImages);
-          } else if(type && type === 'faixadominio') {
-            infoWindowContent = this.createInfoWindowFD(itemArr[i], showBtnImages);
-          } else {
-            infoWindowContent = this.createInfoWindowGenerico(itemArr[i], isAcidente, showBtnImages)
-          }
-          let infowindow = new google.maps.InfoWindow({
-            content: infoWindowContent
-          });
+          // if(type && type === 'fotossensor') {
+          //   infoWindowContent = this.createInfoWindowFE(itemArr[i], showBtnImages);
+          // } else if(type && type === 'faixadominio') {
+          //   infoWindowContent = this.createInfoWindowFD(itemArr[i], showBtnImages);
+          // } else {
+          //   infoWindowContent = this.createInfoWindowGenerico(itemArr[i], isAcidente, showBtnImages)
+          // }
+          // let infowindow = new google.maps.InfoWindow({
+          //   content: infoWindowContent
+          // });
           
           // google.maps.event.addListener(polyline, 'click', event => {
           //   infowindow.setPosition(event.latLng);
           //   infowindow.open(map);
           // });
-          google.maps.event.addListener(polyline, 'click', event => {
-            infowindow.setPosition(event.latLng);
-            infowindow.open(map);
-            MapUtil2.infoWindows.push(infowindow);
+          // google.maps.event.addListener(polyline, 'click', event => {
+          //   infowindow.setPosition(event.latLng);
+          //   infowindow.open(map);
+          //   MapUtil2.infoWindows.push(infowindow);
 
-            if (MapUtil2.infoWindows.length > 1) {
-              MapUtil2.infoWindows.forEach((value, index, arr) => {
-                  if (value != infowindow) {
-                      value.close();
-                      MapUtil2.infoWindows.splice(index, 1);
-                  }
-              })
-            }
-          });
+          //   if (MapUtil2.infoWindows.length > 1) {
+          //     MapUtil2.infoWindows.forEach((value, index, arr) => {
+          //         if (value != infowindow) {
+          //             value.close();
+          //             MapUtil2.infoWindows.splice(index, 1);
+          //         }
+          //     })
+          //   }
+          // });
 
           // google.maps.event.addListener(polyline, 'mouseover', event => {
           //   infowindow.setPosition(event.latLng);

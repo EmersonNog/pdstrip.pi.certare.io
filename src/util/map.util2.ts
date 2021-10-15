@@ -33,7 +33,7 @@ export class MapUtil2 {
             mapTypeId: 'roadmap',
             //   mapTypeId: 'satellite',
             zoom: 9,
-            center: { lat: -3.889623, lng: -38.453566 },
+            center: { lat: -19.907892905853608, lng: -44.00658256604622 },
             mapTypeControl: true,
             mapTypeControlOptions: {
                 style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
