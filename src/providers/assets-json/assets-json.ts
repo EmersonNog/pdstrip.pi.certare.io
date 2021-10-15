@@ -26,6 +26,10 @@ export class AssetsJsonProvider {
     return this.http.get(`${this.folder}/areas_exames.json`);
   }
 
+  getJsonMG(){
+    return this.http.get(`${this.folder}/imoveis_mg.json`);
+  }
+
   getSemiportico(){
     // return this.http.get(`${this.folder}/semiportico-ce085.json`);
     return this.http.get(`${this.folder}/SEMIPORTICOS_ESTADO.json`);

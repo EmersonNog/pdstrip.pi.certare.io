@@ -9,6 +9,7 @@ export class MapUtil {
   static classificacaoNome = 'HDM4';
   static classificacaoSayers = 'PAVIMENTO_NOVO';
   static classificacaoObj = {};
+  
 
   mapUtil = new MapUtil2();
 
@@ -24,8 +25,28 @@ export class MapUtil {
     this.mapUtil.destroy();
   }
 
+  addInfoWindow(poly, content, map, infowindow) {
+    infowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(poly, 'click', function(event) {
+      // infowindow.content = content;
+      infowindow.setContent(content);
+
+      // infowindow.position = event.latLng;
+      infowindow.setPosition(event.latLng);
+      infowindow.open(map);
+  });google.maps.event.addListener(poly, 'click', function(event) {
+    // infowindow.content = content;
+    infowindow.setContent(content);
+
+    // infowindow.position = event.latLng;
+    infowindow.setPosition(event.latLng);
+    infowindow.open(map);
+});
+  }
+  
+
   public showRodoviaPoints(route: any, map, isAcidente=false, type=undefined, showBtnImages=true) {
-    let itemArr: any[] = route.map(item => item.values);
+    let itemArr: any[] = route
     let polyline;
     const latArrOk = itemArr.filter(item => item.lat !== 0.0);
     const hasPoints = latArrOk.length > 0;
@@ -36,13 +57,25 @@ export class MapUtil {
       let indexCenter = (itemArr.length/2 | 0); // cast para int
     //   console.log('center', indexCenter);
 
-      map.setCenter({lat: itemArr[indexCenter].lat, lng: itemArr[indexCenter].lng});
+      map.setCenter({lat: itemArr[indexCenter].lat, long: itemArr[indexCenter].lng});
       map.setZoom(7);
 
       for(let i = 0; i < itemArr.length; i++) {
 
         if(type && type === 'limite-municipio') {
-          polyline = new google.maps.Polyline(this.createPolylineBall(itemArr[i]));
+          let cor = '#2E5C1F'
+          if(itemArr[i].ocupacao === 'Consolidado de baixa ocupação'){
+            cor = '#00FFFF'
+          }else if(itemArr[i].ocupacao === 'Imóvel abandonado'){
+            cor = '#000000'
+          }else if(itemArr[i].ocupacao === 'Terreno'){
+            cor = '#FF0000'
+          }
+          polyline = new google.maps.Polyline(this.createPolylineBall(itemArr[i], cor));
+          this.addInfoWindow(polyline, 'Tipo de ocupação: ' + itemArr[i].ocupacao  +'<br/>' + 'Área do terreno: ' + itemArr[i].area_terreno + 'm²', map, new google.maps.InfoWindow());
+          
+          
+          
 
         } else {
 
@@ -293,8 +326,8 @@ export class MapUtil {
     });
   }
 
-  public createPolylineBall(item) {
-    let cor = '#2E5C1F';
+  public createPolylineBall(item, cor = '#2E5C1F' ) {
+    
 
     return ({
       path: [{lat: item.lat, lng: item.lng}, {lat: item.lat, lng: item.lng}],
