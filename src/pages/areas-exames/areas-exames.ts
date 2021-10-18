@@ -8,6 +8,7 @@ import { UserService } from '../../providers/user/user.service';
 import { MapUtil, Position } from '../../util/map.util';
 import { AngularFirestore } from "angularfire2/firestore";
 
+import wkt from "wkt";
 
 @IonicPage()
 @Component({
@@ -103,16 +104,20 @@ export class AreasExamesPage {
     })).take(1).subscribe(_data => {
       
       const data2 = _data.map(_item => {
-      _item['type'] = 'exame';
-      _item['icon'] = 'marker-blue-2.png';
-      return _item;
-    });
+        _item['type'] = 'exame';
+        _item['icon'] = 'marker-blue-2.png';
+        _item['points'] = wkt.parse(_item['wkt']);
 
-    this.mapUtil.showRodoviaPoints(data2, this.map, false, 'limite-municipio');
-      
+        return _item;
+      });
 
-     
-      
+      console.log('data2', data2);
+      this.mapUtil.showRodoviaPoints(data2, this.map, false, 'limite-municipio');
+        
+      // console.log(wkt.parse('POINT(1 2)'));
+      // console.log(wkt.parse("POINT Z (58.51466818909509 8.629797415591964 61.77237)"));
+      // console.log(wkt.parse("LINESTRING (30 10, 10 30, 40 40)"));
+      // console.log(wkt.parse("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"));      
     });
    
   }
