@@ -49,6 +49,8 @@ export class Constants {
   public static PATH_DOCUMENTS_SRE = '/sre/';
   public static PATH_DOCUMENTS_ESTRADAS = '/estradas/';
   public static PATH_DOCUMENTS_IMOVEIS = '/imoveis/';
+  public static PATH_DOCUMENTS_LINHAS = '/linhas/';
+  public static PATH_DOCUMENTS_ESTACOES = '/estacoes/';
 
   public static BASE_URL_FIREBASE_FUNCTIONS = environment.production ? 'https://us-central1-pav-detect.cloudfunctions.net': 'https://us-central1-pav-detect.cloudfunctions.net';
 

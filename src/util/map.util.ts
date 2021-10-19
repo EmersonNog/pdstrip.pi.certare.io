@@ -46,6 +46,15 @@ export class MapUtil {
     //   infowindow.open(map);
     // });
   }
+
+  public setCenter(estado = 'MG', map){
+    if(estado === 'MG'){
+      map.setCenter({lat: -29.7487866572924, lng: -51.145309434955});
+    } else {
+      
+    }
+    map.setZoom(12);
+  }
   
 
   public showRodoviaPoints(route: any, map, isAcidente=false, type=undefined, showBtnImages=true) {
@@ -58,25 +67,17 @@ export class MapUtil {
 
     if(itemArr.length > 0 && hasPoints) {
       let indexCenter = (itemArr.length/2 | 0); // cast para int
-      console.log('center', {lat: itemArr[indexCenter].lat, long: itemArr[indexCenter].lng});
+      // console.log('center', {lat: itemArr[indexCenter].lat, lng: itemArr[indexCenter].lng});
 
-      map.setCenter({lat: itemArr[indexCenter].lat, long: itemArr[indexCenter].lng});
-      map.setZoom(12);
+      
 
       for(let i = 0; i < itemArr.length; i++) {
 
         if(type && type === 'limite-municipio') {
-          let cor = '#2E5C1F'
-          if(itemArr[i].ocupacao === 'Consolidado de baixa ocupação'){
-            cor = '#00FFFF'
-          }else if(itemArr[i].ocupacao === 'Imóvel abandonado'){
-            cor = '#000000'
-          }else if(itemArr[i].ocupacao === 'Terreno'){
-            cor = '#FF0000'
-          }
+          let cor = '#EA4444'
           
           polyline = new google.maps.Polyline(this.createPolylineBall(itemArr[i], cor));
-          this.addInfoWindow(polyline, 'Tipo de ocupação: ' + itemArr[i].ocupacao  +'<br/>' + 'Área do terreno: ' + itemArr[i].area_terreno + 'm²', map, new google.maps.InfoWindow());
+          // this.addInfoWindow(polyline, 'Tipo de ocupação: ' + itemArr[i].ocupacao  +'<br/>' + 'Área do terreno: ' + itemArr[i].area_terreno + 'm²', map, new google.maps.InfoWindow());
 
         } else {
 
@@ -174,7 +175,6 @@ export class MapUtil {
   public addPolyline(rota: Position[], map, lineColor='#FF4941') {
 
     let polyline;
-    console.log(rota)
     if(rota && rota.length > 0) {
       
       const idxMeio = Math.floor((rota.length/2));
@@ -191,8 +191,9 @@ export class MapUtil {
           geodesic: true,
           strokeColor: lineColor,
           strokeOpacity: 1,
-          strokeWeight: 3
+          strokeWeight: 2
         };
+
         polyline = new google.maps.Polyline(polylineOpt);
 
         // MapUtil2.polylines.push(polyline);
@@ -953,4 +954,5 @@ export class Position {
     this.lat = obj && obj.lat || 0.0;
     this.lng = obj && obj.lng || 0.0;
   }
+  
 }

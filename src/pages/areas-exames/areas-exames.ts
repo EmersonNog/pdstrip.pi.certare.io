@@ -9,6 +9,7 @@ import { MapUtil, Position } from '../../util/map.util';
 import { AngularFirestore } from "angularfire2/firestore";
 
 import wkt from "wkt";
+import { pureArrayDef } from '@angular/core/src/view';
 
 @IonicPage()
 @Component({
@@ -48,7 +49,6 @@ export class AreasExamesPage {
   }
 
   ionViewWillLeave() {
-    // console.log("HOME - IonViewWillLeave")
     this.mapUtil.destroy();
   }
 
@@ -58,25 +58,26 @@ export class AreasExamesPage {
    
   }
 
-  // converterTeste(){
+  converterTeste(){
 
-  //   this.provider.getJsonMG().subscribe(data => {
-  //     let arr = []
+    this.provider.getJsonTeste().subscribe(data => {
+      let arr = []
 
-  //     for(var i in data){
-  //       arr.push(data[i]);
-  //     }
+      for(var i in data){
+        arr.push(data[i]);
+      }
 
-  //     console.log(arr)
+      console.log(arr)
       
 
-  //     arr.forEach((item, idx) => {
-  //       console.log('enviando arquivo ' + idx);
-  //       const id = this.afd.createId();
-  //       item.id = id;
-  //       this.afd.doc(Constants.PATH_DOCUMENTS_IMOVEIS + item.id).set(JSON.parse(JSON.stringify(item)));
-  //     })
-  //   })
+      arr.forEach((item, idx) => {
+        console.log('enviando arquivo ' + idx);
+        const id = this.afd.createId();
+        item.id = id;
+        this.afd.doc(Constants.PATH_DOCUMENTS_ESTACOES + item.id).set(JSON.parse(JSON.stringify(item)));
+      })
+    })
+  }
     
    
 
@@ -104,21 +105,132 @@ export class AreasExamesPage {
     })).take(1).subscribe(_data => {
       
       const data2 = _data.map(_item => {
-        _item['type'] = 'exame';
-        _item['icon'] = 'marker-blue-2.png';
-        _item['points'] = wkt.parse(_item['wkt']);
-
+        
+        _item['points'] = wkt.parse(_item['wkt']).coordinates;
+        
         return _item;
       });
 
-      console.log('data2', data2);
-      this.mapUtil.showRodoviaPoints(data2, this.map, false, 'limite-municipio');
+      if(data2){
+        let arrayData = []
+          for(let i in data2){
+                if(data2[i]['uf'] === 'MG'){
+                arrayData.push(data2[i]);
+              }
+          }
         
-      // console.log(wkt.parse('POINT(1 2)'));
-      // console.log(wkt.parse("POINT Z (58.51466818909509 8.629797415591964 61.77237)"));
-      // console.log(wkt.parse("LINESTRING (30 10, 10 30, 40 40)"));
-      // console.log(wkt.parse("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"));      
+        console.log(arrayData)
+         
+        arrayData.forEach(element => {
+          let cor = '#1F78B4'
+        
+          if(element.ocupacao === 'Consolidado de baixa ocupação'){
+            cor = '#0000FF'
+          }else if(element.ocupacao === 'Imóvel abandonado'){
+            cor = '#000000'
+          }else if(element.ocupacao === 'Terreno'){
+            cor = '#FF0000'
+          }
+
+          element.points.forEach(coordenadas => {
+            
+            
+            coordenadas.forEach((singular, index) => {
+              
+              let polyline = []
+              singular.forEach(coordenada => {
+                const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
+                polyline.push(posicao)
+              });
+              
+              this.mapUtil.addPolyline(polyline, this.map, cor)
+            });
+          })
+        });
+      }
+        
+       
     });
+
+    this.afd.collection(Constants.PATH_DOCUMENTS_ESTACOES,
+      ref => ref
+              // .where('ano', '==', ano)
+              // .orderBy('numero')
+    )
+    .snapshotChanges()
+    .map(actions => actions.map(_data => {
+      const data = _data.payload.doc.data();
+      const id = _data.payload.doc.id;
+
+      const obj = { id, ...data };
+      return obj;
+    })).take(1).subscribe(_data => {
+      
+      const data2 = _data.map(_item => {
+        return _item;
+      });
+
+      if(data2){
+        let arrayData = []
+        for(let i in data2){
+            arrayData.push(data2[i]);
+        }
+
+        let coordenadasTotais = []
+        arrayData.length > 0 && arrayData.forEach(estacao => {
+          const coordenadas = wkt.parse(estacao.wkt).coordinates
+          coordenadasTotais.push({lat: coordenadas[1], lng: coordenadas[0]})
+        })
+
+        this.mapUtil.showRodoviaPoints(coordenadasTotais, this.map, false, 'limite-municipio', false)
+      }
+    });
+
+    this.afd.collection(Constants.PATH_DOCUMENTS_LINHAS,
+      ref => ref
+              // .where('ano', '==', ano)
+              // .orderBy('numero')
+    )
+    .snapshotChanges()
+    .map(actions => actions.map(_data => {
+      const data = _data.payload.doc.data();
+      const id = _data.payload.doc.id;
+
+      const obj = { id, ...data };
+      return obj;
+    })).take(1).subscribe(_data => {
+      
+      const data2 = _data.map(_item => {
+        return _item;
+      });
+
+      
+      if(data2){
+        let arrayData = []
+        for(let i in data2){
+            arrayData.push(data2[i]);
+        }
+
+        arrayData.length > 0 && arrayData.forEach(linha => {
+          const coordenadas = wkt.parse(linha.wkt).coordinates
+          coordenadas.forEach((singular, index) => {
+              
+            let polyline = []
+            singular.forEach(coordenada => {
+              const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
+              polyline.push(posicao)
+            });
+            
+            this.mapUtil.addPolyline(polyline, this.map, '#9B1C04')
+          });
+        })
+      }
+    });
+
+    
+
+    this.mapUtil.setCenter('MG', this.map)
+    
    
   }
 
