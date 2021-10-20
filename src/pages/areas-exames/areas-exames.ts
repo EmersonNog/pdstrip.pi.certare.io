@@ -60,23 +60,59 @@ export class AreasExamesPage {
 
   converterTeste(){
 
-    this.provider.getJsonTeste().subscribe(data => {
-      let arr = []
+    
+    // this.provider.getJsonTratado('MG').subscribe(data => {
+    //   let arr = []
 
-      for(var i in data){
-        arr.push(data[i]);
-      }
+    //   for(var i in data){
+    //     arr.push(data[i]);
+    //   }
 
-      console.log(arr)
+    //   console.log(arr)
       
 
-      arr.forEach((item, idx) => {
-        console.log('enviando arquivo ' + idx);
-        const id = this.afd.createId();
-        item.id = id;
-        this.afd.doc(Constants.PATH_DOCUMENTS_ESTACOES + item.id).set(JSON.parse(JSON.stringify(item)));
-      })
-    })
+    //   arr.forEach((item, idx) => {
+    //     console.log('enviando arquivo ' + idx);
+    //     const id = this.afd.createId();
+    //     item.id = id;
+    //     this.afd.doc(Constants.PATH_DOCUMENTS_IMOVEIS + item.id).set(JSON.parse(JSON.stringify(item)));
+    //   })
+    // })
+    // this.provider.getJsonTratado('PE').subscribe(data => {
+    //   let arr = []
+
+    //   for(var i in data){
+    //     arr.push(data[i]);
+    //   }
+
+    //   console.log(arr)
+      
+
+    //   arr.forEach((item, idx) => {
+    //     console.log('enviando arquivo ' + idx);
+    //     const id = this.afd.createId();
+    //     item.id = id;
+    //     this.afd.doc(Constants.PATH_DOCUMENTS_IMOVEIS + item.id).set(JSON.parse(JSON.stringify(item)));
+    //   })
+    // })
+    // this.provider.getJsonTratado('RS').subscribe(data => {
+    //   let arr = []
+
+    //   for(var i in data){
+    //     arr.push(data[i]);
+    //   }
+
+    //   console.log(arr)
+      
+
+    //   arr.forEach((item, idx) => {
+    //     console.log('enviando arquivo ' + idx);
+    //     const id = this.afd.createId();
+    //     item.id = id;
+    //     this.afd.doc(Constants.PATH_DOCUMENTS_IMOVEIS + item.id).set(JSON.parse(JSON.stringify(item)));
+    //   })
+    // })
+
   }
     
    
@@ -114,23 +150,44 @@ export class AreasExamesPage {
       if(data2){
         let arrayData = []
           for(let i in data2){
-                if(data2[i]['uf'] === 'MG'){
+                
                 arrayData.push(data2[i]);
-              }
+              
           }
         
-        console.log(arrayData)
+        
          
         arrayData.forEach(element => {
-          let cor = '#1F78B4'
+          let cor;
         
-          if(element.ocupacao === 'Consolidado de baixa ocupação'){
-            cor = '#0000FF'
-          }else if(element.ocupacao === 'Imóvel abandonado'){
-            cor = '#000000'
-          }else if(element.ocupacao === 'Terreno'){
-            cor = '#FF0000'
+          switch (element.tipo_imovel) {
+            case 'TERRENO':
+              cor = '#33A02C';
+              break;
+            case 'MUSEU':
+              cor = '#6A3D9A';
+              break;
+            case 'REPRESA':
+              cor = '#1F78B4';
+              break;
+            case 'GALPÃO':
+              cor = '#FF7F00';
+              break;
+            case 'PÁTIO FERROVIÁRIO':
+              cor = '#CAB2D6';
+              break;
+            case 'EDIFÍCIO / PRÉDIO':
+              cor = '#33A02C';
+              break;
+            case 'REPRESA':
+              cor = '#1F78B4';
+              break;
+            default:
+              cor = '#B15928';
+              break;
           }
+
+
 
           element.points.forEach(coordenadas => {
             
@@ -143,7 +200,7 @@ export class AreasExamesPage {
                 polyline.push(posicao)
               });
               
-              this.mapUtil.addPolyline(polyline, this.map, cor)
+              this.mapUtil.addPolyline(polyline,this.map, cor, 'imovel', element)
             });
           })
         });
@@ -179,7 +236,7 @@ export class AreasExamesPage {
         let coordenadasTotais = []
         arrayData.length > 0 && arrayData.forEach(estacao => {
           const coordenadas = wkt.parse(estacao.wkt).coordinates
-          coordenadasTotais.push({lat: coordenadas[1], lng: coordenadas[0]})
+          coordenadasTotais.push({lat: coordenadas[1], lng: coordenadas[0], name: estacao.name})
         })
 
         this.mapUtil.showRodoviaPoints(coordenadasTotais, this.map, false, 'limite-municipio', false)
@@ -221,7 +278,7 @@ export class AreasExamesPage {
               polyline.push(posicao)
             });
             
-            this.mapUtil.addPolyline(polyline, this.map, '#9B1C04')
+            this.mapUtil.addPolyline(polyline, this.map, '#9B1C04', 'linha', linha)
           });
         })
       }

@@ -10,6 +10,7 @@ export class MapUtil {
   static classificacaoSayers = 'PAVIMENTO_NOVO';
   static classificacaoObj = {};
   
+  
 
   mapUtil = new MapUtil2();
 
@@ -25,17 +26,27 @@ export class MapUtil {
     this.mapUtil.destroy();
   }
 
+  
+
   addInfoWindow(poly, content, map, infowindow) {
     infowindow = new google.maps.InfoWindow();
 
+    
+
     google.maps.event.addListener(poly, 'click', function(event) {
       // infowindow.content = content;
+      
       infowindow.setContent(content);
 
       // infowindow.position = event.latLng;
       infowindow.setPosition(event.latLng);
+      
+      MapUtil2.infoWindows.length > 0 && MapUtil2.infoWindows.forEach(infow => infow.close())
       infowindow.open(map);
+      MapUtil2.infoWindows.push(infowindow)
     });
+
+    
 
     // google.maps.event.addListener(poly, 'click', function(event) {
     //   // infowindow.content = content;
@@ -47,6 +58,8 @@ export class MapUtil {
     // });
   }
 
+  
+
   public setCenter(estado = 'MG', map){
     if(estado === 'MG'){
       map.setCenter({lat: -29.7487866572924, lng: -51.145309434955});
@@ -55,6 +68,11 @@ export class MapUtil {
     }
     map.setZoom(12);
   }
+
+
+  //   desativaInfoWindows(){
+  //   this.infowindowAtiva.length > 0  && this.infowindowAtiva.forEach(infowindow => infowindow.close())
+  // }
   
 
   public showRodoviaPoints(route: any, map, isAcidente=false, type=undefined, showBtnImages=true) {
@@ -77,7 +95,7 @@ export class MapUtil {
           let cor = '#EA4444'
           
           polyline = new google.maps.Polyline(this.createPolylineBall(itemArr[i], cor));
-          // this.addInfoWindow(polyline, 'Tipo de ocupação: ' + itemArr[i].ocupacao  +'<br/>' + 'Área do terreno: ' + itemArr[i].area_terreno + 'm²', map, new google.maps.InfoWindow());
+          this.addInfoWindow(polyline, 'Nome da estação: ' + itemArr[i].name, map, new google.maps.InfoWindow());
 
         } else {
 
@@ -172,7 +190,7 @@ export class MapUtil {
     }
   }
 
-  public addPolyline(rota: Position[], map, lineColor='#FF4941') {
+  public addPolyline(rota: Position[], map, lineColor='#FF4941', tipo, info = {name: '', tipo_ocup: '', bairro: '', endereco_forn: ''}) {
 
     let polyline;
     if(rota && rota.length > 0) {
@@ -180,24 +198,51 @@ export class MapUtil {
       const idxMeio = Math.floor((rota.length/2));
       const rotaMeio = rota[idxMeio];
       const latlngCenter = {lat: rotaMeio.lat, lng: rotaMeio.lng};
-      map.setCenter(latlngCenter);
-      map.setZoom(11);
+      // map.setCenter(latlngCenter);
+      // map.setZoom(11);
+
+      let stroke = 1;
+
+      if(tipo === 'imovel'){
+        stroke = 1
+      }else if(tipo === 'linha'){
+        stroke = 5
+      }else if(tipo === 'estacao'){
+        stroke = 6
+      }
 
       for(let i = 0; i < rota.length; i++) {
         const _current = rota[i];
 
         const polylineOpt = {
           path: rota,
-          geodesic: true,
+          geodesic: false,
           strokeColor: lineColor,
-          strokeOpacity: 1,
-          strokeWeight: 2
+          strokeOpacity: 1.0,
+          strokeWeight: stroke,
+          fillColor: lineColor,
+          fillOpacity: 0.01,
         };
 
         polyline = new google.maps.Polyline(polylineOpt);
 
         // MapUtil2.polylines.push(polyline);
-        polyline.setMap(map);
+        
+
+        if(tipo === 'linha'){
+          polyline = new google.maps.Polyline(polylineOpt);
+          polyline.setMap(map);
+          this.addInfoWindow(polyline, 'Linha: ' + info.name, map, new google.maps.InfoWindow());
+        }else if(tipo === 'imovel'){
+          const polygon = new google.maps.Polygon(polylineOpt)
+          polygon.setMap(map)
+          const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}`
+          this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
+        }else {
+          polyline = new google.maps.Polyline(polylineOpt);
+          polyline.setMap(map);
+        }
+        
       }
     }
   }
@@ -335,8 +380,8 @@ export class MapUtil {
       path: [{lat: item.lat, lng: item.lng}, {lat: item.lat, lng: item.lng}],
       geodesic: true,
       strokeColor: cor,
-      strokeOpacity: 1,
-      strokeWeight: 10
+      strokeOpacity: 0.9,
+      strokeWeight: 20
     });
   }
 
