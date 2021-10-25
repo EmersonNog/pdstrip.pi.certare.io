@@ -13,6 +13,12 @@
         <ion-icon class="header-icon" name="ios-funnel"></ion-icon>
       </button>
     </ion-buttons> -->
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openFilterPage()" title="Filtrar">
+        <ion-icon class="header-icon" name="ios-funnel"></ion-icon>
+      </button>
+    </ion-buttons>
+    
   </ion-navbar>
 </ion-header>
 
@@ -42,6 +48,7 @@
   <ion-grid class="data-grid" no-padding [style.display]="selected == 'data' ? 'block' : 'none'">
     
   </ion-grid>
-  <button ion-button color="gray" mode="ios" class="btn-add" (click)="converterTeste()" item-end>Carregar .CSV</button> 
+  
+  
   
 </ion-content>

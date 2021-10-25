@@ -41,6 +41,7 @@ import { LoadingSpinnerComponentModule } from '../components/loading-spinner/loa
 import { AuthExtProvider } from '../providers/auth-ext/auth-ext';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { EstradaProvider } from '../providers/estrada/estrada';
+import { SreProvider } from '../providers/sre/sre'
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -96,7 +97,8 @@ export function createTranslateLoader(httpClient: HttpClient) {
     RodoviaProvider,
     AuthExtProvider,
     RodoviaProvider,
-    EstradaProvider
+    EstradaProvider,
+    SreProvider
   ]
 })
 export class AppModule {}

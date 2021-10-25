@@ -62,9 +62,11 @@ export class MapUtil {
 
   public setCenter(estado = 'MG', map){
     if(estado === 'MG'){
+      map.setCenter({lat: -19.886066, lng: -43.9081736});
+    } else if(estado === 'RS') {
       map.setCenter({lat: -29.7487866572924, lng: -51.145309434955});
     } else {
-      
+      map.setCenter({lat: -19.886066, lng: -43.9081736});
     }
     map.setZoom(12);
   }
@@ -190,7 +192,7 @@ export class MapUtil {
     }
   }
 
-  public addPolyline(rota: Position[], map, lineColor='#FF4941', tipo, info = {name: '', tipo_ocup: '', bairro: '', endereco_forn: ''}) {
+  public addPolyline(rota: Position[], map, lineColor='#FF4941', tipo, info = {name: '', tipo_ocup: '', bairro: '', endereco_forn: '', area_cons: '', area_tot: ''}) {
 
     let polyline;
     if(rota && rota.length > 0) {
@@ -206,7 +208,7 @@ export class MapUtil {
       if(tipo === 'imovel'){
         stroke = 1
       }else if(tipo === 'linha'){
-        stroke = 5
+        stroke = 3
       }else if(tipo === 'estacao'){
         stroke = 6
       }
@@ -216,12 +218,13 @@ export class MapUtil {
 
         const polylineOpt = {
           path: rota,
-          geodesic: false,
+          geodesic: tipo === 'bufferLinha' ? false : true,
           strokeColor: lineColor,
-          strokeOpacity: 1.0,
-          strokeWeight: stroke,
+          strokeOpacity: tipo === 'bufferEstacao' ?   0.01 : tipo === 'bufferLinha' ? 0.01 : 1.0,
+          strokeWeight: tipo === 'bufferLinha' ? 0.8 : stroke,
           fillColor: lineColor,
-          fillOpacity: 0.01,
+          fillOpacity: tipo === 'bufferLinha' ? 0.35 : 0.01,
+          zIndex : tipo === 'bufferEstacao' ? 2 : tipo === 'bufferLinha' ? 1 : 3
         };
 
         polyline = new google.maps.Polyline(polylineOpt);
@@ -233,14 +236,31 @@ export class MapUtil {
           polyline = new google.maps.Polyline(polylineOpt);
           polyline.setMap(map);
           this.addInfoWindow(polyline, 'Linha: ' + info.name, map, new google.maps.InfoWindow());
+          MapUtil2.polylines.push(polyline);
         }else if(tipo === 'imovel'){
           const polygon = new google.maps.Polygon(polylineOpt)
           polygon.setMap(map)
-          const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}`
+          const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}<br/>Área construída: ${info.area_cons}m²<br/>Área total: ${info.area_tot}m²`
           this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
-        }else {
+          MapUtil2.polygons.push(polygon);
+        }else if(tipo === 'estacao'){
           polyline = new google.maps.Polyline(polylineOpt);
           polyline.setMap(map);
+          MapUtil2.polylines.push(polyline);
+        }else if(tipo === 'bufferEstacao'){
+          
+          const polygon = new google.maps.Polygon(polylineOpt)
+          polygon.setMap(map)
+          const conteudo = `Buffer da estação: ${info.name}`
+          this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
+          MapUtil2.polygons.push(polygon);
+        }else if(tipo === 'bufferLinha'){
+          
+          const polygon = new google.maps.Polygon(polylineOpt)
+          polygon.setMap(map)
+          const conteudo = `Buffer da linha: ${info.name}`
+          this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
+          MapUtil2.polygons.push(polygon);
         }
         
       }
@@ -380,8 +400,9 @@ export class MapUtil {
       path: [{lat: item.lat, lng: item.lng}, {lat: item.lat, lng: item.lng}],
       geodesic: true,
       strokeColor: cor,
-      strokeOpacity: 0.9,
-      strokeWeight: 20
+      strokeOpacity: 0.95,
+      strokeWeight: 15,
+      zIndex: 10
     });
   }
 
@@ -917,6 +938,12 @@ export class MapUtil {
   public cleanPolylines() {
     for(let i = 0; i < MapUtil2.polylines.length; i++) {
       MapUtil2.polylines[i].setMap(null);
+    }
+  }
+
+  public cleanPolygons() {
+    for(let i = 0; i < MapUtil2.polygons.length; i++) {
+      MapUtil2.polygons[i].setMap(null);
     }
   }
 

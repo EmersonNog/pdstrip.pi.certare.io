@@ -1,0 +1,123 @@
+page-filter {
+    .item-inner {
+        border-bottom-color: transparent !important;
+        box-shadow: none !important;
+      }
+  
+    .header-icon {
+      color: white;
+    }
+
+    .filter_options{
+      display: inline-flex;
+      width: 100%;
+    }
+  
+    .content {
+      // height:65%;
+
+      .ion-text-right {
+        text-align: right;
+        font-style: italic;
+        color: #589ace;
+      }
+     
+      .text-title {
+        color: #333;
+        font-weight: normal;
+        font-size: 13pt;
+        text-align: left;
+      }
+  
+      .input-filter {
+        background-color: #8aa4af;
+        width: 100%;
+        color: #fff;
+      }
+  
+      ::placeholder {
+        color: #fff;
+      }
+  
+      ::-webkit-input-placeholder { /* WebKit browsers */
+        color: #fff;
+      }
+  
+      :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #fff;
+      }
+  
+      ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #fff;
+      }
+  
+      :-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: #fff;
+      }
+  
+      .text-data {
+        color: #8c8c8c;
+        font-weight: normal;
+        font-size: 12pt;
+        text-align: right;
+        cursor: pointer;
+      }
+  
+      .text-label-route {
+        color: #333;
+        font-weight: normal;
+        font-size: 12pt;
+        text-align: left;
+      }
+  
+      .text-data-route {
+        color: #8c8c8c;
+        font-weight: normal;
+        font-size: 12pt;
+        text-align: right;
+        cursor: pointer;
+      }
+  
+      .btn-row {
+        ion-col {
+          text-align: center;
+        }
+
+        .btn {
+          background: #007aff;
+          font-weight: bold;
+          height: 40px;
+          // width: 20%;
+        }
+      }
+  
+      .icon-arrow {
+        position: absolute;
+        top: 14px;
+        right: 0;
+      }
+  
+      .text-label {
+        color: #767676;
+        font-weight: normal;
+        font-size: 11pt;
+        text-align: left;
+      }
+  
+      ion-select, select-searchable, ion-input {
+        // border: 1px solid #949494;
+        border-radius: 6px;
+        background-color: #e5e5e5;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        font-size: 0.8em;
+        width: 100%;
+        // height: 100%;
+  
+        .select-text, .select-searchable-value {
+            color: #575757;
+            margin-left: 11px;
+        }
+      }
+    }
+
+}

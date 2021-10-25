@@ -12,6 +12,7 @@ export class MapUtil2 {
     static infoWindows = [];
     static markers = [];
     static polylines = [];
+    static polygons = [];
     events: Events = undefined;
     nav:NavController;
 

@@ -30,15 +30,7 @@ export class AssetsJsonProvider {
     return this.http.get(`${this.folder}/jsonteste.json`);
   }
 
-  getJsonTratado(estado){
-    if(estado === 'MG'){
-      return this.http.get(`${this.folder}/tratadoMG.json`)
-    }else if(estado === 'PE'){
-      return this.http.get(`${this.folder}/tratadoPE.json`)
-    }else if(estado === 'RS'){
-      return this.http.get(`${this.folder}/tratadoRS.json`)
-    }
-  }
+ 
 
   getSemiportico(){
     // return this.http.get(`${this.folder}/semiportico-ce085.json`);

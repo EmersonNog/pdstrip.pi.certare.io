@@ -1,0 +1,112 @@
+<ion-header no-border >
+  <ion-navbar color="default">
+    <ion-title text-center>
+      <ion-label>Janela de Filtros</ion-label>
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeFilter()">
+        <ion-icon class="header-icon" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="content">
+  <ion-grid>
+    <ion-row col-12>
+
+      <!-- 
+      <ion-item no-lines *ngIf="hasGroup">
+        <ion-label class="text-label" stacked mode="ios">Grupo</ion-label>
+        <ion-select [(ngModel)]="group" (ionChange)="loadUsers(grupo)" okText="{{'btn.ok' | translate}}" cancelText="{{'btn.cancel' | translate}}">
+          <ion-option *ngFor="let groupTmp of groups" value="{{groupTmp.key}}" title="{{groupTmp.name}}">{{groupTmp.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      -->
+
+      <ion-col>
+        <div class="ion-text-right">
+          <a (click)="clearFields()">Limpar Filtros</a>
+        </div>
+      </ion-col>
+
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="UF" item-content [(ngModel)]="uf" [items]="ufArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="false" [canClear]="true" [clearButtonText]="Limpar" searchPlaceholder="Pesquisar"
+          (onChange)="changeUf($event)"
+          >
+        </select-searchable>
+      </ion-item> 
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Município" item-content [(ngModel)]="municipio" [items]="municipioArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="false" [canClear]="true" [clearButtonText]="Limpar" searchPlaceholder="Pesquisar"
+          (onChange)="changeMunicipio($event)"
+          >
+        </select-searchable>
+      </ion-item> 
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Bairro" item-content [(ngModel)]="bairro" [items]="bairroArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="true" [canClear]="true" [clearButtonText]="Limpar" searchPlaceholder="Pesquisar"
+          (onChange)="changeBairro($event)"
+          >
+        </select-searchable>
+      </ion-item> 
+
+      <!-- <div class="filter_options">
+        <ion-item no-lines>
+          <ion-label class="text-label" stacked mode="ios"></ion-label>
+          <select-searchable placeholder="Data do Levantamento" item-content [(ngModel)]="estrada" [items]="estradaArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="false" [canClear]="true" [clearButtonText]="Limpar" searchPlaceholder="Pesquisar"
+          (ionChange)="changeSre($event)"
+          >
+          </select-searchable>
+        </ion-item> 
+        <ion-item no-lines>
+          <ion-label class="text-label" stacked mode="ios"></ion-label>
+          <select-searchable placeholder="Hora do Registro" item-content [(ngModel)]="estrada" [items]="estradaArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="false" [canClear]="true" [clearButtonText]="Limpar" searchPlaceholder="Pesquisar"
+          (ionChange)="changeSre($event)"
+          >
+          </select-searchable>
+        </ion-item> 
+      </div> -->
+
+      <ion-item>
+        <ion-label>Imóveis</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="imoveisAtivos" (ionChange)="changeAtivos('imoveis', $event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Linhas</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="linhasAtivas" (ionChange)="changeAtivos('linhas', $event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estações</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="estacoesAtivas" (ionChange)="changeAtivos('estacoes', $event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Buffer Linhas</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="bufferLinhasAtivas" (ionChange)="changeAtivos('bufferLinhas', $event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Buffer Estacoes</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="bufferEstacoesAtivas" (ionChange)="changeAtivos('bufferEstacoes, $event')"></ion-checkbox>
+      </ion-item>
+
+    </ion-row>
+
+    <ion-row class="btn-row" justify-content-center align-items-center>
+      <ion-col align-self-center>
+        <button ion-button class="btn" (click)="submit()" mode="ios">Filtrar</button>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row col-12>
+      <button ion-button class="btn" block (click)="clear()">Limpar</button>
+    </ion-row> -->
+  </ion-grid>
+
+</ion-content>
