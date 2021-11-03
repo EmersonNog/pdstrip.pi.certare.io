@@ -11,6 +11,7 @@ import { AngularFirestore } from "angularfire2/firestore";
 import wkt from "wkt";
 import { pureArrayDef } from '@angular/core/src/view';
 import { elementAt } from 'rxjs/operator/elementAt';
+import { truncateSync } from 'fs';
 
 @IonicPage()
 @Component({
@@ -34,38 +35,27 @@ export class AreasExamesPage {
   bufferLinhas = [];
   bufferEstacoes = [];
   imoveis = [];
+  static ufsImoveis = [];
+  static municipiosImoveis = [];
+  static bairrosImoveis = []
   static municipios = [];
   static bairros = [];
   static ufs = [
-    {nome: "Acre", sigla: "AC"},
-    {nome: "Alagoas", sigla: "AL"},
-    {nome: "Amapá", sigla: "AP"},
-    {nome: "Amazonas", sigla: "AM"},
-    {nome: "Bahia", sigla: "BA"},
-    {nome: "Ceará", sigla: "CE"},
-    {nome: "Distrito Federal", sigla: "DF"},
-    {nome: "Espírito Santo", sigla: "ES"},
-    {nome: "Goiás", sigla: "GO"},
-    {nome: "Maranhão", sigla: "MA"},
-    {nome: "Mato Grosso", sigla: "MT"},
-    {nome: "Mato Grosso do Sul", sigla: "MS"},
     {nome: "Minas Gerais", sigla: "MG"},
-    {nome: "Pará", sigla: "PA"},
-    {nome: "Paraíba", sigla: "PB"},
-    {nome: "Paraná", sigla: "PR"},
     {nome: "Pernambuco", sigla: "PE"},
-    {nome: "Piauí", sigla: "PI"},
-    {nome: "Rio de Janeiro", sigla: "RJ"},
-    {nome: "Rio Grande do Norte", sigla: "RN"},
     {nome: "Rio Grande do Sul", sigla: "RS"},
-    {nome: "Rondônia", sigla: "RO"},
-    {nome: "Roraima", sigla: "RR"},
-    {nome: "Santa Catarina", sigla: "SC"},
-    {nome: "São Paulo", sigla: "SP"},
-    {nome: "Sergipe", sigla: "SE"},
-    {nome: "Tocantins", sigla: "TO"}
+  ]
+  static tiposOcupacoes = [];
+  static tiposSetores = [];
+  static fontes = [];
 
-]
+static imoveisAtivos = true;
+static estacoesAtivas = true;
+static linhasAtivas = true;
+static bufferEstacoesAtivas = false;
+static bufferLinhasAtivas = false;
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -123,19 +113,37 @@ export class AreasExamesPage {
       // user: this.user, map: this.map, users: this.users, groups: this.managerGroups
     });
     filterPage.onDidDismiss(_data => {
-      console.log('filters', _data);
+     
       if (_data) {
-        console.log(_data.ativos.imoveis)
+        console.log('datazinha' , _data)
+       
         const filtro = {
           estacoes : {ativo: _data.ativos.estacoes}, 
           imoveis: {ativo: _data.ativos.imoveis, 
             ufs: _data.ufs.length > 0 ? _data.ufs.map(item => item.sigla) : [], 
             municipios: _data.municipios.length > 0 ? _data.municipios.map(item => item.municipio) : [], 
-            bairros: _data.bairros.length > 0 ? _data.bairros.map(item => item.bairro) : []}, 
+            bairros: _data.bairros.length > 0 ? _data.bairros.map(item => item.bairro) : [],
+            tiposOcupacoes: _data.tiposOcupacoes.length > 0 ? _data.tiposOcupacoes.map(item => item.info) : [],
+            tiposSetores: _data.tiposSetores,
+            fontes: _data.fontes,
+            categorias: _data.categorias,
+            categorizacao: _data.categorizacao
+          }, 
+            
           linhas: {ativo: _data.ativos.linhas}, 
           bufferEstacoes: {ativo: _data.ativos.bufferEstacoes}, 
           bufferLinhas: {ativo: _data.ativos.bufferLinhas}}
         this.filtrar(filtro)
+        AreasExamesPage.estacoesAtivas = _data.ativos.estacoes
+        AreasExamesPage.linhasAtivas = _data.ativos.linhas
+        AreasExamesPage.imoveisAtivos = _data.ativos.imoveis
+        AreasExamesPage.bufferLinhasAtivas = _data.ativos.bufferLinhas
+        AreasExamesPage.bufferEstacoesAtivas = _data.ativos.bufferEstacoes
+        AreasExamesPage.ufsImoveis = _data.ufs.length > 0 ? _data.ufs.map(item => item.sigla) : []
+        AreasExamesPage.municipiosImoveis = _data.municipios.length > 0 ? _data.municipios.map(item => item.municipio) : []
+        AreasExamesPage.bairrosImoveis = _data.bairros.length > 0 ? _data.bairros.map(item => item.bairro) : []
+       
+
       }
     });
     filterPage.present();
@@ -144,28 +152,235 @@ export class AreasExamesPage {
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
+
+  filtraApp(){
+
+  }
     
-  filtrar(filtro = {estacoes : {ativo: true}, imoveis: {ativo: true, ufs: [], municipios: [], bairros: []}, linhas: {ativo: true}, bufferEstacoes: {ativo: false}, bufferLinhas: {ativo: false}}){
+  filtrar(filtro = {
+    estacoes : {ativo: true}, 
+    imoveis: {
+      ativo: true, 
+      ufs: [], 
+      municipios: [], 
+      bairros: [], 
+      tiposOcupacoes: [], 
+      tiposSetores: [], 
+      fontes: [], 
+      categorias: [],
+      categorizacao: null
+    }, 
+    linhas: {ativo: true}, 
+    bufferEstacoes: {ativo: false}, 
+    bufferLinhas: {ativo: false}
+  }
+  ){
 
     this.mapUtil.cleanMarkers();
     this.mapUtil.cleanPolylines();
     this.mapUtil.cleanPolygons();
 
-    console.log('munis', AreasExamesPage.municipios)
-    console.log('bairros', AreasExamesPage.bairros)
+    console.log('ipo', filtro.imoveis.fontes)
+
+    // && filtro.imoveis.tiposOcupacoes.includes(imovel.element.tipo_ocup)
 
     if(filtro.estacoes.ativo){
       this.mapUtil.showRodoviaPoints(this.estacoes.coordenadas, this.map, false, 'limite-municipio', false)
     }
     if(filtro.imoveis.ativo){
+      console.log('chegou no filtro', this.imoveis)
       this.imoveis.length > 0 && this.imoveis.forEach(imovel => {
-        if(filtro.imoveis.ufs.length > 0){
-          if(filtro.imoveis.municipios.length > 0){
-            if(filtro.imoveis.bairros.length > 0){
-             filtro.imoveis.ufs.forEach(uf => {
-               if(uf === imovel.element.uf){
+
+          if(filtro.imoveis.tiposSetores.length  > 0 && !filtro.imoveis.tiposSetores.includes(imovel.element.tipo_setor)){
+            return;
+          }
+          if(filtro.imoveis.tiposOcupacoes.length > 0 && !filtro.imoveis.tiposOcupacoes.includes(imovel.element.tipo_ocup)){
+            return;
+          }
+
+          if(filtro.imoveis.fontes.length > 0 && !filtro.imoveis.fontes.includes(imovel.element.fonte)){
+            return;
+          }
+
+          if(filtro.imoveis.categorizacao){
+            switch (filtro.imoveis.categorizacao) {
+              case 'tipo_ocup':
+                switch (imovel.element.tipo_ocup.toLowerCase()) {
+                  case 'terreno':
+                    imovel.cor = '#CFF09E';
+                    break;
+                  case 'consolidado de baixa ocupação':
+                    imovel.cor = '#3B8686';
+                    break;
+                  case 'imóvel abandonado':
+                    imovel.cor = '#333333';
+                    break; 
+                  default:
+                    imovel.cor = '#B15928';
+                    break;
+                }
+                break;
+              case 'g_priorizacao':
+                switch (imovel.element.g_priorizacao.toString()) {
+                  case '1':
+                    imovel.cor = '#FF0000';
+                    break;
+                  case '2':
+                    imovel.cor = '#00FF00';
+                    break;
+                  case '3':
+                    imovel.cor = '#0000FF';
+                    break;
+                  case '4':
+                    imovel.cor = '#333333';
+                    break;  
+                  default:
+                    imovel.cor = '#B15928';
+                    break;
+                }
+                break;
+              case 'app':
+                switch (imovel.element.app.toLowerCase()) {
+                  case 'true':
+                    imovel.cor = '#00FF00';
+                    break;
+                  case 'false':
+                    imovel.cor = '#FF0000';
+                    break;
+                  default:
+                    imovel.cor = '#B15928';
+                    break;
+                }
+                break;
+              case 'iso_10':
+                switch (imovel.element.iso_10.toLowerCase()) {
+                  case 'true':
+                    imovel.cor = '#00FF00';
+                    break;
+                  case 'false':
+                    imovel.cor = '#FF0000';
+                    break;
+                  default:
+                    imovel.cor = '#B15928';
+                    break;
+                }
+              break;
+              case 'iso_15':
+                switch (imovel.element.iso_15.toLowerCase()) {
+                  case 'true':
+                    imovel.cor = '#00FF00';
+                    break;
+                  case 'false':
+                    imovel.cor = '#FF0000';
+                    break;
+                  default:
+                    imovel.cor = '#B15928';
+                    break;
+                }
+              break;
+              case 'fonte':
+                switch (imovel.element.fonte.toUpperCase()) {
+                  case 'TRENSURB':
+                    imovel.cor = '#00FF00';
+                    break;
+                  case 'SIAPA':
+                    imovel.cor = '#FF0000';
+                    break;
+                  case 'PREFEITURA DE BELO HORIZONTE':
+                    imovel.cor = '#0000FF';
+                    break;
+                  case 'SPIUNET':
+                    imovel.cor = '#657199';
+                    break; 
+                  default:
+                    imovel.cor = '#B15928';
+                    break;
+                }
+              break;
+              default:
+                break;
+            }
+          }
+
+          let isValido = true
+          if(filtro.imoveis.categorias.length > 0){
+            filtro.imoveis.categorias.forEach(categoria => {
+              if(categoria === 'app'){
+                if(imovel.element.app !== 'TRUE'){
+                  isValido = false
+                }
+              }
+              if(categoria === 'iso_10'){
+                if(imovel.element.iso_10 !== 'TRUE'){
+                  isValido = false
+                }
+              }
+              if(categoria === 'iso_15'){
+                if(imovel.element.iso_15 !== 'TRUE'){
+                  isValido = false
+                }
+              }
+            })
+          }
+
+          if(!isValido){
+            return;
+          }
+
+
+          if(filtro.imoveis.ufs.length > 0){
+            if(filtro.imoveis.municipios.length > 0){
+              if(filtro.imoveis.bairros.length > 0){
+              filtro.imoveis.ufs.forEach(uf => {
+                if(uf === imovel.element.uf){
+                  filtro.imoveis.municipios.forEach(municipio => {
+                    if(municipio === imovel.element.municipio){
+                      filtro.imoveis.bairros.forEach(bairro => {
+                        if(bairro === imovel.element.bairro){
+                          
+                          this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                        }
+                      })
+                      
+                    }
+                  })
+                }
+              })
+              }else{
+                filtro.imoveis.ufs.forEach(uf => {
+                  if(uf === imovel.element.uf){
+                  filtro.imoveis.municipios.forEach(municipio => {
+                    if(municipio === imovel.element.municipio){                    
+                      this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)                                                               
+                    }
+                  })
+                  }
+                })
+              }
+            }else{
+              if(filtro.imoveis.bairros.length > 0){
+                filtro.imoveis.ufs.forEach(uf => {
+                  if(uf === imovel.element.uf){
+                    filtro.imoveis.bairros.forEach(bairro => {
+                      if(bairro === imovel.element.bairro){
+                        this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                      }
+                    })
+                  }
+                })
+              }else{
+                filtro.imoveis.ufs.forEach(uf => {
+                  if(uf === imovel.element.uf){
+                    this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                  }
+                })
+              }
+            }
+          } else {
+            if(filtro.imoveis.municipios.length > 0){
+              if(filtro.imoveis.bairros.length > 0){
                 filtro.imoveis.municipios.forEach(municipio => {
-                  if(municipio === imovel.element.muni){
+                  if(municipio === imovel.element.municipio){
                     filtro.imoveis.bairros.forEach(bairro => {
                       if(bairro === imovel.element.bairro){
                         this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
@@ -174,75 +389,34 @@ export class AreasExamesPage {
                     
                   }
                 })
-               }
-             })
+              }else{
+                filtro.imoveis.municipios.forEach(municipio => {
+                  if(municipio === imovel.element.municipio){
+                    this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                  }
+                })
+              }
             }else{
-              filtro.imoveis.ufs.forEach(uf => {
-                if(uf === imovel.element.uf){
-                 filtro.imoveis.municipios.forEach(municipio => {
-                   if(municipio === imovel.element.muni){                    
-                     this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)                                                               
-                   }
-                 })
-                }
-              })
-            }
-          }else{
-            if(filtro.imoveis.bairros.length > 0){
-              filtro.imoveis.ufs.forEach(uf => {
-                if(uf === imovel.element.uf){
-                  filtro.imoveis.bairros.forEach(bairro => {
-                    if(bairro === imovel.element.bairro){
-                      this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
-                    }
-                  })
-                }
-              })
-            }else{
-              filtro.imoveis.ufs.forEach(uf => {
-                if(uf === imovel.element.uf){
-                  this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
-                }
-              })
+              if(filtro.imoveis.bairros.length > 0){
+                filtro.imoveis.bairros.forEach(bairro => {
+                  if(imovel.element.bairro === bairro){
+                    this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                  }
+                })
+              }else{
+                this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+              }
             }
           }
-        } else {
-          if(filtro.imoveis.municipios.length > 0){
-            if(filtro.imoveis.bairros.length > 0){
-              filtro.imoveis.municipios.forEach(municipio => {
-                if(municipio === imovel.element.muni){
-                  filtro.imoveis.bairros.forEach(bairro => {
-                    if(bairro === imovel.element.bairro){
-                      this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
-                    }
-                  })
-                  
-                }
-              })
-            }else{
-              filtro.imoveis.municipios.forEach(municipio => {
-                if(municipio === imovel.element.muni){
-                  this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
-                }
-              })
-            }
-          }else{
-            if(filtro.imoveis.bairros.length > 0){
-              filtro.imoveis.bairros.forEach(bairro => {
-                if(imovel.element.bairro === bairro){
-                  this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
-                }
-              })
-            }else{
-              this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
-            }
-          }
-        }
-       
+          
+        
+      
       })
+      
     }
     if(filtro.linhas.ativo){
       this.linhas.length > 0 && this.linhas.forEach(linha => {
+        
         this.mapUtil.addPolyline(linha.polyline, this.map, linha.cor, 'linha', linha.element)
       })
     }
@@ -253,7 +427,9 @@ export class AreasExamesPage {
 
     }
     if(filtro.bufferLinhas.ativo){
+     
       this.bufferLinhas.length > 0 && this.bufferLinhas.forEach(buffer => {
+       
         this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferLinha', buffer.element)
       })
     }
@@ -300,16 +476,35 @@ export class AreasExamesPage {
         
           let municipios = []
           let bairros = []
+          let tiposOcupacoes = []
+          let tiposSetores = []
+          let fontes = []
          
         arrayData.forEach(element => {
           let cor;
-          if(!municipios.find(municipio => municipio.municipio === element.muni)){
-            municipios.push({municipio: element.muni, uf: element.uf})
+          if(!municipios.find(municipio => municipio.municipio === element.municipio) && !!element.municipio){
+            municipios.push({municipio: element.municipio, uf: element.uf})
           }
           
-          if(!bairros.find(item => item.bairro === element.bairro)){
-            bairros.push({municipio: element.muni, uf: element.uf, bairro: element.bairro})
+          if(!bairros.find(item => item.bairro === element.bairro) && !!element.bairro){
+            bairros.push({municipio: element.municipio, uf: element.uf, bairro: element.bairro})
           }
+
+          if(!tiposOcupacoes.find(item => item === element.tipo_ocup) && !!element.tipo_ocup){
+            tiposOcupacoes.push(element.tipo_ocup)
+          }
+
+          if(!tiposSetores.find(item => item === element.tipo_setor) && !! element.tipo_setor){
+            tiposSetores.push(element.tipo_setor)
+          }
+
+          if(!fontes.find(item => item === element.fonte) && !!element.fonte){
+            fontes.push(element.fonte)
+          }
+
+          
+
+
          
         
           // switch (element.tipo_imovel) {
@@ -377,6 +572,10 @@ export class AreasExamesPage {
 
         AreasExamesPage.municipios = municipios;
         AreasExamesPage.bairros = bairros;
+        AreasExamesPage.tiposOcupacoes = tiposOcupacoes;
+        AreasExamesPage.tiposSetores = tiposSetores;
+        AreasExamesPage.fontes = fontes;
+        
       }
         
        
@@ -473,24 +672,28 @@ export class AreasExamesPage {
         
          
         arrayData.forEach(element => {
-          const cor = '#E6E6E6';
+          const cor = '#D9D9D9';
         
         
 
-          element.points.forEach(coordenadas => {
+          element.points.forEach((coordenadas, i) => {
             
-            
+            let polyline = []
             coordenadas.forEach((singular, index) => {
               
-              let polyline = []
-              singular.forEach(coordenada => {
-                const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
-                polyline.push(posicao)
-              });
               
-              this.bufferLinhas.push({polyline, cor, element})
+              
+                const posicao = new Position({lat: singular[1], lng: singular[0]})
+                polyline.push(posicao)
+              
+              
+              
               // this.mapUtil.addPolyline(polyline,this.map, cor, 'bufferLinha', element)
             });
+              if(i === 0){
+                this.bufferLinhas.push({polyline, cor, element})
+              }
+              
           })
         });
       }
@@ -580,7 +783,6 @@ export class AreasExamesPage {
     // this.filtrar()
     this.mapUtil.setCenter('MG', this.map)
 
-    console.log(this.estacoes)
     
    
   }

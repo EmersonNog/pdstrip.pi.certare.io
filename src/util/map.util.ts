@@ -96,7 +96,16 @@ export class MapUtil {
         if(type && type === 'limite-municipio') {
           let cor = '#EA4444'
           
-          polyline = new google.maps.Polyline(this.createPolylineBall(itemArr[i], cor));
+          // polyline = new google.maps.Polyline(this.createPolylineBall(itemArr[i], cor));
+          polyline = new google.maps.Marker({
+            position: {lat: itemArr[i].lat, lng: itemArr[i].lng},
+            title: itemArr[i]['title'],
+            icon: new google.maps.MarkerImage(
+                "assets/icon/" + 'iconEstacao.svg', 
+              // 'https://mt.google.com/vt/icon?psize=16&font=fonts/Roboto-Regular.ttf&color=ff330000&name=icons/spotlight/spotlight-waypoint-a.png&ax=44&ay=48&scale=1&text=I',
+              // 'https://mt.google.com/vt/icon?psize=16&font=fonts/Roboto-Regular.ttf&color=ff330000&name=icons/spotlight/spotlight-waypoint-b.png&ax=44&ay=48&scale=1&text=F',
+              ),
+          })
           this.addInfoWindow(polyline, 'Nome da estação: ' + itemArr[i].name, map, new google.maps.InfoWindow());
 
         } else {
@@ -220,10 +229,10 @@ export class MapUtil {
           path: rota,
           geodesic: tipo === 'bufferLinha' ? false : true,
           strokeColor: lineColor,
-          strokeOpacity: tipo === 'bufferEstacao' ?   0.01 : tipo === 'bufferLinha' ? 0.01 : 1.0,
-          strokeWeight: tipo === 'bufferLinha' ? 0.8 : stroke,
+          strokeOpacity: tipo === 'bufferEstacao' ?   0.01 : tipo === 'bufferLinha' ? 0 : 1.0,
+          strokeWeight: tipo === 'bufferLinha' ? 0 : stroke,
           fillColor: lineColor,
-          fillOpacity: tipo === 'bufferLinha' ? 0.35 : 0.01,
+          fillOpacity: tipo === 'bufferLinha' ? 0.01 : 0.01,
           zIndex : tipo === 'bufferEstacao' ? 2 : tipo === 'bufferLinha' ? 1 : 3
         };
 
