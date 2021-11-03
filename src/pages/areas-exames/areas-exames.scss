@@ -9,6 +9,22 @@ page-areas-exames {
   .content {
     background: #fff;
 
+    ion-card{
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      width: 15%;
+      height: 30%;
+
+      
+    }
+
+    .blocoLegenda{
+      height: 100%;
+      min-height: 20px;
+      max-height: 22px;
+    }
+
     .btn-infowindow {
       width: 120px;
       height: 35px;
@@ -103,6 +119,8 @@ page-areas-exames {
           color: #fff;
         }
       }
+
+      
     }
 
     .data-grid {
@@ -111,9 +129,7 @@ page-areas-exames {
       height: 100%;
       background: #fff;
 
-      .btn-action {
-        // background: color($colors, logo);
-      }
+     
     }
   }
 

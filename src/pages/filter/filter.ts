@@ -119,31 +119,8 @@ export class FilterPage {
     console.log('teste')
   }
   ionViewDidLoad() {
-    // this.rodoviaService.listSRE().take(1).subscribe(_data => {
-    //   // console.log(_data);
-    //   this.sreArr = _data.map(item => {
-    //     let values = item.values;
-    //     values.info = values.id + ' | ' + values.inicio + ' - ' + values.fim;
-    //     return values;
-    //   });
-    // });
-
-    this.sreService.list().take(1).subscribe(_data => {
-      console.log('[SRE]', _data);
-      this.sreArr = _data.map(values => {
-        values['info'] = values.codigo + ' | ' + values.inicio_desc + ' - ' + values.fim_desc;
-        return values;
-      });
-    });
-
-    this.estradaService.list().take(1).subscribe(_data => {
-      console.log('[ESTRADAS]', _data);
-      this.estradaArr = _data.map(values => {
-          values['info'] = values.rodovia;
-          return values;
-      });
-    });
-
+  
+    
     this.ufArr = AreasExamesPage.ufs.map(values => {
       values['info'] = values.nome;
       values['id'] = values.sigla;

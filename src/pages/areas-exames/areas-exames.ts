@@ -55,6 +55,32 @@ static linhasAtivas = true;
 static bufferEstacoesAtivas = false;
 static bufferLinhasAtivas = false;
 
+legendaOcupacao = true;
+legendaGPriorizacao = false;
+legendaApp = false;
+legendaFonte = false;
+legendaIso10 = false;
+legendaIso15 = false;
+
+cores = {
+  terreno: '#CFF09E',
+  consolidadoBaixaOcupacao: '#3B8686',
+  imovelAbandonado: '#333333',
+  verdadeiro: '#00FF00',
+  falso: '#FF0000',
+  valor1: '#FF0000',
+  valor2: '#00FF00',
+  valor3: '#0000FF',
+  valor4: '#333333',
+  SIAPA: '#FF0000',
+  TRENSURB: '#00FF00',
+  PREFEITURA_DE_BELO_HORIZONTE: '#0000FF',
+  SPIUNET: '#333333'
+
+
+}
+
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -84,6 +110,61 @@ static bufferLinhasAtivas = false;
   ionViewDidLoad() {
     this.initMap();
    
+  }
+
+  mudarLegenda(tipoLegenda){
+    switch (tipoLegenda) {
+      case 'tipo_ocup':
+        this.legendaOcupacao = true;
+        this.legendaGPriorizacao = false;
+        this.legendaApp = false;
+        this.legendaFonte = false;
+        this.legendaIso10 = false;
+        this.legendaIso15 = false;
+        break;
+      case 'g_priorizacao':
+        this.legendaOcupacao = false;
+        this.legendaGPriorizacao = true;
+        this.legendaApp = false;
+        this.legendaFonte = false;
+        this.legendaIso10 = false;
+        this.legendaIso15 = false;
+        break;
+      case 'app':
+        this.legendaOcupacao = false;
+        this.legendaGPriorizacao = false;
+        this.legendaApp = true;
+        this.legendaFonte = false;
+        this.legendaIso10 = false;
+        this.legendaIso15 = false;
+        break;
+      case 'fonte':
+        this.legendaOcupacao = false;
+        this.legendaGPriorizacao = false;
+        this.legendaApp = false;
+        this.legendaFonte = true;
+        this.legendaIso10 = false;
+        this.legendaIso15 = false;
+        break;
+      case 'iso_10':
+        this.legendaOcupacao = false;
+        this.legendaGPriorizacao = false;
+        this.legendaApp = false;
+        this.legendaFonte = false;
+        this.legendaIso10 = true;
+        this.legendaIso15 = false;
+        break;
+      case 'iso_15':
+        this.legendaOcupacao = false;
+        this.legendaGPriorizacao = false;
+        this.legendaApp = false;
+        this.legendaFonte = false;
+        this.legendaIso10 = false;
+        this.legendaIso15 = true;
+        break;
+      default:
+        break;
+    }
   }
 
   converterTeste(){
@@ -180,10 +261,6 @@ static bufferLinhasAtivas = false;
     this.mapUtil.cleanPolylines();
     this.mapUtil.cleanPolygons();
 
-    console.log('ipo', filtro.imoveis.fontes)
-
-    // && filtro.imoveis.tiposOcupacoes.includes(imovel.element.tipo_ocup)
-
     if(filtro.estacoes.ativo){
       this.mapUtil.showRodoviaPoints(this.estacoes.coordenadas, this.map, false, 'limite-municipio', false)
     }
@@ -205,6 +282,7 @@ static bufferLinhasAtivas = false;
           if(filtro.imoveis.categorizacao){
             switch (filtro.imoveis.categorizacao) {
               case 'tipo_ocup':
+                this.mudarLegenda('tipo_ocup')
                 switch (imovel.element.tipo_ocup.toLowerCase()) {
                   case 'terreno':
                     imovel.cor = '#CFF09E';
@@ -221,6 +299,7 @@ static bufferLinhasAtivas = false;
                 }
                 break;
               case 'g_priorizacao':
+                this.mudarLegenda('g_priorizacao')
                 switch (imovel.element.g_priorizacao.toString()) {
                   case '1':
                     imovel.cor = '#FF0000';
@@ -240,6 +319,7 @@ static bufferLinhasAtivas = false;
                 }
                 break;
               case 'app':
+                this.mudarLegenda('app')
                 switch (imovel.element.app.toLowerCase()) {
                   case 'true':
                     imovel.cor = '#00FF00';
@@ -253,6 +333,7 @@ static bufferLinhasAtivas = false;
                 }
                 break;
               case 'iso_10':
+                this.mudarLegenda('iso_10')
                 switch (imovel.element.iso_10.toLowerCase()) {
                   case 'true':
                     imovel.cor = '#00FF00';
@@ -266,6 +347,7 @@ static bufferLinhasAtivas = false;
                 }
               break;
               case 'iso_15':
+                this.mudarLegenda('iso_15')
                 switch (imovel.element.iso_15.toLowerCase()) {
                   case 'true':
                     imovel.cor = '#00FF00';
@@ -279,6 +361,7 @@ static bufferLinhasAtivas = false;
                 }
               break;
               case 'fonte':
+                this.mudarLegenda('fonte')
                 switch (imovel.element.fonte.toUpperCase()) {
                   case 'TRENSURB':
                     imovel.cor = '#00FF00';
