@@ -35,32 +35,41 @@ export class AreasExamesPage {
   bufferLinhas = [];
   bufferEstacoes = [];
   imoveis = [];
-  static ufsImoveis = [];
-  static municipiosImoveis = [];
-  static bairrosImoveis = []
-  static municipios = [];
-  static bairros = [];
-  static ufs = [
+  ufsImoveis = [];
+  municipiosImoveis = [];
+  bairrosImoveis = []
+  municipios = [];
+  bairros = [];
+  ufs = [
     {nome: "Minas Gerais", sigla: "MG"},
     {nome: "Pernambuco", sigla: "PE"},
     {nome: "Rio Grande do Sul", sigla: "RS"},
   ]
-  static tiposOcupacoes = [];
-  static tiposSetores = [];
-  static fontes = [];
+  tiposOcupacoes = [];
+  tiposOcupacoesSelecionados = [];
 
-static imoveisAtivos = true;
-static estacoesAtivas = true;
-static linhasAtivas = true;
-static bufferEstacoesAtivas = false;
-static bufferLinhasAtivas = false;
+  tiposSetores = [];
+  tiposSetoresSelecionados = [];
 
-legendaOcupacao = true;
-legendaGPriorizacao = false;
-legendaApp = false;
-legendaFonte = false;
-legendaIso10 = false;
-legendaIso15 = false;
+  fontes = [];
+  fontesSelecionadas = [];
+
+  imoveisAtivos = true;
+  estacoesAtivas = true;
+  linhasAtivas = true;
+  bufferEstacoesAtivas = false;
+  bufferLinhasAtivas = false;
+
+  legendaOcupacao = true;
+  legendaGPriorizacao = false;
+  legendaApp = false;
+  legendaFonte = false;
+  legendaIso10 = false;
+  legendaIso15 = false;
+
+  categorias = []
+  categorizacao = {info: 'Tipo ocupação', id: 'tipo_ocup'}
+
 
 cores = {
   terreno: '#CFF09E',
@@ -167,31 +176,50 @@ cores = {
     }
   }
 
-  converterTeste(){
+  // converterTeste(){
 
     
-    this.provider.getJsonTeste().subscribe(data => {
-      let arr = []
+  //   this.provider.getJsonTeste().subscribe(data => {
+  //     let arr = []
 
-      for(var i in data){
-        arr.push(data[i]);
-      }
+  //     for(var i in data){
+  //       arr.push(data[i]);
+  //     }
 
-      console.log(arr)
+  //     console.log(arr)
       
 
-      arr.forEach((item, idx) => {
-        console.log('enviando arquivo ' + idx);
-        const id = this.afd.createId();
-        item.id = id;
-        this.afd.doc(Constants.PATH_DOCUMENTS_BUFFER_LINHAS + item.id).set(JSON.parse(JSON.stringify(item)));
-      })
-    })
-  }
+  //     arr.forEach((item, idx) => {
+  //       console.log('enviando arquivo ' + idx);
+  //       const id = this.afd.createId();
+  //       item.id = id;
+  //       this.afd.doc(Constants.PATH_DOCUMENTS_BUFFER_LINHAS + item.id).set(JSON.parse(JSON.stringify(item)));
+  //     })
+  //   })
+  // }
 
   openFilterPage() {
     const filterPage = this.modalCtrl.create(Constants.FILTER_PAGE.name, {
-      // user: this.user, map: this.map, users: this.users, groups: this.managerGroups
+      municipios: this.municipios, 
+      bairros: this.bairros, 
+      fontes: this.fontes,
+      tiposOcupacoes: this.tiposOcupacoes,
+      tiposSetores: this.tiposSetores,
+      imoveisAtivos: this.imoveisAtivos,
+      estacoesAtivas: this.estacoesAtivas,
+      linhasAtivas: this.linhasAtivas,
+      bufferEstacoesAtivas: this.bufferEstacoesAtivas,
+      bufferLinhasAtivas: this.bufferLinhasAtivas,
+      ufsSelecionadas: this.ufsImoveis,
+      municipiosSelecionados: this.municipiosImoveis,
+      bairrosSelecionados: this.bairrosImoveis,
+      fontesSelecionadas: this.fontesSelecionadas,
+      tipoOcupacoesSelecionados: this.tiposOcupacoesSelecionados,
+      tipoSetoresSelecionados: this.tiposSetoresSelecionados,
+      categorias: this.categorias,
+      categorizacao: this.categorizacao
+
+
     });
     filterPage.onDidDismiss(_data => {
      
@@ -201,28 +229,37 @@ cores = {
         const filtro = {
           estacoes : {ativo: _data.ativos.estacoes}, 
           imoveis: {ativo: _data.ativos.imoveis, 
-            ufs: _data.ufs.length > 0 ? _data.ufs.map(item => item.sigla) : [], 
-            municipios: _data.municipios.length > 0 ? _data.municipios.map(item => item.municipio) : [], 
-            bairros: _data.bairros.length > 0 ? _data.bairros.map(item => item.bairro) : [],
+            ufs: _data.ufs.length > 0 ? _data.ufs.map(item => item.id) : [], 
+            municipios: _data.municipios.length > 0 ? _data.municipios.map(item => item.info) : [], 
+            bairros: _data.bairros.length > 0 ? _data.bairros.map(item => item.info) : [],
             tiposOcupacoes: _data.tiposOcupacoes.length > 0 ? _data.tiposOcupacoes.map(item => item.info) : [],
-            tiposSetores: _data.tiposSetores,
-            fontes: _data.fontes,
-            categorias: _data.categorias,
-            categorizacao: _data.categorizacao
-          }, 
-            
+            tiposSetores: _data.tiposSetores.length > 0 ? _data.tiposSetores.map(item => item.info) : [],
+            fontes: _data.fontes.length > 0 ? _data.fontes.map(item => item.info) : [],
+            categorias: _data.categorias.length > 0 ? _data.categorias.map(item => item.id) : [],
+            categorizacao: !!_data.categorizacao ? _data.categorizacao : null
+          },       
           linhas: {ativo: _data.ativos.linhas}, 
           bufferEstacoes: {ativo: _data.ativos.bufferEstacoes}, 
-          bufferLinhas: {ativo: _data.ativos.bufferLinhas}}
+          bufferLinhas: {ativo: _data.ativos.bufferLinhas}
+        }
+
+        this.estacoesAtivas = _data.ativos.estacoes;
+        this.imoveisAtivos = _data.ativos.imoveis;
+        this.linhasAtivas = _data.ativos.linhas;
+        this.bufferLinhasAtivas = _data.ativos.bufferLinhas;
+        this.bufferEstacoesAtivas = _data.ativos.bufferEstacoes;
+
+        this.ufsImoveis = _data.ufs;
+        this.municipiosImoveis = _data.municipios;
+        this.bairrosImoveis = _data.bairros;
+        this.tiposOcupacoesSelecionados = _data.tiposOcupacoes;
+        this.tiposSetoresSelecionados = _data.tiposSetores,
+        this.fontesSelecionadas = _data.fontes,
+        this.categorias = _data.categorias,
+        this.categorizacao = !!_data.categorizacao ? _data.categorizacao : null;
+
         this.filtrar(filtro)
-        AreasExamesPage.estacoesAtivas = _data.ativos.estacoes
-        AreasExamesPage.linhasAtivas = _data.ativos.linhas
-        AreasExamesPage.imoveisAtivos = _data.ativos.imoveis
-        AreasExamesPage.bufferLinhasAtivas = _data.ativos.bufferLinhas
-        AreasExamesPage.bufferEstacoesAtivas = _data.ativos.bufferEstacoes
-        AreasExamesPage.ufsImoveis = _data.ufs.length > 0 ? _data.ufs.map(item => item.sigla) : []
-        AreasExamesPage.municipiosImoveis = _data.municipios.length > 0 ? _data.municipios.map(item => item.municipio) : []
-        AreasExamesPage.bairrosImoveis = _data.bairros.length > 0 ? _data.bairros.map(item => item.bairro) : []
+        
        
 
       }
@@ -265,7 +302,7 @@ cores = {
       this.mapUtil.showRodoviaPoints(this.estacoes.coordenadas, this.map, false, 'limite-municipio', false)
     }
     if(filtro.imoveis.ativo){
-      console.log('chegou no filtro', this.imoveis)
+      
       this.imoveis.length > 0 && this.imoveis.forEach(imovel => {
 
           if(filtro.imoveis.tiposSetores.length  > 0 && !filtro.imoveis.tiposSetores.includes(imovel.element.tipo_setor)){
@@ -279,8 +316,9 @@ cores = {
             return;
           }
 
+          
           if(filtro.imoveis.categorizacao){
-            switch (filtro.imoveis.categorizacao) {
+            switch (filtro.imoveis.categorizacao.id) {
               case 'tipo_ocup':
                 this.mudarLegenda('tipo_ocup')
                 switch (imovel.element.tipo_ocup.toLowerCase()) {
@@ -653,11 +691,11 @@ cores = {
           })
         });
 
-        AreasExamesPage.municipios = municipios;
-        AreasExamesPage.bairros = bairros;
-        AreasExamesPage.tiposOcupacoes = tiposOcupacoes;
-        AreasExamesPage.tiposSetores = tiposSetores;
-        AreasExamesPage.fontes = fontes;
+        this.municipios = municipios;
+        this.bairros = bairros;
+        this.tiposOcupacoes = tiposOcupacoes;
+        this.tiposSetores = tiposSetores;
+        this.fontes = fontes;
         
       }
         

@@ -5,8 +5,8 @@
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only (click)="closeFilter()">
-        <ion-icon class="header-icon" name="close"></ion-icon>
+      <button ion-button icon-only  (click)="closeFilter()">
+        <ion-icon class="header-icon" ios="ios-close" md="md-close"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -120,14 +120,14 @@
         </select-searchable>
       </ion-item> 
 
-      <ion-item no-lines>
+      <!-- <ion-item no-lines>
         <ion-label class="text-label" stacked mode="ios"></ion-label>
         <select-searchable outline placeholder="Mapa graduado" item-content [(ngModel)]="graduacao" [items]="graduacaoArr" itemValueField="id" itemTextField="info"
           [canSearch]="true" [isMultiple]="false" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
           (onChange)="changeGraduacao($event)" 
           >
         </select-searchable>
-      </ion-item> 
+      </ion-item>  -->
 
 
       <ion-item>

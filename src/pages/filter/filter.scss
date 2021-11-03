@@ -5,12 +5,19 @@ page-filter {
       }
   
     .header-icon {
-      color: white;
+      color: white !important;
     }
 
     .filter_options{
       display: inline-flex;
       width: 100%;
+    }
+
+    .bar-button{
+      color: white !important;
+    }
+    .ion-ios-options{
+      color: white !important;
     }
   
     .content {

@@ -8,11 +8,6 @@
       <ion-label>Áreas</ion-label>
     </ion-title>
 
-    <!-- <ion-buttons end>
-      <button ion-button icon-only (click)="openFilterPage()" title="Filtrar">
-        <ion-icon class="header-icon" name="ios-funnel"></ion-icon>
-      </button>
-    </ion-buttons> -->
     <ion-buttons end>
       <button ion-button icon-only (click)="openFilterPage()" title="Filtrar">
         <ion-icon class="header-icon" name="ios-funnel"></ion-icon>
@@ -26,20 +21,7 @@
 
   <button ion-button id="btn-show-estacionar-page-2" (click)="openImagensPage($event)" [style.display]="'none'"></button>
 
-  <!-- <ion-grid class="abas">
-    <ion-row align-items-center>
-      <ion-col col-6 (click)="showMap()" align-self-center>
-        <ion-item no-lines no-border class="item-label">
-          <label class="label-map" [style.color]="selected == 'map' ? '#2d324f' : '#ccc'">Mapa</label>
-        </ion-item>
-      </ion-col>
-      <ion-col col-6 (click)="showData()" align-self-center>
-        <ion-item no-lines no-border class="item-label">
-          <label class="label" [style.color]="selected == 'data' ? '#2d324f' : '#ccc'">Dados</label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
+ 
 
   <ion-grid class="map-grid" no-padding [style.display]="selected == 'map' ? 'block' : 'none'">
     <div #map id="map">

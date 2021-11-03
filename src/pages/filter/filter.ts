@@ -5,7 +5,6 @@ import { EstradaProvider } from '../../providers/estrada/estrada';
 import { RodoviaProvider } from '../../providers/rodovia/rodovia';
 import { SreProvider } from '../../providers/sre/sre';
 import { UserService } from '../../providers/user/user.service';
-import { AreasExamesPage } from '../areas-exames/areas-exames';
 
 @IonicPage()
 @Component({
@@ -18,6 +17,9 @@ export class FilterPage {
   estrada;
   sreArr = [];
   sre;
+
+
+
   iso10Ativos = false;
   iso15Ativos = false;
   appAtivos = true;
@@ -52,36 +54,26 @@ export class FilterPage {
   ]
 
   uf = [];
-  ufArr = AreasExamesPage.ufs.length > 0  ? AreasExamesPage.ufs.map(uf => {
-    uf['info'] = uf.nome
-    uf['id'] = uf.sigla
-    return uf 
-  }) : [];
+  ufArr = [
+    {info: "Minas Gerais", id: "MG"},
+    {info: "Pernambuco", id: "PE"},
+    {info: "Rio Grande do Sul", id: "RS"}
+  ];
+
   municipio = [];
-  municipioArr = AreasExamesPage.municipios.length > 0  ? !!AreasExamesPage.municipios[0].info ? AreasExamesPage.municipios : AreasExamesPage.municipios.map(item => {
-    
-    return {info: item.municipio, id: item.municipio}
-  }) : [];
+  municipioArr = [];
+
   bairro = [];
-  bairroArr = AreasExamesPage.bairros.length > 0  ? !!AreasExamesPage.bairros[0].info ? AreasExamesPage.bairros : AreasExamesPage.bairros.map(item => {
-    
-    return {info: item.bairro, id: item.bairro}
-  }) : [];
+  bairroArr = [];
 
   tiposOcupacoes = [];
-  tiposOcupacoesArr = AreasExamesPage.tiposOcupacoes.length > 0 ? AreasExamesPage.tiposOcupacoes.map(ocupacao => {
-    return {id: ocupacao, info: ocupacao}
-  }) : [];
+  tiposOcupacoesArr = [];
 
   fontes = [];
-  fontesArr = AreasExamesPage.fontes.length > 0 ? AreasExamesPage.fontes.map(fonte => {
-    return {id: fonte, info: fonte}
-  }) : [];;
+  fontesArr = [];
 
   tiposSetores = [];
-  tiposSetoresArr = AreasExamesPage.tiposSetores.length > 0 ? AreasExamesPage.tiposSetores.map(setor => {
-    return {id: setor, info: setor}
-  }) : [];
+  tiposSetoresArr = [];
 
   categorias = [];
   categoriasArr = [
@@ -90,11 +82,11 @@ export class FilterPage {
     {id:  'iso_15', info: 'Iso 15'}
   ]
 
-  imoveisAtivos = AreasExamesPage.imoveisAtivos;
-  linhasAtivas = AreasExamesPage.linhasAtivas;
-  estacoesAtivas = AreasExamesPage.estacoesAtivas;
-  bufferLinhasAtivas = AreasExamesPage.bufferLinhasAtivas;
-  bufferEstacoesAtivas = AreasExamesPage.bufferEstacoesAtivas;
+  imoveisAtivos = true;
+  linhasAtivas = true;
+  estacoesAtivas = true;
+  bufferLinhasAtivas = false;
+  bufferEstacoesAtivas = false;
 
   @ViewChild("rodoviaField") rodoviaField:ElementRef;
   @ViewChild("dataLevantamentoField") dataLevantamentoField:ElementRef;
@@ -108,25 +100,62 @@ export class FilterPage {
     private estradaService: EstradaProvider,
     private sreService: SreProvider,
     ) {
+
+      const params = navParams.data;
+    
+      console.log('paramssss', params)
+      this.uf = params.ufsSelecionadas;
+
+      this.municipioArr = params.municipios.map(item => {
+        item.info = item.municipio
+        item.id = item.uf + item.municipio
+        return item
+      })
+      this.municipio = params.municipiosSelecionados
+      
+
+      this.bairroArr = params.bairros.map(item => {
+        item.info = item.bairro
+        item.id = item.uf + item.municipio + item.bairro
+        return item
+      })
+      this.bairro = params.bairrosSelecionados;
+
+      this.imoveisAtivos = params.imoveisAtivos;
+      this.linhasAtivas = params.linhasAtivas;
+      this.estacoesAtivas = params.estacoesAtivas;
+      this.bufferEstacoesAtivas = params.bufferEstacoesAtivas;
+      this.bufferLinhasAtivas = params.bufferLinhasAtivas;
+
+      this.tiposOcupacoes = params.tipoOcupacoesSelecionados;
+      this.tiposOcupacoesArr = params.tiposOcupacoes.map(item => {
+       return {id: item, info: item}
+      })
+
+      this.tiposSetores = params.tipoSetoresSelecionados;
+      this.tiposSetoresArr = params.tiposSetores.map(item => {
+        return {id: item, info: item}
+      })
+
+      this.fontes = params.fontesSelecionadas;
+      this.fontesArr = params.fontes.map(item => {
+        return {id: item, info: item}
+      })
+
+      this.categorias = params.categorias;
+      this.categorizacao = params.categorizacao;
+
   }
 
 
   clearFields(){
-    // this.rodoviaField.nativeElement.value="";
-    // this.dataLevantamentoField.nativeElement.value="";
-    // this.horaRegistroField.nativeElement.value="";
-    // this.sreField.nativeElement.value="";
+    
     console.log('teste')
   }
   ionViewDidLoad() {
   
-    
-    this.ufArr = AreasExamesPage.ufs.map(values => {
-      values['info'] = values.nome;
-      values['id'] = values.sigla;
-      return values;
-    });
 
+    
     
   }
 
@@ -134,6 +163,11 @@ export class FilterPage {
     const value = event.value;
     console.log(event);
 
+  }
+
+  changeCategorias(event){
+    const value = event.value;
+    console.log(event);
   }
 
   changeGraduacao(event) {
@@ -188,14 +222,14 @@ export class FilterPage {
     
     
     const value = event.value;
-    console.log(AreasExamesPage.municipios)
-    const siglasContidas = value.map(uf => uf.sigla)
+    
+    const siglasContidas = value.map(uf => uf.id)
     console.log(siglasContidas)
-    const municipioArr = AreasExamesPage.municipios
+    const municipioArr = this.municipioArr
       .filter(municipio => siglasContidas.includes(municipio.uf))
       .map(values => {
         values['info'] = values.municipio;
-        values['id'] = values.municipio;
+        values['id'] = values.uf + values.municipio;
         return values;
       })
     console.log(municipioArr)
@@ -204,25 +238,17 @@ export class FilterPage {
 
   changeMunicipio(event){
     const value = event.value;
-    const bairroArr = AreasExamesPage.bairros
-    const municipios = value.map(item => item.municipio)
-    console.log(bairroArr
-      .filter(bairro => {
-        console.log('bairro', bairro)
-        return municipios.includes(bairro.municipio)
-      })
-    )
-
+    const bairroArr = this.bairroArr
+    const municipios = value.map(item => item.info)
     
     this.bairroArr = bairroArr
     .filter(bairro => municipios.includes(bairro.municipio))
     .map(values => {
         values['info'] = values.bairro;
-        values['id'] = values.bairro;
-        console.log(values)
+        values['id'] = values.uf + values.municipio + values.bairro;
+        
         return values;
     })
-    console.log(this.bairroArr)
   }
 
   changeBairro(event){
@@ -247,6 +273,18 @@ export class FilterPage {
 
   submit() {
     
+    const { log } = console
+
+    console.log('uf', this.uf)
+    log('muni', this.municipio)
+    log('bairro', this.bairro)
+    log('tipoOcuo', this.tiposOcupacoes)
+    log('tipoSet', this.tiposSetores)
+    log('font', this.fontes)
+    log('categorias', this.categorias)
+    log('categorizacao', this.categorizacao)
+    
+
     const params = {
       ativos: {
         imoveis: this.imoveisAtivos,
@@ -254,19 +292,15 @@ export class FilterPage {
         estacoes: this.estacoesAtivas,
         bufferLinhas: this.bufferLinhasAtivas,
         bufferEstacoes: this.bufferEstacoesAtivas,
-        app: this.appAtivos,
-        iso15: this.iso15Ativos,
-        iso10: this.iso10Ativos,
-        
       },
-      ufs: this.uf , 
-      municipios: this.municipio, 
-      bairros: this.bairro,
-      tiposOcupacoes: this.tiposOcupacoes,
-      tiposSetores: this.tiposSetores.length > 0 ? this.tiposSetores.map(setor => setor.info) : [],
-      fontes: this.fontes.length > 0 ? this.fontes.map(fonte => fonte.info) : [],
-      categorias: this.categorias.length > 0 ? this.categorias.map(categoria => categoria.id) : [],
-      categorizacao: this.categorizacao ? this.categorizacao.id : null
+      ufs: this.uf.length > 0 ? this.uf : [] , 
+      municipios: this.municipio.length > 0 ? this.municipio : [], 
+      bairros: this.bairro.length > 0 ? this.bairro : [],
+      tiposOcupacoes: this.tiposOcupacoes.length > 0 ? this.tiposOcupacoes : [],
+      tiposSetores: this.tiposSetores.length > 0 ? this.tiposSetores : [],
+      fontes: this.fontes.length > 0 ? this.fontes : [],
+      categorias: this.categorias.length > 0 ? this.categorias : [],
+      categorizacao: !!this.categorizacao ? this.categorizacao : null,
     };
     console.log('params', params);
     this.closeFilter(params);

@@ -121,19 +121,19 @@ export class MyApp {
     });
     this.traduz(`menu.${Constants.AREAS_EXAMES_PAGE.id}`).then(text => {
       Constants.AREAS_EXAMES_PAGE['label'] = text;
-      this.pagesAll.push(Constants.AREAS_EXAMES_PAGE);
+      // this.pagesAll.push(Constants.AREAS_EXAMES_PAGE);
     });
     this.traduz(`menu.${Constants.PROFILE_PAGE.id}`).then(text => {
       Constants.PROFILE_PAGE['label'] = text;
-      this.pagesAll.push(Constants.PROFILE_PAGE);
+      // this.pagesAll.push(Constants.PROFILE_PAGE);
     });
     this.traduz(`menu.${Constants.USERS_PAGE.id}`).then(text => {
       Constants.USERS_PAGE['label'] = text;
-      this.pagesAdminAll.push(Constants.USERS_PAGE);
+      // this.pagesAdminAll.push(Constants.USERS_PAGE);
     });
     this.traduz(`menu.${Constants.IMPORT_DATA_PAGE.id}`).then(text => {
       Constants.IMPORT_DATA_PAGE['label'] = text;
-      this.pagesAdminAll.push(Constants.IMPORT_DATA_PAGE);
+      // this.pagesAdminAll.push(Constants.IMPORT_DATA_PAGE);
     });
     this.traduz('menu.logout').then(text => {
       this.labelLogout = text;
