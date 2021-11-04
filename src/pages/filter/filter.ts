@@ -19,6 +19,8 @@ export class FilterPage {
   sre;
 
 
+  operacao;
+
 
   iso10Ativos = false;
   iso15Ativos = false;
@@ -62,15 +64,18 @@ export class FilterPage {
 
   municipio = [];
   municipioArr = [];
+  municipioArrTotal = []
 
   bairro = [];
   bairroArr = [];
+  bairroArrTotal = [];
 
   tiposOcupacoes = [];
   tiposOcupacoesArr = [];
 
   fontes = [];
   fontesArr = [];
+
 
   tiposSetores = [];
   tiposSetoresArr = [];
@@ -106,6 +111,11 @@ export class FilterPage {
       console.log('paramssss', params)
       this.uf = params.ufsSelecionadas;
 
+      this.municipioArrTotal = params.municipios.map(item => {
+        item.info = item.municipio
+        item.id = item.uf + item.municipio
+        return item
+      })
       this.municipioArr = params.municipios.map(item => {
         item.info = item.municipio
         item.id = item.uf + item.municipio
@@ -113,7 +123,11 @@ export class FilterPage {
       })
       this.municipio = params.municipiosSelecionados
       
-
+      this.bairroArrTotal = params.bairros.map(item => {
+        item.info = item.bairro
+        item.id = item.uf + item.municipio + item.bairro
+        return item
+      })
       this.bairroArr = params.bairros.map(item => {
         item.info = item.bairro
         item.id = item.uf + item.municipio + item.bairro
@@ -149,9 +163,25 @@ export class FilterPage {
 
 
   clearFields(){
+
+    this.imoveisAtivos = true;
+    this.linhasAtivas = true;
+    this.estacoesAtivas = true;
+    this.bufferEstacoesAtivas = false;
+    this.bufferLinhasAtivas = false;
     
-    console.log('teste')
+    this.uf = [];
+    this.municipio = [];
+    this.bairro = [];
+    this.tiposOcupacoes = [];
+    this.tiposSetores = [];
+    this.fontes = [];
+    this.categorias = [];
+    this.categorizacao = {info: 'Tipo ocupação', id: 'tipo_ocup'};
+
   }
+
+
   ionViewDidLoad() {
   
 
@@ -222,10 +252,19 @@ export class FilterPage {
     
     
     const value = event.value;
+    this.uf = value
+
+    this.bairro = []
+    this.municipio = []
+
+    this.bairroArr = this.bairroArrTotal
+    this.municipioArr = this.municipioArrTotal
     
     const siglasContidas = value.map(uf => uf.id)
     console.log(siglasContidas)
-    const municipioArr = this.municipioArr
+
+    if(value.length > 0){
+      const municipioArr = this.municipioArrTotal
       .filter(municipio => siglasContidas.includes(municipio.uf))
       .map(values => {
         values['info'] = values.municipio;
@@ -233,27 +272,35 @@ export class FilterPage {
         return values;
       })
     console.log(municipioArr)
-    this.municipioArr = municipioArr  
+    this.municipioArr = municipioArr 
+    }
+     
   }
 
   changeMunicipio(event){
+    this.bairro = []
+    this.bairroArr = this.bairroArrTotal
     const value = event.value;
-    const bairroArr = this.bairroArr
+    this.municipio = value
+    const bairroArr = this.bairroArrTotal
     const municipios = value.map(item => item.info)
     
-    this.bairroArr = bairroArr
-    .filter(bairro => municipios.includes(bairro.municipio))
-    .map(values => {
-        values['info'] = values.bairro;
-        values['id'] = values.uf + values.municipio + values.bairro;
-        
-        return values;
-    })
+    if(value.length > 0){
+      this.bairroArr = bairroArr
+      .filter(bairro => municipios.includes(bairro.municipio))
+      .map(values => {
+          values['info'] = values.bairro;
+          values['id'] = values.uf + values.municipio + values.bairro;
+          
+          return values;
+      })
+    }
+    
   }
 
   changeBairro(event){
     const value = event.value
-    this.bairroArr = value
+    this.bairro = value
   }
 
   changeTipoOcupacoes(event){

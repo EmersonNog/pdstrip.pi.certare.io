@@ -32,104 +32,6 @@
         </div>
       </ion-col>
 
-      <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="UF" item-content [(ngModel)]="uf" [items]="ufArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="true" [canClear]="true" [clearButtonText]="Limpar" searchPlaceholder="Pesquisar"
-          (onChange)="changeUf($event)"
-          >
-        </select-searchable>
-      </ion-item> 
-      <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="Municípios" item-content [(ngModel)]="municipio" [items]="municipioArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="true" [canClear]="true" [clearButtonText]="Limpar" searchPlaceholder="Pesquisar"
-          (onChange)="changeMunicipio($event)"
-          >
-        </select-searchable>
-      </ion-item> 
-      <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="Bairros" item-content [(ngModel)]="bairro" [items]="bairroArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="true" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
-          (onChange)="changeBairro($event)" 
-          >
-        </select-searchable>
-      </ion-item> 
-
-      
-
-    
-      <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="Tipos de ocupações" item-content [(ngModel)]="tiposOcupacoes" [items]="tiposOcupacoesArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="true" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
-          (onChange)="changeTipoOcupacoes($event)" 
-          >
-        </select-searchable>
-      </ion-item> 
-
-      <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="Tipos de setores" item-content [(ngModel)]="tiposSetores" [items]="tiposSetoresArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="true" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
-          (onChange)="changeTipoSetores($event)" 
-          >
-        </select-searchable>
-      </ion-item> 
-
-      <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="Fontes" item-content [(ngModel)]="fontes" [items]="fontesArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="true" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
-          (onChange)="changeFontes($event)" 
-          >
-        </select-searchable>
-      </ion-item> 
-
-      <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="Categorias" item-content [(ngModel)]="categorias" [items]="categoriasArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="true" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
-          (onChange)="changeCategorias($event)" 
-          >
-        </select-searchable>
-      </ion-item> 
-
-      <!-- <ion-item>
-        <ion-label>App</ion-label>
-        <ion-checkbox color="blue" [(ngModel)]="appAtivos" (ionChange)="changeAtivos('app', $event)"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Iso 15</ion-label>
-        <ion-checkbox color="blue" [(ngModel)]="iso15Ativos" (ionChange)="changeAtivos('iso_15', $event)"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Iso 10</ion-label>
-        <ion-checkbox color="blue" [(ngModel)]="iso10Ativos" (ionChange)="changeAtivos('iso_10', $event)"></ion-checkbox>
-      </ion-item> -->
-     
-
-
-      <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="Mapa categorizado" item-content [(ngModel)]="categorizacao" [items]="categorizacaoArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="false" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
-          (onChange)="changeCategorizacao($event)" 
-          >
-        </select-searchable>
-      </ion-item> 
-
-      <!-- <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="Mapa graduado" item-content [(ngModel)]="graduacao" [items]="graduacaoArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="false" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
-          (onChange)="changeGraduacao($event)" 
-          >
-        </select-searchable>
-      </ion-item>  -->
-
-
       <ion-item>
         <ion-label>Imóveis</ion-label>
         <ion-checkbox color="blue" [(ngModel)]="imoveisAtivos" (ionChange)="changeAtivos('imoveis', $event)"></ion-checkbox>
@@ -150,6 +52,132 @@
         <ion-label>Buffer Estacoes</ion-label>
         <ion-checkbox color="blue" [(ngModel)]="bufferEstacoesAtivas" (ionChange)="changeAtivos('bufferEstacoes, $event')"></ion-checkbox>
       </ion-item>
+
+
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios">Filtro de Imóveis</ion-label>
+      </ion-item> 
+
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="UF" item-content [(ngModel)]="uf" [items]="ufArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="true" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar"
+          (onChange)="changeUf($event)"
+          >
+        </select-searchable>
+      </ion-item> 
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Municípios" item-content [(ngModel)]="municipio" [items]="municipioArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="true" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar"
+          (onChange)="changeMunicipio($event)"
+          >
+        </select-searchable>
+      </ion-item> 
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Bairros" item-content [(ngModel)]="bairro" [items]="bairroArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="true" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar" 
+          (onChange)="changeBairro($event)" 
+          >
+        </select-searchable>
+      </ion-item> 
+
+      
+
+    
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Tipos de ocupações" item-content [(ngModel)]="tiposOcupacoes" [items]="tiposOcupacoesArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="true" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar" 
+          (onChange)="changeTipoOcupacoes($event)" 
+          >
+        </select-searchable>
+      </ion-item> 
+
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Tipos de setores" item-content [(ngModel)]="tiposSetores" [items]="tiposSetoresArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="true" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar" 
+          (onChange)="changeTipoSetores($event)" 
+          >
+        </select-searchable>
+      </ion-item> 
+
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Fontes" item-content [(ngModel)]="fontes" [items]="fontesArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="true" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar" 
+          (onChange)="changeFontes($event)" 
+          >
+        </select-searchable>
+      </ion-item> 
+
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Categorias" item-content [(ngModel)]="categorias" [items]="categoriasArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="true" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar" 
+          (onChange)="changeCategorias($event)" 
+          >
+        </select-searchable>
+      </ion-item> 
+
+      <!-- <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios">Área total do imóvel</ion-label>
+        <ion-item>
+          <ion-label fixed>Username</ion-label>
+          <ion-input type="text" value=""></ion-input>
+        </ion-item>
+        <ion-select [(ngModel)]="operacao">
+          <ion-option value="menor">menor que</ion-option>
+          <ion-option value="menorigual">menor ou igual que</ion-option>
+          <ion-option value="maiorigual">maior ou igual que</ion-option>
+          <ion-option value="maior">maior que</ion-option>
+          
+        </ion-select>
+        <ion-item>
+          <ion-label fixed>Username</ion-label>
+          <ion-input type="text" value=""></ion-input>
+        </ion-item>
+          
+      </ion-item>  -->
+
+   
+     
+
+
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios">Mapa categorizado</ion-label>
+        <select-searchable outline placeholder="Mapa categorizado" item-content [(ngModel)]="categorizacao" [items]="categorizacaoArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="false" [canClear]="false"  searchPlaceholder="Pesquisar" 
+          (onChange)="changeCategorizacao($event)" 
+          >
+        </select-searchable>
+      </ion-item> 
+
+      <!-- <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Mapa graduado" item-content [(ngModel)]="graduacao" [items]="graduacaoArr" itemValueField="id" itemTextField="info"
+          [canSearch]="true" [isMultiple]="false" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
+          (onChange)="changeGraduacao($event)" 
+          >
+        </select-searchable>
+      </ion-item>  -->
+         <!-- <ion-item>
+        <ion-label>App</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="appAtivos" (ionChange)="changeAtivos('app', $event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Iso 15</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="iso15Ativos" (ionChange)="changeAtivos('iso_15', $event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Iso 10</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="iso10Ativos" (ionChange)="changeAtivos('iso_10', $event)"></ion-checkbox>
+      </ion-item> -->
+
+
+     
      
     </ion-row>
 
@@ -158,9 +186,6 @@
         <button ion-button class="btn" (click)="submit()" mode="ios">Filtrar</button>
       </ion-col>
     </ion-row>
-    <!-- <ion-row col-12>
-      <button ion-button class="btn" block (click)="clear()">Limpar</button>
-    </ion-row> -->
   </ion-grid>
 
 </ion-content>

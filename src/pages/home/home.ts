@@ -419,6 +419,21 @@ cores = {
                 }
               break;
               default:
+                this.mudarLegenda('tipo_ocup')
+                switch (imovel.element.tipo_ocup.toLowerCase()) {
+                  case 'terreno':
+                    imovel.cor = '#CFF09E';
+                    break;
+                  case 'consolidado de baixa ocupação':
+                    imovel.cor = '#3B8686';
+                    break;
+                  case 'imóvel abandonado':
+                    imovel.cor = '#333333';
+                    break; 
+                  default:
+                    imovel.cor = '#B15928';
+                    break;
+                }
                 break;
             }
           }
