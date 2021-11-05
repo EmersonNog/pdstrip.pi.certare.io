@@ -12,6 +12,9 @@ import wkt from "wkt";
 import { pureArrayDef } from '@angular/core/src/view';
 import { elementAt } from 'rxjs/operator/elementAt';
 import { truncateSync } from 'fs';
+import * as _ from 'lodash';
+import { _ParseAST } from '@angular/compiler';
+import { _getAngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -69,25 +72,28 @@ export class HomePage {
 
   categorias = []
   categorizacao = {info: 'Tipo ocupação', id: 'tipo_ocup'}
+  graduacao = null;
 
 
-cores = {
-  terreno: '#CFF09E',
-  consolidadoBaixaOcupacao: '#3B8686',
-  imovelAbandonado: '#333333',
-  verdadeiro: '#00FF00',
-  falso: '#FF0000',
-  valor1: '#FF0000',
-  valor2: '#00FF00',
-  valor3: '#0000FF',
-  valor4: '#333333',
-  SIAPA: '#FF0000',
-  TRENSURB: '#00FF00',
-  PREFEITURA_DE_BELO_HORIZONTE: '#0000FF',
-  SPIUNET: '#333333'
+  cores = {
+    terreno: '#CFF09E',
+    consolidadoBaixaOcupacao: '#3B8686',
+    imovelAbandonado: '#333333',
+    verdadeiro: '#00FF00',
+    falso: '#FF0000',
+    valor1: '#FF0000',
+    valor2: '#00FF00',
+    valor3: '#0000FF',
+    valor4: '#333333',
+    SIAPA: '#FF0000',
+    TRENSURB: '#00FF00',
+    PREFEITURA_DE_BELO_HORIZONTE: '#0000FF',
+    SPIUNET: '#333333'
+  }
 
-
-}
+  graduacaoMinima;
+  graduacaoMaxima;
+  colunaGraduacao;
 
 
 
@@ -95,7 +101,6 @@ cores = {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController,
     private userService: UserService,
-    private rodoviaService: RodoviaProvider,
     private provider: AssetsJsonProvider,
     public afd: AngularFirestore) {
   }
@@ -172,6 +177,12 @@ cores = {
         this.legendaIso15 = true;
         break;
       default:
+        this.legendaOcupacao = false;
+        this.legendaGPriorizacao = false;
+        this.legendaApp = false;
+        this.legendaFonte = false;
+        this.legendaIso10 = false;
+        this.legendaIso15 = false;
         break;
     }
   }
@@ -198,6 +209,67 @@ cores = {
   //   })
   // }
 
+  calcularGraduacao(imovel, coluna){
+
+
+   
+    
+    if(coluna !== this.colunaGraduacao){
+      console.log('oi')
+      this.colunaGraduacao = coluna
+      this.graduacaoMaxima = null
+      this.graduacaoMinima = null
+        this.imoveis.forEach(item => {
+          if(item.element.uf === 'MG'){
+            
+            if(!_.get(item.element, coluna)){
+              _.set(item.element, coluna, 0)
+            }
+            if(!this.graduacaoMinima || _.get(item.element, coluna) < this.graduacaoMinima){
+              this.graduacaoMinima = _.get(item.element, coluna)
+            }
+            if(!this.graduacaoMaxima || _.get(item.element, coluna) > this.graduacaoMaxima){
+              this.graduacaoMaxima = _.get(item.element, coluna)
+            }
+          }
+        })
+    }
+     
+    
+      if(!_.get(imovel, coluna)){
+        _.set(imovel, coluna, 0)
+      }
+   
+
+    const fator = _.get(imovel, coluna)/this.graduacaoMaxima
+
+    console.log(fator)
+    
+    
+
+    if(fator <= 0.1){
+     return '#660000'
+    }else if(fator <= 0.2){
+      return '#770000'
+    }else if(fator <= 0.3){
+      return '#880000'
+    }else if(fator <= 0.4){
+      return '#990000'
+    }else if(fator <= 0.5){
+      return '#AA0000'
+    }else if(fator <= 0.6){
+      return '#BB0000'
+    }else if(fator <= 0.7){
+      return '#CC0000'
+    }else if(fator <= 0.8){
+      return '#DD0000'
+    }else if(fator <= 0.9){
+      return '#EE0000'
+    }else{
+      return '#FF0000'
+    }
+  }
+
   openFilterPage() {
     const filterPage = this.modalCtrl.create(Constants.FILTER_PAGE.name, {
       municipios: this.municipios, 
@@ -217,7 +289,8 @@ cores = {
       tipoOcupacoesSelecionados: this.tiposOcupacoesSelecionados,
       tipoSetoresSelecionados: this.tiposSetoresSelecionados,
       categorias: this.categorias,
-      categorizacao: this.categorizacao
+      categorizacao: this.categorizacao,
+      graduacao: this.graduacao
 
 
     });
@@ -236,7 +309,8 @@ cores = {
             tiposSetores: _data.tiposSetores.length > 0 ? _data.tiposSetores.map(item => item.info) : [],
             fontes: _data.fontes.length > 0 ? _data.fontes.map(item => item.info) : [],
             categorias: _data.categorias.length > 0 ? _data.categorias.map(item => item.id) : [],
-            categorizacao: !!_data.categorizacao ? _data.categorizacao : null
+            categorizacao: !!_data.categorizacao ? _data.categorizacao : null,
+            graduacao: !!_data.graduacao ? _data.graduacao : null
           },       
           linhas: {ativo: _data.ativos.linhas}, 
           bufferEstacoes: {ativo: _data.ativos.bufferEstacoes}, 
@@ -257,6 +331,7 @@ cores = {
         this.fontesSelecionadas = _data.fontes,
         this.categorias = _data.categorias,
         this.categorizacao = !!_data.categorizacao ? _data.categorizacao : null;
+        this.graduacao = !!_data.graduacao ? _data.graduacao : null;
 
         this.filtrar(filtro)
         
@@ -267,14 +342,6 @@ cores = {
     filterPage.present();
   }
 
-  onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
-
-  filtraApp(){
-
-  }
-    
   filtrar(filtro = {
     estacoes : {ativo: true}, 
     imoveis: {
@@ -286,7 +353,8 @@ cores = {
       tiposSetores: [], 
       fontes: [], 
       categorias: [],
-      categorizacao: null
+      categorizacao: null,
+      graduacao: null
     }, 
     linhas: {ativo: true}, 
     bufferEstacoes: {ativo: false}, 
@@ -436,6 +504,63 @@ cores = {
                 }
                 break;
             }
+          }
+
+
+          if(filtro.imoveis.graduacao){
+
+
+            this.mudarLegenda('')
+            
+              switch (filtro.imoveis.graduacao.id) {
+                case 'dist_centro':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'dist_centro')
+                  break;
+                case 'preco_m2':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'preco_m2')
+                  break;
+                case 'area_tot':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'area_tot')
+                  break;
+                case 'den_est':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'den_est')
+                  break;
+                case 'renda_est':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'renda_est')
+                  break;
+                case 'ivs_atlas':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'ivs_atlas')
+                  break;
+                case 'ivs_renda':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'ivs_renda')
+                  break;
+                case 'ivs_infra':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'ivs_infra')
+                  break;
+                case 't_vulner_mais1h':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 't_vulner_mais1h')
+                  break;
+                case 'declividade':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'declividade')
+                  break;
+                case 'pois_com':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'pois_com')
+                  break;
+                case 'pois_saude':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'pois_saude')
+                  break;
+                case 'pois_edu':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'pois_edu')
+                  break;
+                case 'i_priorizacao':
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'i_priorizacao')
+                  break;
+                default:
+                  imovel.cor = this.calcularGraduacao(imovel.element, 'dist_centro')
+                  break;
+              }
+            
+            
           }
 
           let isValido = true
@@ -617,6 +742,12 @@ cores = {
           let fontes = []
          
         arrayData.forEach(element => {
+
+
+          if(this.imoveis.find(imovel => imovel.element.id_gen.slice(0,8) === element.id_gen.slice(0,8))){
+            return;
+          }
+
           let cor;
           if(!municipios.find(municipio => municipio.municipio === element.municipio) && !!element.municipio){
             municipios.push({municipio: element.municipio, uf: element.uf})

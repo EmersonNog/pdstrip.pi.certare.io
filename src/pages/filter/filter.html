@@ -122,25 +122,43 @@
         </select-searchable>
       </ion-item> 
 
-      <!-- <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios">Área total do imóvel</ion-label>
-        <ion-item>
-          <ion-label fixed>Username</ion-label>
-          <ion-input type="text" value=""></ion-input>
+      
+    
+    
+      <!-- <ion-row class="ionrowcomparacao">
+        <ion-col>
+          <ion-item no-lines>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item no-lines>
+          <ion-select [(ngModel)]="operacao">
+            <ion-option value="menor">menor que</ion-option>
+            <ion-option value="menorigual">menor ou igual que</ion-option>
+            <ion-option value="maiorigual">maior ou igual que</ion-option>
+            <ion-option value="maior">maior que</ion-option>
+            
+          </ion-select>
         </ion-item>
-        <ion-select [(ngModel)]="operacao">
-          <ion-option value="menor">menor que</ion-option>
-          <ion-option value="menorigual">menor ou igual que</ion-option>
-          <ion-option value="maiorigual">maior ou igual que</ion-option>
-          <ion-option value="maior">maior que</ion-option>
+        </ion-col>
+        <ion-col>
+          <ion-item no-lines>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+         -->
+            
+         
+              
+            
+      
+        
+        
+       
           
-        </ion-select>
-        <ion-item>
-          <ion-label fixed>Username</ion-label>
-          <ion-input type="text" value=""></ion-input>
-        </ion-item>
-          
-      </ion-item>  -->
+     
 
    
      
@@ -155,28 +173,15 @@
         </select-searchable>
       </ion-item> 
 
-      <!-- <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios"></ion-label>
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios">Mapa graduado</ion-label>
         <select-searchable outline placeholder="Mapa graduado" item-content [(ngModel)]="graduacao" [items]="graduacaoArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="false" [canClear]="true" [clearButtonText]="Limpar" [searchPlaceholder]="Pesquisar" searchText="Pesquisar"
+          [canSearch]="true" [isMultiple]="false" [canClear]="false" searchPlaceholder="Pesquisar"
           (onChange)="changeGraduacao($event)" 
           >
         </select-searchable>
-      </ion-item>  -->
-         <!-- <ion-item>
-        <ion-label>App</ion-label>
-        <ion-checkbox color="blue" [(ngModel)]="appAtivos" (ionChange)="changeAtivos('app', $event)"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Iso 15</ion-label>
-        <ion-checkbox color="blue" [(ngModel)]="iso15Ativos" (ionChange)="changeAtivos('iso_15', $event)"></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Iso 10</ion-label>
-        <ion-checkbox color="blue" [(ngModel)]="iso10Ativos" (ionChange)="changeAtivos('iso_10', $event)"></ion-checkbox>
-      </ion-item> -->
-
-
+      </ion-item> 
+       
      
      
     </ion-row>

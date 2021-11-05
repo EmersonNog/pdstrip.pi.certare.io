@@ -1,9 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Constants } from '../../environments/constants';
-import { EstradaProvider } from '../../providers/estrada/estrada';
-import { RodoviaProvider } from '../../providers/rodovia/rodovia';
-import { SreProvider } from '../../providers/sre/sre';
 import { UserService } from '../../providers/user/user.service';
 
 @IonicPage()
@@ -13,13 +10,10 @@ import { UserService } from '../../providers/user/user.service';
 })
 export class FilterPage {
 
-  estradaArr = [];
-  estrada;
-  sreArr = [];
-  sre;
-
-
+  
   operacao;
+  minimo;
+  maximo;
 
 
   iso10Ativos = false;
@@ -100,10 +94,7 @@ export class FilterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public viewCtrl: ViewController,
-    public userService: UserService,
-    private rodoviaService: RodoviaProvider,
-    private estradaService: EstradaProvider,
-    private sreService: SreProvider,
+    public userService: UserService
     ) {
 
       const params = navParams.data;
@@ -158,6 +149,7 @@ export class FilterPage {
 
       this.categorias = params.categorias;
       this.categorizacao = params.categorizacao;
+      this.graduacao = params.graduacao;
 
   }
 
@@ -193,6 +185,9 @@ export class FilterPage {
     const value = event.value;
     console.log(event);
 
+    this.categorizacao = value;
+    this.graduacao = null;
+
   }
 
   changeCategorias(event){
@@ -203,6 +198,8 @@ export class FilterPage {
   changeGraduacao(event) {
     const value = event.value;
     console.log(event);
+    this.graduacao = value;
+    this.categorizacao = null;
 
   }
 
@@ -278,15 +275,20 @@ export class FilterPage {
   }
 
   changeMunicipio(event){
-    this.bairro = []
-    this.bairroArr = this.bairroArrTotal
+
+    
     const value = event.value;
     this.municipio = value
-    const bairroArr = this.bairroArrTotal
+
+    this.bairro = [];
+    this.bairroArr = this.bairroArrTotal;
+
+    
+   
     const municipios = value.map(item => item.info)
     
     if(value.length > 0){
-      this.bairroArr = bairroArr
+      this.bairroArr = this.bairroArrTotal
       .filter(bairro => municipios.includes(bairro.municipio))
       .map(values => {
           values['info'] = values.bairro;
@@ -320,18 +322,6 @@ export class FilterPage {
 
   submit() {
     
-    const { log } = console
-
-    console.log('uf', this.uf)
-    log('muni', this.municipio)
-    log('bairro', this.bairro)
-    log('tipoOcuo', this.tiposOcupacoes)
-    log('tipoSet', this.tiposSetores)
-    log('font', this.fontes)
-    log('categorias', this.categorias)
-    log('categorizacao', this.categorizacao)
-    
-
     const params = {
       ativos: {
         imoveis: this.imoveisAtivos,
@@ -348,6 +338,7 @@ export class FilterPage {
       fontes: this.fontes.length > 0 ? this.fontes : [],
       categorias: this.categorias.length > 0 ? this.categorias : [],
       categorizacao: !!this.categorizacao ? this.categorizacao : null,
+      graduacao: !!this.graduacao ? this.graduacao : null
     };
     console.log('params', params);
     this.closeFilter(params);
