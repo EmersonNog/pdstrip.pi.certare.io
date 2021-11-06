@@ -151,6 +151,8 @@ export class FilterPage {
       this.categorizacao = params.categorizacao;
       this.graduacao = params.graduacao;
 
+
+      console.log(params.area)
       this.valor1 = params.area.valor1
       this.valor2 = params.area.valor2
       this.operacao = params.area.operacao

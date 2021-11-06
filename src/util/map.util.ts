@@ -276,20 +276,179 @@ export class MapUtil {
     }
   }
 
-  // marker clusterer para servir de lazy loading dos pontos de limite de municipio
-  // public markerClusterer(locationArray: any, map){
-  //   const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  //   const markers = locationArray.map((location, i) => {
-  //     return new google.maps.Marker({
-  //       position: {lat: location.lat, lng: location.lng},
-  //       label: labels[i % labels.length],
-  //     });
-  //   });
-  //  const markerclustererplus = new MarkerClusterer(map, markers, {
-  //     imagePath:
-  //       "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-  //   });
-  // }
+  public addBufferLinha(
+    rota: Position[], 
+    map,
+    cor,
+    info: {
+      name: ''
+    }
+    ) {
+
+
+    if(rota && rota.length > 0) {
+      
+      for(let i = 0; i < rota.length; i++) {
+
+        const options = {
+          path: rota,
+          geodesic: true,
+          strokeColor: cor,
+          strokeOpacity: 0.0,
+          strokeWeight: 0.0,
+          fillColor: cor,
+          fillOpacity: 0.01,
+          zIndex : 1
+        };
+
+        const polygon = new google.maps.Polygon(options)
+        polygon.setMap(map)
+        const conteudo = `Buffer da linha: ${info.name}`
+        this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
+        MapUtil2.polygons.push(polygon);
+        
+      }
+    }
+  }
+  public addBufferEstacao(
+    rota: Position[], 
+    map,
+    cor,
+    info: {
+      name: ''
+    }
+    ) {
+
+    
+
+    if(rota && rota.length > 0) {
+      
+      for(let i = 0; i < rota.length; i++) {
+
+        const options = {
+          path: rota,
+          geodesic: true,
+          strokeColor: cor,
+          strokeOpacity: 0.0,
+          strokeWeight: 0.0,
+          fillColor: cor,
+          fillOpacity: 0.01,
+          zIndex : 2
+        };
+
+        const polygon = new google.maps.Polygon(options)
+        polygon.setMap(map)
+        const conteudo = `Buffer da estação: ${info.name}`
+        this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
+        MapUtil2.polygons.push(polygon);
+      }
+    }
+  }
+
+  public addEstacao(
+    rota, 
+    map,
+    
+    ) {
+
+    let marker;
+
+    if(rota && rota.length > 0) {
+      
+      for(let i = 0; i < rota.length; i++) {
+    
+        console.log('est', rota[i])
+
+        marker = new google.maps.Marker({
+          position: {lat: rota[i].lat, lng: rota[i].lng},
+          title: rota[i]['name'],
+          icon: new google.maps.MarkerImage("assets/icon/" + 'iconEstacao.svg'),
+        })
+
+        this.addInfoWindow(marker, 'Nome da estação: ' + rota[i].name, map, new google.maps.InfoWindow());
+        marker.setMap(map);
+        MapUtil2.polylines.push(marker);
+
+        
+      }
+    }
+  }
+
+
+  public addLinha(
+    rota: Position[], 
+    map,
+    cor,
+    info = {
+      name: ''
+    }) {
+
+    let polyline;
+
+    if(rota && rota.length > 0) {
+      
+      for(let i = 0; i < rota.length; i++) {
+
+        const options = {
+          path: rota,
+          geodesic: true,
+          strokeColor: cor,
+          strokeOpacity: 1.0,
+          strokeWeight: 3.0,
+          fillColor: cor,
+          fillOpacity: 0.01,
+          zIndex : 3
+        };
+
+        polyline = new google.maps.Polyline(options);
+        polyline.setMap(map);
+        this.addInfoWindow(polyline, 'Linha: ' + info.name, map, new google.maps.InfoWindow());
+        MapUtil2.polylines.push(polyline);
+        
+      }
+    }
+  }
+
+
+  public addImovel(
+    rota: Position[], 
+    map,
+    cor,
+    info = {
+      name: '', 
+      tipo_ocup: '', 
+      bairro: '', 
+      endereco_forn: '', 
+      area_cons: '', 
+      area_tot: ''
+    }) {
+
+
+    if(rota && rota.length > 0) {
+     
+      for(let i = 0; i < rota.length; i++) {
+
+        const options = {
+          path: rota,
+          geodesic: true,
+          strokeColor: cor,
+          strokeOpacity: 1.0,
+          strokeWeight: 1.0,
+          fillColor: cor,
+          fillOpacity: 0.01,
+          zIndex : 3
+        };      
+       
+        const polygon = new google.maps.Polygon(options)
+        polygon.setMap(map)
+        const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}<br/>Área construída: ${info.area_cons}m²<br/>Área total: ${info.area_tot}m²`
+        this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
+        MapUtil2.polygons.push(polygon);
+        
+      }
+    }
+  }
+
   
 
 

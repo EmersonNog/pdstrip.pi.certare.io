@@ -3,15 +3,10 @@ import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angu
 import { Constants } from '../../environments/constants';
 import { User } from '../../models/user';
 import { AssetsJsonProvider } from '../../providers/assets-json/assets-json';
-import { RodoviaProvider } from '../../providers/rodovia/rodovia';
 import { UserService } from '../../providers/user/user.service';
 import { MapUtil, Position } from '../../util/map.util';
 import { AngularFirestore } from "angularfire2/firestore";
-
 import wkt from "wkt";
-import { pureArrayDef } from '@angular/core/src/view';
-import { elementAt } from 'rxjs/operator/elementAt';
-import { truncateSync } from 'fs';
 import * as _ from 'lodash';
 import { _ParseAST } from '@angular/compiler';
 import { _getAngularFireAuth } from 'angularfire2/auth';
@@ -31,8 +26,6 @@ export class HomePage {
 
   user: User = new User();
 
-  rodovia;
-  sre;
   estacoes = {coordenadas : []};
   linhas = [];
   bufferLinhas = [];
@@ -376,7 +369,8 @@ export class HomePage {
     this.mapUtil.cleanPolygons();
 
     if(filtro.estacoes.ativo){
-      this.mapUtil.showRodoviaPoints(this.estacoes.coordenadas, this.map, false, 'limite-municipio', false)
+      // this.mapUtil.showRodoviaPoints(this.estacoes.coordenadas, this.map, false, 'limite-municipio', false)
+      this.mapUtil.addEstacao(this.estacoes.coordenadas, this.map)
     }
     if(filtro.imoveis.ativo){
       
@@ -637,7 +631,7 @@ export class HomePage {
                       filtro.imoveis.bairros.forEach(bairro => {
                         if(bairro === imovel.element.bairro){
                           
-                          this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                          this.mapUtil.addImovel(imovel.polyline, this.map, imovel.cor, imovel.element)
                         }
                       })
                       
@@ -650,7 +644,7 @@ export class HomePage {
                   if(uf === imovel.element.uf){
                   filtro.imoveis.municipios.forEach(municipio => {
                     if(municipio === imovel.element.municipio){                    
-                      this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)                                                               
+                      this.mapUtil.addImovel(imovel.polyline, this.map, imovel.cor, imovel.element)                                                               
                     }
                   })
                   }
@@ -662,7 +656,7 @@ export class HomePage {
                   if(uf === imovel.element.uf){
                     filtro.imoveis.bairros.forEach(bairro => {
                       if(bairro === imovel.element.bairro){
-                        this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                        this.mapUtil.addImovel(imovel.polyline, this.map, imovel.cor, imovel.element)
                       }
                     })
                   }
@@ -670,7 +664,7 @@ export class HomePage {
               }else{
                 filtro.imoveis.ufs.forEach(uf => {
                   if(uf === imovel.element.uf){
-                    this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                    this.mapUtil.addImovel(imovel.polyline, this.map, imovel.cor, imovel.element)
                   }
                 })
               }
@@ -682,7 +676,7 @@ export class HomePage {
                   if(municipio === imovel.element.municipio){
                     filtro.imoveis.bairros.forEach(bairro => {
                       if(bairro === imovel.element.bairro){
-                        this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                        this.mapUtil.addImovel(imovel.polyline, this.map, imovel.cor, imovel.element)
                       }
                     })
                     
@@ -691,7 +685,7 @@ export class HomePage {
               }else{
                 filtro.imoveis.municipios.forEach(municipio => {
                   if(municipio === imovel.element.municipio){
-                    this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                    this.mapUtil.addImovel(imovel.polyline, this.map, imovel.cor, imovel.element)
                   }
                 })
               }
@@ -699,11 +693,11 @@ export class HomePage {
               if(filtro.imoveis.bairros.length > 0){
                 filtro.imoveis.bairros.forEach(bairro => {
                   if(imovel.element.bairro === bairro){
-                    this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                    this.mapUtil.addImovel(imovel.polyline, this.map, imovel.cor, imovel.element)
                   }
                 })
               }else{
-                this.mapUtil.addPolyline(imovel.polyline, this.map, imovel.cor, 'imovel', imovel.element)
+                this.mapUtil.addImovel(imovel.polyline, this.map, imovel.cor, imovel.element)
               }
             }
           }
@@ -715,21 +709,22 @@ export class HomePage {
     }
     if(filtro.linhas.ativo){
       this.linhas.length > 0 && this.linhas.forEach(linha => {
-        
-        this.mapUtil.addPolyline(linha.polyline, this.map, linha.cor, 'linha', linha.element)
+        this.mapUtil.addLinha(linha.polyline, this.map, linha.cor, linha.element)
+        // this.mapUtil.addPolyline(linha.polyline, this.map, linha.cor, 'linha', linha.element)
       })
     }
     if(filtro.bufferEstacoes.ativo){
       this.bufferEstacoes.length > 0 && this.bufferEstacoes.forEach(buffer => {
-        this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferEstacao', buffer.element)
+        this.mapUtil.addBufferEstacao(buffer.polyline, this.map, buffer.cor, buffer.element)
+        // this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferEstacao', buffer.element)
       })
 
     }
     if(filtro.bufferLinhas.ativo){
      
       this.bufferLinhas.length > 0 && this.bufferLinhas.forEach(buffer => {
-       
-        this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferLinha', buffer.element)
+        this.mapUtil.addBufferLinha(buffer.polyline, this.map, buffer.cor, buffer.element)
+        // this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferLinha', buffer.element)
       })
     }
   }
@@ -839,7 +834,7 @@ export class HomePage {
               });
               
               this.imoveis.push({polyline, cor, element})
-              this.mapUtil.addPolyline(polyline,this.map, cor, 'imovel', element)
+              this.mapUtil.addImovel(polyline, this.map,cor, element)
             });
           })
         });
@@ -1005,7 +1000,9 @@ export class HomePage {
           coordenadasTotais.push({lat: coordenadas[1], lng: coordenadas[0], name: estacao.name})
         })
 
-        this.mapUtil.showRodoviaPoints(coordenadasTotais, this.map, false, 'limite-municipio', false)
+        // this.mapUtil.showRodoviaPoints(coordenadasTotais, this.map, false, 'limite-municipio', false)
+        this.mapUtil.addEstacao(coordenadasTotais, this.map)
+
         this.estacoes = {coordenadas: coordenadasTotais}
 
       }
@@ -1047,41 +1044,17 @@ export class HomePage {
             });
             
             this.linhas.push({polyline, cor: '#9B1C04', element: linha})
-            this.mapUtil.addPolyline(polyline, this.map, '#9B1C04', 'linha', linha)
+            // this.mapUtil.addPolyline(polyline, this.map, '#9B1C04', 'linha', linha)
+            this.mapUtil.addLinha(polyline, this.map, '#9B1C04', linha)
           });
         })
       }
     });
 
-    
-    // this.filtrar()
     this.mapUtil.setCenter('MG', this.map)
 
-    
-   
   }
 
-  openImagensPage(event) {
-
-    let button = document.getElementById('btn-show-estacionar-page-2');
-    let levantamentoId = button.getAttribute("levantamentoId");
-    let key = button.getAttribute("key");
-    let name = button.getAttribute("name");
-    let lat = button.getAttribute("lat");
-    let lng = button.getAttribute("lng");
-    let distance = button.getAttribute("distance");
-    let sre_inic = button.getAttribute("sre_inic");
-    let sre_fim = button.getAttribute("sre_fim");
-    let sre_sit = button.getAttribute("sre_sit");
-    let ce = button.getAttribute("ce");
-    let rodovia = button.getAttribute("rodovia");
-    let sre = button.getAttribute("sre");
-
-    const params = { name: name, lat: lat, lng: lng, distance: distance,
-      ce: ce, pathImage: rodovia, key: key, levantamentoId: 'areas_de_exames', type: 'exames' };
-
-    this.modalCtrl.create('ImagensTrechoPage', params)
-      .present();
-  }
+ 
 
 }
