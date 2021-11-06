@@ -122,33 +122,25 @@
         </select-searchable>
       </ion-item> 
 
-      
-    
-    
-      <!-- <ion-row class="ionrowcomparacao">
-        <ion-col>
-          <ion-item no-lines>
-            <ion-input type="text" value=""></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item no-lines>
-          <ion-select [(ngModel)]="operacao">
-            <ion-option value="menor">menor que</ion-option>
-            <ion-option value="menorigual">menor ou igual que</ion-option>
-            <ion-option value="maiorigual">maior ou igual que</ion-option>
-            <ion-option value="maior">maior que</ion-option>
-            
-          </ion-select>
-        </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item no-lines>
-            <ion-input type="text" value=""></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-         -->
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios">Área do mapa</ion-label>
+      </ion-item>
+   
+    <ion-row class="ionrowperso">
+      <ion-col col-4 >
+        <ion-input type='number' placeholder='Valor' [(ngModel)]="valor1"></ion-input>
+      </ion-col>
+      <ion-col col-4>
+        <ion-select [(ngModel)]="operacao" okText='Ok' cancelText='Cancelar'>
+          <ion-option value="entre">Entre</ion-option>
+         
+        </ion-select>
+      </ion-col>
+      <ion-col col-4>
+        <ion-input type='number' placeholder='Valor' [(ngModel)]="valor2"></ion-input>
+      </ion-col>
+    </ion-row>
+        
             
          
               

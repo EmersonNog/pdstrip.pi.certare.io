@@ -73,6 +73,7 @@ export class HomePage {
   categorias = []
   categorizacao = {info: 'Tipo ocupação', id: 'tipo_ocup'}
   graduacao = null;
+  area = {valor1: null, valor2: null, operacao: null}
 
 
   cores = {
@@ -290,7 +291,8 @@ export class HomePage {
       tipoSetoresSelecionados: this.tiposSetoresSelecionados,
       categorias: this.categorias,
       categorizacao: this.categorizacao,
-      graduacao: this.graduacao
+      graduacao: this.graduacao,
+      area: this.area
 
 
     });
@@ -310,7 +312,8 @@ export class HomePage {
             fontes: _data.fontes.length > 0 ? _data.fontes.map(item => item.info) : [],
             categorias: _data.categorias.length > 0 ? _data.categorias.map(item => item.id) : [],
             categorizacao: !!_data.categorizacao ? _data.categorizacao : null,
-            graduacao: !!_data.graduacao ? _data.graduacao : null
+            graduacao: !!_data.graduacao ? _data.graduacao : null,
+            area: _data.area
           },       
           linhas: {ativo: _data.ativos.linhas}, 
           bufferEstacoes: {ativo: _data.ativos.bufferEstacoes}, 
@@ -332,6 +335,7 @@ export class HomePage {
         this.categorias = _data.categorias,
         this.categorizacao = !!_data.categorizacao ? _data.categorizacao : null;
         this.graduacao = !!_data.graduacao ? _data.graduacao : null;
+        this.area = _data.area
 
         this.filtrar(filtro)
         
@@ -354,7 +358,12 @@ export class HomePage {
       fontes: [], 
       categorias: [],
       categorizacao: null,
-      graduacao: null
+      graduacao: null,
+      area: {
+        valor1: null, 
+        valor2: null, 
+        operacao: null
+      }
     }, 
     linhas: {ativo: true}, 
     bufferEstacoes: {ativo: false}, 
@@ -382,6 +391,35 @@ export class HomePage {
 
           if(filtro.imoveis.fontes.length > 0 && !filtro.imoveis.fontes.includes(imovel.element.fonte)){
             return;
+          }
+
+          if(filtro.imoveis.area.operacao){
+            const valor1 = filtro.imoveis.area.valor1
+            const valor2 = filtro.imoveis.area.valor2
+            if(valor1 && valor2){
+
+              let minimo = 0
+              let maximo = 0
+
+              if(valor1 < valor2){
+                minimo = valor1
+                maximo = valor2
+              }else{
+                minimo = valor2
+                maximo = valor1
+              }
+              
+              if(filtro.imoveis.area.operacao === 'entre'){
+                if(minimo > imovel.element.area_tot || maximo < imovel.element.area_tot ){
+                  return;
+                }
+              }
+              
+            }else if(valor1){
+              console.log('so 1')
+            }else if(valor2){
+              console.log('so 2')
+            }
           }
 
           
@@ -769,37 +807,6 @@ export class HomePage {
             fontes.push(element.fonte)
           }
 
-          
-
-
-         
-        
-          // switch (element.tipo_imovel) {
-          //   case 'TERRENO':
-          //     cor = '#33A02C';
-          //     break;
-          //   case 'MUSEU':
-          //     cor = '#6A3D9A';
-          //     break;
-          //   case 'REPRESA':
-          //     cor = '#1F78B4';
-          //     break;
-          //   case 'GALPÃO':
-          //     cor = '#FF7F00';
-          //     break;
-          //   case 'PÁTIO FERROVIÁRIO':
-          //     cor = '#CAB2D6';
-          //     break;
-          //   case 'EDIFÍCIO / PRÉDIO':
-          //     cor = '#33A02C';
-          //     break;
-          //   case 'REPRESA':
-          //     cor = '#1F78B4';
-          //     break;
-          //   default:
-          //     cor = '#B15928';
-          //     break;
-          // }
 
           const tipoOcupacao = element.tipo_ocup.toLowerCase()
 

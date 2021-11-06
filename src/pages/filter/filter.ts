@@ -12,8 +12,8 @@ export class FilterPage {
 
   
   operacao;
-  minimo;
-  maximo;
+  valor1;
+  valor2;
 
 
   iso10Ativos = false;
@@ -151,6 +151,10 @@ export class FilterPage {
       this.categorizacao = params.categorizacao;
       this.graduacao = params.graduacao;
 
+      this.valor1 = params.area.valor1
+      this.valor2 = params.area.valor2
+      this.operacao = params.area.operacao
+
   }
 
 
@@ -170,6 +174,10 @@ export class FilterPage {
     this.fontes = [];
     this.categorias = [];
     this.categorizacao = {info: 'Tipo ocupação', id: 'tipo_ocup'};
+
+    this.operacao = null;
+    this.valor1 = null;
+    this.valor2 = null;
 
   }
 
@@ -338,7 +346,8 @@ export class FilterPage {
       fontes: this.fontes.length > 0 ? this.fontes : [],
       categorias: this.categorias.length > 0 ? this.categorias : [],
       categorizacao: !!this.categorizacao ? this.categorizacao : null,
-      graduacao: !!this.graduacao ? this.graduacao : null
+      graduacao: !!this.graduacao ? this.graduacao : null,
+      area: {valor1: this.valor1, valor2: this.valor2, operacao: this.operacao}
     };
     console.log('params', params);
     this.closeFilter(params);
