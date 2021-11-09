@@ -2,13 +2,24 @@
     // @include respond-to(xl) { max-width: 180px !important; }
     @include respond-to(xl) { max-width: 20% !important; }
     @include respond-to(lg) { max-width: 20% !important; }
+
+
+    .list{
+      height: 100%;
+      background-color: rgb(28, 34, 51) !important;
+      margin-bottom: 0 !important;
+     
+    
+      
+    }
   .menu {
     // Variaveis
     //363441
-    $background-color: #0d7939;
+    $background-color: rgb(28, 34, 51) ;
     $text-color: #fff;
     $font-family: 'Roboto';
     $font-size: 14px;
+    height: 100% !important;
 
     color: $text-color;
     font-family: $font-family;
@@ -21,7 +32,17 @@
       // position: absolute; 
       bottom: 0;
       // margin-top: 15px;
-      background-color: #fff;
+      background-color: rgb(28, 34, 51);
+      margin-top: 5%;
+      
+
+      ion-row{
+        border-radius: 100px;
+        background-color: #fff;
+        width: 80%;
+        align-self: center;
+        justify-self: center;
+      }
       padding: 0 0 15px 0;
 
       .row {
@@ -39,7 +60,7 @@
       }
 
       .color-div-menu {
-        background-color: #DCBF00 !important; 
+        background-color: rgb(28, 34, 51) !important; 
 
         ion-label {
           margin: 0 0 12px 0;
@@ -70,7 +91,7 @@
         img{
           width: 60%;
           // height: 30%;
-          background: #fff;
+          background: rgb(28, 34, 51);
           border-radius: 5px;
           padding: 5px 15px;
         }
@@ -88,7 +109,7 @@
 
     .menu-item:hover{
       cursor: pointer;
-      background-color: #5e9273;
+      background-color: #333399;
     }
 
     .menu-item-logout {
@@ -130,7 +151,7 @@
   }
 
   .versao {
-    color: #0d7939;
+    color: rgb(28, 34, 51);
     text-align: center;
     font-size: 13px;
   }

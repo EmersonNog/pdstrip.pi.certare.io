@@ -30,6 +30,7 @@ export class HomePage {
   linhas = [];
   bufferLinhas = [];
   bufferEstacoes = [];
+  areaCaminhavel = [];
   imoveis = [];
   ufsImoveis = [];
   municipiosImoveis = [];
@@ -53,9 +54,12 @@ export class HomePage {
   imoveisAtivos = true;
   estacoesAtivas = true;
   linhasAtivas = true;
+  areaCaminhavelAtiva = false; 
   bufferEstacoesAtivas = false;
   bufferLinhasAtivas = false;
+  
 
+  blocoLegenda = true;
   legendaOcupacao = true;
   legendaGPriorizacao = false;
   legendaApp = false;
@@ -82,7 +86,8 @@ export class HomePage {
     SIAPA: '#FF0000',
     TRENSURB: '#00FF00',
     PREFEITURA_DE_BELO_HORIZONTE: '#0000FF',
-    SPIUNET: '#333333'
+    SPIUNET: '#333333',
+   
   }
 
   graduacaoMinima;
@@ -121,6 +126,7 @@ export class HomePage {
   }
 
   mudarLegenda(tipoLegenda){
+    this.blocoLegenda = true;
     switch (tipoLegenda) {
       case 'tipo_ocup':
         this.legendaOcupacao = true;
@@ -177,31 +183,32 @@ export class HomePage {
         this.legendaFonte = false;
         this.legendaIso10 = false;
         this.legendaIso15 = false;
+        this.blocoLegenda = false;
         break;
     }
   }
 
-  // converterTeste(){
+  converterTeste(){
 
     
-  //   this.provider.getJsonTeste().subscribe(data => {
-  //     let arr = []
+    this.provider.getJsonTeste().subscribe(data => {
+      let arr = []
 
-  //     for(var i in data){
-  //       arr.push(data[i]);
-  //     }
+      for(var i in data){
+        arr.push(data[i]);
+      }
 
-  //     console.log(arr)
+      console.log(arr)
       
 
-  //     arr.forEach((item, idx) => {
-  //       console.log('enviando arquivo ' + idx);
-  //       const id = this.afd.createId();
-  //       item.id = id;
-  //       this.afd.doc(Constants.PATH_DOCUMENTS_BUFFER_LINHAS + item.id).set(JSON.parse(JSON.stringify(item)));
-  //     })
-  //   })
-  // }
+      arr.forEach((item, idx) => {
+        console.log('enviando arquivo ' + idx);
+        const id = this.afd.createId();
+        item.id = id;
+        this.afd.doc(Constants.PATH_DOCUMENTS_AREA_CAMINHAVEL + item.id).set(JSON.parse(JSON.stringify(item)));
+      })
+    })
+  }
 
   calcularGraduacao(imovel, coluna){
 
@@ -285,7 +292,8 @@ export class HomePage {
       categorias: this.categorias,
       categorizacao: this.categorizacao,
       graduacao: this.graduacao,
-      area: this.area
+      area: this.area,
+      areaCaminhavelAtiva: this.areaCaminhavelAtiva
 
 
     });
@@ -310,12 +318,14 @@ export class HomePage {
           },       
           linhas: {ativo: _data.ativos.linhas}, 
           bufferEstacoes: {ativo: _data.ativos.bufferEstacoes}, 
-          bufferLinhas: {ativo: _data.ativos.bufferLinhas}
+          bufferLinhas: {ativo: _data.ativos.bufferLinhas},
+          areaCaminhavel: {ativo: _data.ativos.areaCaminhavel}
         }
 
         this.estacoesAtivas = _data.ativos.estacoes;
         this.imoveisAtivos = _data.ativos.imoveis;
         this.linhasAtivas = _data.ativos.linhas;
+        this.areaCaminhavelAtiva = _data.ativos.areaCaminhavel;
         this.bufferLinhasAtivas = _data.ativos.bufferLinhas;
         this.bufferEstacoesAtivas = _data.ativos.bufferEstacoes;
 
@@ -360,7 +370,8 @@ export class HomePage {
     }, 
     linhas: {ativo: true}, 
     bufferEstacoes: {ativo: false}, 
-    bufferLinhas: {ativo: false}
+    bufferLinhas: {ativo: false},
+    areaCaminhavel: {ativo: false}
   }
   ){
 
@@ -372,6 +383,14 @@ export class HomePage {
       // this.mapUtil.showRodoviaPoints(this.estacoes.coordenadas, this.map, false, 'limite-municipio', false)
       this.mapUtil.addEstacao(this.estacoes.coordenadas, this.map)
     }
+
+    if(filtro.areaCaminhavel.ativo){
+      this.areaCaminhavel.length > 0 && this.areaCaminhavel.forEach(area => {
+        this.mapUtil.addPolyline(area.polyline, this.map, area.cor, 'bufferEstacao',area.element)
+        // this.mapUtil.addPolyline(linha.polyline, this.map, linha.cor, 'linha', linha.element)
+      })
+    }
+
     if(filtro.imoveis.ativo){
       
       this.imoveis.length > 0 && this.imoveis.forEach(imovel => {
@@ -898,6 +917,65 @@ export class HomePage {
               });
               
               this.bufferEstacoes.push({polyline, cor, element})
+              // this.mapUtil.addPolyline(polyline, this.map, cor, 'bufferEstacao', element)
+            });
+          })
+        });
+
+        
+      }
+        
+       
+    });
+
+    this.afd.collection(Constants.PATH_DOCUMENTS_AREA_CAMINHAVEL,
+      ref => ref
+              // .where('ano', '==', ano)
+              // .orderBy('numero')
+    )
+    .snapshotChanges()
+    .map(actions => actions.map(_data => {
+      const data = _data.payload.doc.data();
+      const id = _data.payload.doc.id;
+
+      const obj = { id, ...data };
+      return obj;
+    })).take(1).subscribe(_data => {
+      
+      const data2 = _data.map(_item => {
+        
+        _item['points'] = wkt.parse(_item['wkt']).coordinates;
+        
+        return _item;
+      });
+
+      if(data2){
+        let arrayData = []
+          for(let i in data2){
+                
+                arrayData.push(data2[i]);
+              
+          }
+        
+       
+       
+        arrayData.forEach(element => {
+          const cor = '#DD5555';
+        
+          
+
+          element.points.forEach(coordenadas => {
+            
+            
+            coordenadas.forEach((singular, index) => {
+              
+              let polyline = []
+              singular.forEach(coordenada => {
+                const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
+                polyline.push(posicao)
+              });
+              
+              this.areaCaminhavel.push({polyline, cor, element})
               // this.mapUtil.addPolyline(polyline, this.map, cor, 'bufferEstacao', element)
             });
           })

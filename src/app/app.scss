@@ -25,6 +25,8 @@ body {
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
+    
+  
 }
 
 .header-icon {
@@ -97,16 +99,20 @@ body {
     // box-shadow: 0px 0px 1px 3px #ccc;
     // box-shadow: inset 0 0 10px #000000;
     box-shadow: 0 8px 6px -6px #ccc;
+    background-color: rgb(28, 34, 51);
 
     .toolbar-content {
         .toolbar-title {
             ion-label {
                 font-weight:bold;
                 float: left;
-                color: #0d7939;
+                color: #333;
+                
                 padding-left: 20px;
             }
         }
     }
 }
+
+
 

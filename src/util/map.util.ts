@@ -68,7 +68,7 @@ export class MapUtil {
     } else {
       map.setCenter({lat: -19.886066, lng: -43.9081736});
     }
-    map.setZoom(12);
+    map.setZoom(14);
   }
 
 
@@ -229,11 +229,11 @@ export class MapUtil {
           path: rota,
           geodesic: tipo === 'bufferLinha' ? false : true,
           strokeColor: lineColor,
-          strokeOpacity: tipo === 'bufferEstacao' ?   0.01 : tipo === 'bufferLinha' ? 0 : 1.0,
-          strokeWeight: tipo === 'bufferLinha' ? 0 : stroke,
+          strokeOpacity: tipo === 'bufferEstacao' ?   0 : tipo === 'bufferLinha' ? 0 : 1.0,
+          strokeWeight: tipo === 'bufferLinha' ? 0 : 0,
           fillColor: lineColor,
           fillOpacity: tipo === 'bufferLinha' ? 0.01 : 0.01,
-          zIndex : tipo === 'bufferEstacao' ? 2 : tipo === 'bufferLinha' ? 1 : 3
+          zIndex : tipo === 'bufferEstacao' ? 3 : tipo === 'bufferLinha' ? 1 : 3
         };
 
         polyline = new google.maps.Polyline(polylineOpt);
@@ -435,7 +435,7 @@ export class MapUtil {
           strokeOpacity: 1.0,
           strokeWeight: 1.0,
           fillColor: cor,
-          fillOpacity: 0.01,
+          fillOpacity: 0.1,
           zIndex : 3
         };      
        

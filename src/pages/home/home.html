@@ -29,7 +29,7 @@
 
     </div>
   </ion-grid>
-  <ion-card>
+  <ion-card *ngIf="blocoLegenda === true">
 
     <ion-card-header>
       Legenda
@@ -145,6 +145,7 @@
     
   </ion-grid>
   
-  
+  <!-- <button ion-button color="secondary" (click)="converterTeste()">Secondary</button> -->
+
   
 </ion-content>

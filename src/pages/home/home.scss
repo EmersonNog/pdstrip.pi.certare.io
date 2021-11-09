@@ -12,10 +12,16 @@ page-home {
   ion-card{
     position: fixed;
     right: 0;
-    bottom: 0;
+    bottom: 10px;
     width: 15%;
     height: 30%;
+    background: rgb(28, 34, 51);
+    
+    color: white;
 
+    ion-card-header{
+      color: white;
+    }
     
   }
 

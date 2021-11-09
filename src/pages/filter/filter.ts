@@ -86,6 +86,7 @@ export class FilterPage {
   estacoesAtivas = true;
   bufferLinhasAtivas = false;
   bufferEstacoesAtivas = false;
+  areaCaminhavelAtiva = false;
 
   @ViewChild("rodoviaField") rodoviaField:ElementRef;
   @ViewChild("dataLevantamentoField") dataLevantamentoField:ElementRef;
@@ -131,6 +132,7 @@ export class FilterPage {
       this.estacoesAtivas = params.estacoesAtivas;
       this.bufferEstacoesAtivas = params.bufferEstacoesAtivas;
       this.bufferLinhasAtivas = params.bufferLinhasAtivas;
+      this.areaCaminhavelAtiva = params.areaCaminhavelAtiva;
 
       this.tiposOcupacoes = params.tipoOcupacoesSelecionados;
       this.tiposOcupacoesArr = params.tiposOcupacoes.map(item => {
@@ -250,6 +252,9 @@ export class FilterPage {
       case 'app':
         this.appAtivos = event.value
         break;
+      case 'areaCaminhavel':
+        this.areaCaminhavelAtiva = event.value
+        break;  
       default:
         break;
     }
@@ -339,6 +344,7 @@ export class FilterPage {
         estacoes: this.estacoesAtivas,
         bufferLinhas: this.bufferLinhasAtivas,
         bufferEstacoes: this.bufferEstacoesAtivas,
+        areaCaminhavel: this.areaCaminhavelAtiva
       },
       ufs: this.uf.length > 0 ? this.uf : [] , 
       municipios: this.municipio.length > 0 ? this.municipio : [], 

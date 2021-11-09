@@ -45,6 +45,10 @@
         <ion-checkbox color="blue" [(ngModel)]="estacoesAtivas" (ionChange)="changeAtivos('estacoes', $event)"></ion-checkbox>
       </ion-item>
       <ion-item>
+        <ion-label>Área Caminhável</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="areaCaminhavelAtiva" (ionChange)="changeAtivos('areaCaminhavel', $event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
         <ion-label>Buffer Linhas</ion-label>
         <ion-checkbox color="blue" [(ngModel)]="bufferLinhasAtivas" (ionChange)="changeAtivos('bufferLinhas', $event)"></ion-checkbox>
       </ion-item>
@@ -52,6 +56,7 @@
         <ion-label>Buffer Estacoes</ion-label>
         <ion-checkbox color="blue" [(ngModel)]="bufferEstacoesAtivas" (ionChange)="changeAtivos('bufferEstacoes, $event')"></ion-checkbox>
       </ion-item>
+      
 
 
       <ion-item no-lines>
