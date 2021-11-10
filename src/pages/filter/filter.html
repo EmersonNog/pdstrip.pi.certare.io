@@ -37,13 +37,18 @@
         <ion-checkbox color="blue" [(ngModel)]="imoveisAtivos" (ionChange)="changeAtivos('imoveis', $event)"></ion-checkbox>
       </ion-item>
       <ion-item>
+        <ion-label>Estações</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="estacoesAtivas" (ionChange)="changeAtivos('estacoes', $event)"></ion-checkbox>
+      </ion-item>
+      <ion-item>
         <ion-label>Linhas</ion-label>
         <ion-checkbox color="blue" [(ngModel)]="linhasAtivas" (ionChange)="changeAtivos('linhas', $event)"></ion-checkbox>
       </ion-item>
       <ion-item>
-        <ion-label>Estações</ion-label>
-        <ion-checkbox color="blue" [(ngModel)]="estacoesAtivas" (ionChange)="changeAtivos('estacoes', $event)"></ion-checkbox>
+        <ion-label>Linhas planejadas</ion-label>
+        <ion-checkbox color="blue" [(ngModel)]="linhasPlanejadasAtivas" (ionChange)="changeAtivos('linhasPlanejadas', $event)"></ion-checkbox>
       </ion-item>
+
       <ion-item>
         <ion-label>Área Caminhável</ion-label>
         <ion-checkbox color="blue" [(ngModel)]="areaCaminhavelAtiva" (ionChange)="changeAtivos('areaCaminhavel', $event)"></ion-checkbox>
@@ -118,22 +123,40 @@
         </select-searchable>
       </ion-item> 
 
+     
+
       <ion-item no-lines>
         <ion-label class="text-label" stacked mode="ios"></ion-label>
-        <select-searchable outline placeholder="Categorias" item-content [(ngModel)]="categorias" [items]="categoriasArr" itemValueField="id" itemTextField="info"
-          [canSearch]="true" [isMultiple]="true" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar" 
-          (onChange)="changeCategorias($event)" 
+        <select-searchable outline placeholder="App" item-content [(ngModel)]="app" [items]="appArr" itemValueField="id" itemTextField="info"
+          [canSearch]="false" [isMultiple]="false" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar" 
+          (onChange)="changeApp($event)" 
           >
         </select-searchable>
       </ion-item> 
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Iso 10" item-content [(ngModel)]="iso10" [items]="iso10Arr" itemValueField="id" itemTextField="info"
+          [canSearch]="false" [isMultiple]="false" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar" 
+          (onChange)="changeIso10($event)" 
+          >
+        </select-searchable>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-label class="text-label" stacked mode="ios"></ion-label>
+        <select-searchable outline placeholder="Iso 15" item-content [(ngModel)]="iso15" [items]="iso15Arr" itemValueField="id" itemTextField="info"
+          [canSearch]="false" [isMultiple]="false" [canClear]="true" clearButtonText="Limpar" searchPlaceholder="Pesquisar" 
+          (onChange)="changeIso15($event)" 
+          >
+        </select-searchable>
+      </ion-item>
 
       <ion-item no-lines>
-        <ion-label class="text-label" stacked mode="ios">Área do mapa</ion-label>
+        <ion-label class="text-label" stacked mode="ios">Área do terreno</ion-label>
       </ion-item>
    
     <ion-row class="ionrowperso">
       <ion-col col-4 >
-        <ion-input type='number' placeholder='Valor' [(ngModel)]="valor1"></ion-input>
+        <ion-input type='number' placeholder='Mínimo' [(ngModel)]="valor1"></ion-input>
       </ion-col>
       <ion-col col-4>
         <ion-select [(ngModel)]="operacao" okText='Ok' cancelText='Cancelar'>
@@ -142,7 +165,7 @@
         </ion-select>
       </ion-col>
       <ion-col col-4>
-        <ion-input type='number' placeholder='Valor' [(ngModel)]="valor2"></ion-input>
+        <ion-input type='number' placeholder='Máximo' [(ngModel)]="valor2"></ion-input>
       </ion-col>
     </ion-row>
         

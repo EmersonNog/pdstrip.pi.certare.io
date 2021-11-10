@@ -54,6 +54,7 @@ export class Constants {
   public static PATH_DOCUMENTS_BUFFER_ESTACOES = '/bufferEstacoes/';
   public static PATH_DOCUMENTS_BUFFER_LINHAS = '/bufferLinhas/';
   public static PATH_DOCUMENTS_AREA_CAMINHAVEL = '/areaCaminhavel/';
+  public static PATH_DOCUMENTS_LINHAS_PLANEJADAS ='/linhasPlanejadas/';
 
   public static BASE_URL_FIREBASE_FUNCTIONS = environment.production ? 'https://us-central1-pav-detect.cloudfunctions.net': 'https://us-central1-pav-detect.cloudfunctions.net';
 

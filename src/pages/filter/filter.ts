@@ -81,8 +81,26 @@ export class FilterPage {
     {id:  'iso_15', info: 'Iso 15'}
   ]
 
+  app;
+  iso10;
+  iso15;
+
+  appArr = [
+    {id: 'true', info: 'VERDADEIRO'}, 
+    {id: 'false', info: 'FALSO'}
+  ]
+  iso10Arr = [
+    {id: 'true', info: 'VERDADEIRO'}, 
+    {id: 'false', info: 'FALSO'}
+  ]
+  iso15Arr = [
+    {id: 'true', info: 'VERDADEIRO'}, 
+    {id: 'false', info: 'FALSO'}
+  ]
+
   imoveisAtivos = true;
   linhasAtivas = true;
+  linhasPlanejadasAtivas = true;
   estacoesAtivas = true;
   bufferLinhasAtivas = false;
   bufferEstacoesAtivas = false;
@@ -129,6 +147,7 @@ export class FilterPage {
 
       this.imoveisAtivos = params.imoveisAtivos;
       this.linhasAtivas = params.linhasAtivas;
+      this.linhasPlanejadasAtivas = params.linhasPlanejadasAtivas
       this.estacoesAtivas = params.estacoesAtivas;
       this.bufferEstacoesAtivas = params.bufferEstacoesAtivas;
       this.bufferLinhasAtivas = params.bufferLinhasAtivas;
@@ -153,11 +172,13 @@ export class FilterPage {
       this.categorizacao = params.categorizacao;
       this.graduacao = params.graduacao;
 
-
-      console.log(params.area)
       this.valor1 = params.area.valor1
       this.valor2 = params.area.valor2
       this.operacao = params.area.operacao
+
+      this.app = params.app;
+      this.iso10 = params.iso10;
+      this.iso15 = params.iso15;
 
   }
 
@@ -167,8 +188,10 @@ export class FilterPage {
     this.imoveisAtivos = true;
     this.linhasAtivas = true;
     this.estacoesAtivas = true;
+    this.linhasPlanejadasAtivas = true;
     this.bufferEstacoesAtivas = false;
     this.bufferLinhasAtivas = false;
+    this.areaCaminhavelAtiva = false;
     
     this.uf = [];
     this.municipio = [];
@@ -178,10 +201,15 @@ export class FilterPage {
     this.fontes = [];
     this.categorias = [];
     this.categorizacao = {info: 'Tipo ocupação', id: 'tipo_ocup'};
+    this.graduacao = null;
 
     this.operacao = null;
     this.valor1 = null;
     this.valor2 = null;
+
+    this.app = null;
+    this.iso10 = null;
+    this.iso15 = null;
 
   }
 
@@ -201,6 +229,7 @@ export class FilterPage {
     this.graduacao = null;
 
   }
+
 
   changeCategorias(event){
     const value = event.value;
@@ -226,7 +255,6 @@ export class FilterPage {
   }
 
   changeAtivos(tipo, event){
-    console.log(tipo, this.imoveisAtivos, this.estacoesAtivas, this.linhasAtivas)
     switch (tipo) {
       case 'imovel':
         this.imoveisAtivos = event.value
@@ -243,18 +271,12 @@ export class FilterPage {
       case 'bufferEstacoes':
         this.bufferEstacoesAtivas = event.value
         break;
-      case 'iso_10':
-        this.iso10Ativos = event.value
-        break;
-      case 'iso_15':
-        this.iso15Ativos = event.value
-        break;
-      case 'app':
-        this.appAtivos = event.value
-        break;
       case 'areaCaminhavel':
         this.areaCaminhavelAtiva = event.value
-        break;  
+        break; 
+      case 'linhasPlanejadas':
+        this.linhasPlanejadasAtivas = event.value
+        break; 
       default:
         break;
     }
@@ -320,6 +342,21 @@ export class FilterPage {
     this.bairro = value
   }
 
+  changeApp(event){
+    const value = event.value
+    this.app = value
+  }
+
+  changeIso10(event){
+    const value = event.value
+    this.iso10 = value
+  }
+
+  changeIso15(event){
+    const value = event.value
+    this.iso15 = value
+  }
+
   changeTipoOcupacoes(event){
     console.log(event.value)
   }
@@ -344,7 +381,8 @@ export class FilterPage {
         estacoes: this.estacoesAtivas,
         bufferLinhas: this.bufferLinhasAtivas,
         bufferEstacoes: this.bufferEstacoesAtivas,
-        areaCaminhavel: this.areaCaminhavelAtiva
+        areaCaminhavel: this.areaCaminhavelAtiva,
+        linhasPlanejadas: this.linhasPlanejadasAtivas
       },
       ufs: this.uf.length > 0 ? this.uf : [] , 
       municipios: this.municipio.length > 0 ? this.municipio : [], 
@@ -355,7 +393,10 @@ export class FilterPage {
       categorias: this.categorias.length > 0 ? this.categorias : [],
       categorizacao: !!this.categorizacao ? this.categorizacao : null,
       graduacao: !!this.graduacao ? this.graduacao : null,
-      area: {valor1: this.valor1, valor2: this.valor2, operacao: this.operacao}
+      area: {valor1: this.valor1, valor2: this.valor2, operacao: this.operacao},
+      app: !!this.app ? this.app : null,
+      iso10: !!this.iso10 ? this.iso10 : null,
+      iso15: !!this.iso15 ? this.iso15 : null
     };
     console.log('params', params);
     this.closeFilter(params);

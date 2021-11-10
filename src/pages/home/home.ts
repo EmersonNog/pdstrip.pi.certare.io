@@ -28,6 +28,7 @@ export class HomePage {
 
   estacoes = {coordenadas : []};
   linhas = [];
+  linhasPlanejadas = [];
   bufferLinhas = [];
   bufferEstacoes = [];
   areaCaminhavel = [];
@@ -54,6 +55,7 @@ export class HomePage {
   imoveisAtivos = true;
   estacoesAtivas = true;
   linhasAtivas = true;
+  linhasPlanejadasAtivas = true;
   areaCaminhavelAtiva = false; 
   bufferEstacoesAtivas = false;
   bufferLinhasAtivas = false;
@@ -93,6 +95,10 @@ export class HomePage {
   graduacaoMinima;
   graduacaoMaxima;
   colunaGraduacao;
+
+  app;
+  iso10;
+  iso15;
 
 
 
@@ -205,7 +211,7 @@ export class HomePage {
         console.log('enviando arquivo ' + idx);
         const id = this.afd.createId();
         item.id = id;
-        this.afd.doc(Constants.PATH_DOCUMENTS_AREA_CAMINHAVEL + item.id).set(JSON.parse(JSON.stringify(item)));
+        this.afd.doc(Constants.PATH_DOCUMENTS_LINHAS_PLANEJADAS + item.id).set(JSON.parse(JSON.stringify(item)));
       })
     })
   }
@@ -249,23 +255,23 @@ export class HomePage {
     
 
     if(fator <= 0.1){
-     return '#660000'
+     return '#FFD5D5'
     }else if(fator <= 0.2){
-      return '#770000'
+      return '#FFCCCC'
     }else if(fator <= 0.3){
-      return '#880000'
+      return '#FFA5A5'
     }else if(fator <= 0.4){
-      return '#990000'
+      return '#FF9090'
     }else if(fator <= 0.5){
-      return '#AA0000'
+      return '#FF7575'
     }else if(fator <= 0.6){
-      return '#BB0000'
+      return '#FF6060'
     }else if(fator <= 0.7){
-      return '#CC0000'
+      return '#FF4545'
     }else if(fator <= 0.8){
-      return '#DD0000'
+      return '#FF3030'
     }else if(fator <= 0.9){
-      return '#EE0000'
+      return '#FF1515'
     }else{
       return '#FF0000'
     }
@@ -293,7 +299,11 @@ export class HomePage {
       categorizacao: this.categorizacao,
       graduacao: this.graduacao,
       area: this.area,
-      areaCaminhavelAtiva: this.areaCaminhavelAtiva
+      areaCaminhavelAtiva: this.areaCaminhavelAtiva,
+      app: this.app,
+      iso10: this.iso10,
+      iso15: this.iso15,
+      linhasPlanejadasAtivas: this.linhasPlanejadasAtivas
 
 
     });
@@ -314,9 +324,13 @@ export class HomePage {
             categorias: _data.categorias.length > 0 ? _data.categorias.map(item => item.id) : [],
             categorizacao: !!_data.categorizacao ? _data.categorizacao : null,
             graduacao: !!_data.graduacao ? _data.graduacao : null,
-            area: _data.area
+            area: _data.area,
+            app: !!_data.app ? _data.app : null,
+            iso10: !!_data.iso10 ? _data.iso10 : null,
+            iso15: !!_data.iso15 ? _data.iso15 : null
           },       
-          linhas: {ativo: _data.ativos.linhas}, 
+          linhas: {ativo: _data.ativos.linhas},
+          linhasPlanejadas: {ativo: _data.ativos.linhasPlanejadas},
           bufferEstacoes: {ativo: _data.ativos.bufferEstacoes}, 
           bufferLinhas: {ativo: _data.ativos.bufferLinhas},
           areaCaminhavel: {ativo: _data.ativos.areaCaminhavel}
@@ -325,6 +339,7 @@ export class HomePage {
         this.estacoesAtivas = _data.ativos.estacoes;
         this.imoveisAtivos = _data.ativos.imoveis;
         this.linhasAtivas = _data.ativos.linhas;
+        this.linhasPlanejadasAtivas = _data.ativos.linhasPlanejadas;
         this.areaCaminhavelAtiva = _data.ativos.areaCaminhavel;
         this.bufferLinhasAtivas = _data.ativos.bufferLinhas;
         this.bufferEstacoesAtivas = _data.ativos.bufferEstacoes;
@@ -339,6 +354,9 @@ export class HomePage {
         this.categorizacao = !!_data.categorizacao ? _data.categorizacao : null;
         this.graduacao = !!_data.graduacao ? _data.graduacao : null;
         this.area = _data.area
+        this.app = !!_data.app ? _data.app : null
+        this.iso10 = !!_data.iso10 ? _data.iso10 : null
+        this.iso15 = !!_data.iso15 ? _data.iso15 : null
 
         this.filtrar(filtro)
         
@@ -366,12 +384,16 @@ export class HomePage {
         valor1: null, 
         valor2: null, 
         operacao: null
-      }
+      },
+      app: null,
+      iso10: null,
+      iso15: null
     }, 
-    linhas: {ativo: true}, 
+    linhas: {ativo: true},
+    linhasPlanejadas: {ativo: true},
     bufferEstacoes: {ativo: false}, 
     bufferLinhas: {ativo: false},
-    areaCaminhavel: {ativo: false}
+    areaCaminhavel: {ativo: false},
   }
   ){
 
@@ -391,6 +413,33 @@ export class HomePage {
       })
     }
 
+    if(filtro.linhasPlanejadas.ativo){
+      this.linhasPlanejadas.length > 0 && this.linhasPlanejadas.forEach(linhaPlanejada => {
+        this.mapUtil.addLinha(linhaPlanejada.polyline, this.map, linhaPlanejada.cor, linhaPlanejada.element)
+
+      })
+    }
+    if(filtro.linhas.ativo){
+      this.linhas.length > 0 && this.linhas.forEach(linha => {
+        this.mapUtil.addLinha(linha.polyline, this.map, linha.cor, linha.element)
+        // this.mapUtil.addPolyline(linha.polyline, this.map, linha.cor, 'linha', linha.element)
+      })
+    }
+    if(filtro.bufferEstacoes.ativo){
+      this.bufferEstacoes.length > 0 && this.bufferEstacoes.forEach(buffer => {
+        this.mapUtil.addBufferEstacao(buffer.polyline, this.map, buffer.cor, buffer.element)
+        // this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferEstacao', buffer.element)
+      })
+
+    }
+    if(filtro.bufferLinhas.ativo){
+     
+      this.bufferLinhas.length > 0 && this.bufferLinhas.forEach(buffer => {
+        this.mapUtil.addBufferLinha(buffer.polyline, this.map, buffer.cor, buffer.element)
+        // this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferLinha', buffer.element)
+      })
+    }
+
     if(filtro.imoveis.ativo){
       
       this.imoveis.length > 0 && this.imoveis.forEach(imovel => {
@@ -404,6 +453,33 @@ export class HomePage {
 
           if(filtro.imoveis.fontes.length > 0 && !filtro.imoveis.fontes.includes(imovel.element.fonte)){
             return;
+          }
+
+          if(filtro.imoveis.app){
+            if(filtro.imoveis.app.id === 'true' && imovel.element.app === 'FALSE'){
+              return;
+            }else if(filtro.imoveis.app.id === 'false' && imovel.element.app === 'TRUE'){
+              return;
+            }
+          }
+
+
+          if(filtro.imoveis.iso10){
+            if(filtro.imoveis.iso10.id === 'true' && imovel.element.iso_10 === 'FALSE'){
+              return;
+            }else if(filtro.imoveis.iso10.id === 'false' && imovel.element.iso_10 === 'TRUE'){
+              return;
+            }
+          }
+
+          if(filtro.imoveis.iso15){
+            console.log('caiu')
+
+            if(filtro.imoveis.iso15.id === 'true' && imovel.element.iso_15 === 'FALSE'){
+              return;
+            }else if(filtro.imoveis.iso15.id === 'false' && imovel.element.iso_15 === 'TRUE'){
+              return;
+            }
           }
 
           if(filtro.imoveis.area.operacao){
@@ -429,9 +505,17 @@ export class HomePage {
               }
               
             }else if(valor1){
-              console.log('so 1')
+              if(filtro.imoveis.area.operacao === 'entre'){
+                if(valor1 > imovel.element.area_tot){
+                  return;
+                }
+              }
             }else if(valor2){
-              console.log('so 2')
+              if(filtro.imoveis.area.operacao === 'entre'){
+                if(valor2 < imovel.element.area_tot){
+                  return;
+                }
+              }
             }
           }
 
@@ -726,26 +810,7 @@ export class HomePage {
       })
       
     }
-    if(filtro.linhas.ativo){
-      this.linhas.length > 0 && this.linhas.forEach(linha => {
-        this.mapUtil.addLinha(linha.polyline, this.map, linha.cor, linha.element)
-        // this.mapUtil.addPolyline(linha.polyline, this.map, linha.cor, 'linha', linha.element)
-      })
-    }
-    if(filtro.bufferEstacoes.ativo){
-      this.bufferEstacoes.length > 0 && this.bufferEstacoes.forEach(buffer => {
-        this.mapUtil.addBufferEstacao(buffer.polyline, this.map, buffer.cor, buffer.element)
-        // this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferEstacao', buffer.element)
-      })
-
-    }
-    if(filtro.bufferLinhas.ativo){
-     
-      this.bufferLinhas.length > 0 && this.bufferLinhas.forEach(buffer => {
-        this.mapUtil.addBufferLinha(buffer.polyline, this.map, buffer.cor, buffer.element)
-        // this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferLinha', buffer.element)
-      })
-    }
+    
   }
 
   private initMap(route = undefined) {
@@ -1124,6 +1189,49 @@ export class HomePage {
             this.linhas.push({polyline, cor: '#9B1C04', element: linha})
             // this.mapUtil.addPolyline(polyline, this.map, '#9B1C04', 'linha', linha)
             this.mapUtil.addLinha(polyline, this.map, '#9B1C04', linha)
+          });
+        })
+      }
+    });
+
+    this.afd.collection(Constants.PATH_DOCUMENTS_LINHAS_PLANEJADAS,
+      ref => ref
+              // .where('ano', '==', ano)
+              // .orderBy('numero')
+    )
+    .snapshotChanges()
+    .map(actions => actions.map(_data => {
+      const data = _data.payload.doc.data();
+      const id = _data.payload.doc.id;
+
+      const obj = { id, ...data };
+      return obj;
+    })).take(1).subscribe(_data => {
+      
+      const data2 = _data.map(_item => {
+        return _item;
+      });
+
+      
+      if(data2){
+        let arrayData = []
+        for(let i in data2){
+            arrayData.push(data2[i]);
+        }
+
+        arrayData.length > 0 && arrayData.forEach(linha => {
+          const coordenadas = wkt.parse(linha.wkt).coordinates
+          coordenadas.forEach((singular, index) => {
+              
+            let polyline = []
+            singular.forEach(coordenada => {
+              const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
+              polyline.push(posicao)
+            });
+            
+            this.linhasPlanejadas.push({polyline, cor: '#0000FF', element: linha})
+            // this.mapUtil.addPolyline(polyline, this.map, '#9B1C04', 'linha', linha)
+            this.mapUtil.addLinha(polyline, this.map, '#0000FF', linha)
           });
         })
       }

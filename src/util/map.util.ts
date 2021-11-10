@@ -357,7 +357,6 @@ export class MapUtil {
       
       for(let i = 0; i < rota.length; i++) {
     
-        console.log('est', rota[i])
 
         marker = new google.maps.Marker({
           position: {lat: rota[i].lat, lng: rota[i].lng},
