@@ -73,7 +73,7 @@ export class HomePage {
   categorias = []
   categorizacao = {info: 'Tipo ocupação', id: 'tipo_ocup'}
   graduacao = null;
-  area = {valor1: null, valor2: null, operacao: null}
+  area = {valor1: null, valor2: null, operacao: 'entre'}
 
 
   cores = {
