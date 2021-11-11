@@ -37,6 +37,14 @@ ion-col {
     
     color: white;
 
+    @include respond-to(xs) { width: 50% !important; }
+    @include respond-to(md) { width: 35% !important; }
+    @include respond-to(lg) { width: 30% !important; }
+    @include respond-to(xl) { width: 16% !important; }
+      
+    
+
+
     ion-card-header{
       color: white;
     }

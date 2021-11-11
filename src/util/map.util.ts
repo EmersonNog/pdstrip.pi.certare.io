@@ -451,6 +451,7 @@ export class MapUtil {
         const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}<br/>Área construída: ${info.area_cons}m²<br/>Área total: ${info.area_tot}m²`
         this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
         MapUtil2.polygons.push(polygon);
+        MapUtil2.polylines.push(polyline);
         
       // }
     }
