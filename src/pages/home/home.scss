@@ -42,6 +42,7 @@ ion-col {
     @include respond-to(lg) { width: 30% !important; }
     @include respond-to(xl) { width: 16% !important; }
       
+    overflow-y: scroll;
     
 
 
