@@ -43,8 +43,30 @@ page-filter {
         }
       }
       ion-input {
+        
+        $textColor: #A1A1A1;
+
         * {
           font-size: 18px;
+        }
+        ::placeholder {
+          color: $textColor;
+        }
+
+        ::-webkit-input-placeholder { /* WebKit browsers */
+          color: $textColor;
+        }
+
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+          color: $textColor;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+          color: $textColor;
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10+ */
+          color: $textColor;
         }
       }
     }

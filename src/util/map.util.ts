@@ -289,6 +289,7 @@ export class MapUtil {
     if(rota && rota.length > 0) {
       
       for(let i = 0; i < rota.length; i++) {
+       
 
         const options = {
           path: rota,
@@ -323,7 +324,8 @@ export class MapUtil {
 
     if(rota && rota.length > 0) {
       
-      for(let i = 0; i < rota.length; i++) {
+      
+        
 
         const options = {
           path: rota,
@@ -332,7 +334,7 @@ export class MapUtil {
           strokeOpacity: 0.0,
           strokeWeight: 0.0,
           fillColor: cor,
-          fillOpacity: 0.01,
+          fillOpacity: 0.2,
           zIndex : 2
         };
 
@@ -341,7 +343,7 @@ export class MapUtil {
         const conteudo = `Buffer da estação: ${info.name}`
         this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
         MapUtil2.polygons.push(polygon);
-      }
+      
     }
   }
 
@@ -386,7 +388,7 @@ export class MapUtil {
 
     if(rota && rota.length > 0) {
       
-      for(let i = 0; i < rota.length; i++) {
+      
 
         const options = {
           path: rota,
@@ -404,7 +406,7 @@ export class MapUtil {
         this.addInfoWindow(polyline, 'Linha: ' + info.name, map, new google.maps.InfoWindow());
         MapUtil2.polylines.push(polyline);
         
-      }
+      
     }
   }
 
@@ -419,13 +421,15 @@ export class MapUtil {
       bairro: '', 
       endereco_forn: '', 
       area_cons: '', 
-      area_tot: ''
+      area_tot: '',
+      lat_cons: 0,
+      lon_cons: 0
     }) {
 
 
     if(rota && rota.length > 0) {
      
-      for(let i = 0; i < rota.length; i++) {
+      // for(let i = 0; i < rota.length; i++) {
 
         const options = {
           path: rota,
@@ -434,17 +438,21 @@ export class MapUtil {
           strokeOpacity: 1.0,
           strokeWeight: 1.0,
           fillColor: cor,
-          fillOpacity: 0.1,
-          zIndex : 3
+          fillOpacity: 0.7,
+          zIndex : 4
         };      
+
        
+
+        const polyline = new google.maps.Polyline(this.createPolylineBall({lat: info.lat_cons, lng: info.lon_cons }, cor));
         const polygon = new google.maps.Polygon(options)
         polygon.setMap(map)
+        polyline.setMap(map)
         const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}<br/>Área construída: ${info.area_cons}m²<br/>Área total: ${info.area_tot}m²`
         this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
         MapUtil2.polygons.push(polygon);
         
-      }
+      // }
     }
   }
 
@@ -568,8 +576,8 @@ export class MapUtil {
       geodesic: true,
       strokeColor: cor,
       strokeOpacity: 0.95,
-      strokeWeight: 15,
-      zIndex: 10
+      strokeWeight: 8,
+      zIndex: 3
     });
   }
 

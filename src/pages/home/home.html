@@ -29,13 +29,73 @@
 
     </div>
   </ion-grid>
-  <ion-card *ngIf="blocoLegenda === true">
+  <ion-card>
 
     <ion-card-header>
       Legenda
     </ion-card-header>
   
     <ion-card-content>
+      <ion-grid>
+        <ion-row *ngIf="estacoesAtivas === true">
+          <ion-col col-3>
+            <!-- <div class="blocoLegenda" [style.background-color]="cores.estacao"></div> -->
+            <img src="../../assets/icon/iconEstacao.svg"/>
+          </ion-col>
+          <ion-col col-9>
+            <span>Estação</span>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="linhasAtivas === true">
+          <ion-col col-3>
+            <div class="blocoLegendaLinha" [style.background-color]="cores.linha"></div>
+          </ion-col>
+          <ion-col col-9>
+            Linha
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="linhasPlanejadasAtivas === true">
+          <ion-col col-3>
+            <div class="blocoLegendaLinha" [style.background-color]="cores.linhaPlanejada"></div>
+          </ion-col>
+          <ion-col col-9>
+            Linha planejada
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="blocoLegenda === false">
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.faixa1"></div>
+          </ion-col>
+          <ion-col col-9>{{ faixas.faixa1 }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.faixa2"></div>
+          </ion-col>
+          <ion-col col-9>{{ faixas.faixa2 }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.faixa3"></div>
+          </ion-col>
+          <ion-col col-9>{{ faixas.faixa3 }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.faixa4"></div>
+          </ion-col>
+          <ion-col col-9>{{ faixas.faixa4 }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.faixa5"></div>
+          </ion-col>
+          <ion-col col-9>{{ faixas.faixa5 }}</ion-col>
+        </ion-row>
+      </ion-grid>
+
       <ion-grid *ngIf="legendaOcupacao === true">
         <ion-row>
           <ion-col col-3>
@@ -54,6 +114,12 @@
             <div class="blocoLegenda" [style.background-color]="cores.imovelAbandonado"></div>
           </ion-col>
           <ion-col col-9>Imóvel abandonado</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.naoClassificado"></div>
+          </ion-col>
+          <ion-col col-9>Não classificado</ion-col>
         </ion-row>
       </ion-grid>
 

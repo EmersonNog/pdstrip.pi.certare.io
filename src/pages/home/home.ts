@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 import { _ParseAST } from '@angular/compiler';
 import { _getAngularFireAuth } from 'angularfire2/auth';
 
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -76,9 +77,10 @@ export class HomePage {
 
 
   cores = {
-    terreno: '#CFF09E',
-    consolidadoBaixaOcupacao: '#3B8686',
+    terreno: '#6A3C9A',
+    consolidadoBaixaOcupacao: '#E31B1C',
     imovelAbandonado: '#333333',
+    naoClassificado: '#F07F03',
     verdadeiro: '#00FF00',
     falso: '#FF0000',
     valor1: '#FF0000',
@@ -89,16 +91,37 @@ export class HomePage {
     TRENSURB: '#00FF00',
     PREFEITURA_DE_BELO_HORIZONTE: '#0000FF',
     SPIUNET: '#333333',
+    linhaPlanejada: '#800080',
+    linha: '#9B1C04',
+    estacao: '#E91D63',
+    faixa1: '#f9a656',
+    faixa2: '#b59e73',
+    faixa3: '#7d978b',
+    faixa4: '#368eaa',
+    faixa5: '#0187c0',
+    src: '../../assets/icon/iconEstacao.svg'
    
   }
+
+  
 
   graduacaoMinima;
   graduacaoMaxima;
   colunaGraduacao;
 
+  faixasSetadas = false;
+
   app;
   iso10;
   iso15;
+
+  faixas = {
+    faixa1: '',
+    faixa2: '',
+    faixa3: '',
+    faixa4: '',
+    faixa5: ''
+  }
 
 
 
@@ -211,7 +234,7 @@ export class HomePage {
         console.log('enviando arquivo ' + idx);
         const id = this.afd.createId();
         item.id = id;
-        this.afd.doc(Constants.PATH_DOCUMENTS_LINHAS_PLANEJADAS + item.id).set(JSON.parse(JSON.stringify(item)));
+        this.afd.doc(Constants.PATH_DOCUMENTS_BUFFER_LINHAS + item.id).set(JSON.parse(JSON.stringify(item)));
       })
     })
   }
@@ -222,12 +245,11 @@ export class HomePage {
    
     
     if(coluna !== this.colunaGraduacao){
-      console.log('oi')
       this.colunaGraduacao = coluna
       this.graduacaoMaxima = null
       this.graduacaoMinima = null
-        this.imoveis.forEach(item => {
-          if(item.element.uf === 'MG'){
+      this.faixasSetadas = false
+      this.imoveis.forEach(item => {
             
             if(!_.get(item.element, coluna)){
               _.set(item.element, coluna, 0)
@@ -238,43 +260,68 @@ export class HomePage {
             if(!this.graduacaoMaxima || _.get(item.element, coluna) > this.graduacaoMaxima){
               this.graduacaoMaxima = _.get(item.element, coluna)
             }
-          }
+          
         })
     }
      
     
-      if(!_.get(imovel, coluna)){
-        _.set(imovel, coluna, 0)
-      }
+    if(!_.get(imovel, coluna)){
+      _.set(imovel, coluna, 0)
+    }
+
+    const diferencaFator = (this.graduacaoMaxima - this.graduacaoMinima) / 5
    
 
     const fator = _.get(imovel, coluna)/this.graduacaoMaxima
 
-    console.log(fator)
+    if(!this.faixasSetadas){
+      this.faixasSetadas = true;
+      this.faixas = {
+        faixa1: this.graduacaoMinima.toFixed(0) + ' ~ ' + (this.graduacaoMinima + diferencaFator).toFixed(0),
+        faixa2: (this.graduacaoMinima + diferencaFator).toFixed(0) + ' ~ ' + (this.graduacaoMinima + diferencaFator * 2).toFixed(0),
+        faixa3: (this.graduacaoMinima + diferencaFator * 2).toFixed(0) + ' ~ ' + (this.graduacaoMinima + diferencaFator * 3).toFixed(0),
+        faixa4: (this.graduacaoMinima + diferencaFator * 3).toFixed(0) + ' ~ ' + (this.graduacaoMinima + diferencaFator * 4).toFixed(0),
+        faixa5: (this.graduacaoMinima + diferencaFator * 4).toFixed(0) + ' ~ ' + this.graduacaoMaxima.toFixed(0)
+      }
+    }
+
+    const valor = _.get(imovel, coluna)
     
+    if(valor < this.graduacaoMinima + diferencaFator){
+      return '#f9a656'
+    }else if(valor < this.graduacaoMinima + (2 * diferencaFator)){
+      return '#b59e73'
+    }else if(valor < this.graduacaoMinima + (3 * diferencaFator)){
+      return '#7d978b'
+    }else if(valor < this.graduacaoMinima + (4 * diferencaFator)){
+      return '#368eaa'
+    }else{
+      return '#0187c0'
+    }
+
     
 
-    if(fator <= 0.1){
-     return '#FFD5D5'
-    }else if(fator <= 0.2){
-      return '#FFCCCC'
-    }else if(fator <= 0.3){
-      return '#FFA5A5'
-    }else if(fator <= 0.4){
-      return '#FF9090'
-    }else if(fator <= 0.5){
-      return '#FF7575'
-    }else if(fator <= 0.6){
-      return '#FF6060'
-    }else if(fator <= 0.7){
-      return '#FF4545'
-    }else if(fator <= 0.8){
-      return '#FF3030'
-    }else if(fator <= 0.9){
-      return '#FF1515'
-    }else{
-      return '#FF0000'
-    }
+    // if(fator <= 0.1){
+    //  return '#FFD5D5'
+    // }else if(fator <= 0.2){
+    //   return '#FFCCCC'
+    // }else if(fator <= 0.3){
+    //   return '#FFA5A5'
+    // }else if(fator <= 0.4){
+    //   return '#FF9090'
+    // }else if(fator <= 0.5){
+    //   return '#FF7575'
+    // }else if(fator <= 0.6){
+    //   return '#FF6060'
+    // }else if(fator <= 0.7){
+    //   return '#FF4545'
+    // }else if(fator <= 0.8){
+    //   return '#FF3030'
+    // }else if(fator <= 0.9){
+    //   return '#FF1515'
+    // }else{
+    //   return '#FF0000'
+    // }
   }
 
   openFilterPage() {
@@ -526,16 +573,16 @@ export class HomePage {
                 this.mudarLegenda('tipo_ocup')
                 switch (imovel.element.tipo_ocup.toLowerCase()) {
                   case 'terreno':
-                    imovel.cor = '#CFF09E';
+                    imovel.cor = '#6A3C9A';
                     break;
                   case 'consolidado de baixa ocupação':
-                    imovel.cor = '#3B8686';
+                    imovel.cor = '#E31B1C';
                     break;
                   case 'imóvel abandonado':
                     imovel.cor = '#333333';
                     break; 
                   default:
-                    imovel.cor = '#B15928';
+                    imovel.cor = '#F07F03';
                     break;
                 }
                 break;
@@ -617,7 +664,7 @@ export class HomePage {
                     imovel.cor = '#657199';
                     break; 
                   default:
-                    imovel.cor = '#B15928';
+                    imovel.cor = '#F07F03';
                     break;
                 }
               break;
@@ -625,16 +672,16 @@ export class HomePage {
                 this.mudarLegenda('tipo_ocup')
                 switch (imovel.element.tipo_ocup.toLowerCase()) {
                   case 'terreno':
-                    imovel.cor = '#CFF09E';
+                    imovel.cor = '#6A3C9A';
                     break;
                   case 'consolidado de baixa ocupação':
-                    imovel.cor = '#3B8686';
+                    imovel.cor = '#E31B1C';
                     break;
                   case 'imóvel abandonado':
                     imovel.cor = '#333333';
                     break; 
                   default:
-                    imovel.cor = '#B15928';
+                    imovel.cor = '#F07F03';
                     break;
                 }
                 break;
@@ -891,16 +938,16 @@ export class HomePage {
 
           switch (tipoOcupacao) {
             case 'terreno':
-              cor = '#CFF09E';
+              cor = '#6A3C9A';
               break;
             case 'consolidado de baixa ocupação':
-              cor = '#3B8686';
+              cor = '#E31B1C';
               break;
             case 'imóvel abandonado':
               cor = '#333333';
               break; 
             default:
-              cor = '#B15928';
+              cor = '#F07F03';
               break;
           }
 
@@ -1081,33 +1128,31 @@ export class HomePage {
               
           }
         
-        
-         
+       
+       
         arrayData.forEach(element => {
-          const cor = '#D9D9D9';
+          const cor = '#CCCCCC';
         
-        
+          
 
-          element.points.forEach((coordenadas, i) => {
+          element.points.forEach(coordenadas => {
             
-            let polyline = []
+            
             coordenadas.forEach((singular, index) => {
               
-              
-              
-                const posicao = new Position({lat: singular[1], lng: singular[0]})
+              let polyline = []
+              singular.forEach(coordenada => {
+                const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
                 polyline.push(posicao)
+              });
               
-              
-              
-              // this.mapUtil.addPolyline(polyline,this.map, cor, 'bufferLinha', element)
+              this.bufferLinhas.push({polyline, cor, element})
+              // this.mapUtil.addPolyline(polyline, this.map, cor, 'bufferEstacao', element)
             });
-              if(i === 0){
-                this.bufferLinhas.push({polyline, cor, element})
-              }
-              
           })
         });
+
+        
       }
         
        
@@ -1229,9 +1274,9 @@ export class HomePage {
               polyline.push(posicao)
             });
             
-            this.linhasPlanejadas.push({polyline, cor: '#0000FF', element: linha})
+            this.linhasPlanejadas.push({polyline, cor: '#800080', element: linha})
             // this.mapUtil.addPolyline(polyline, this.map, '#9B1C04', 'linha', linha)
-            this.mapUtil.addLinha(polyline, this.map, '#0000FF', linha)
+            this.mapUtil.addLinha(polyline, this.map, '#800080', linha)
           });
         })
       }
