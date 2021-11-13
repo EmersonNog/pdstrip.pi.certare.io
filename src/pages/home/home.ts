@@ -234,7 +234,7 @@ export class HomePage {
         console.log('enviando arquivo ' + idx);
         const id = this.afd.createId();
         item.id = id;
-        this.afd.doc(Constants.PATH_DOCUMENTS_BUFFER_LINHAS + item.id).set(JSON.parse(JSON.stringify(item)));
+        this.afd.doc(Constants.PATH_DOCUMENTS_AREA_CAMINHAVEL + item.id).set(JSON.parse(JSON.stringify(item)));
       })
     })
   }
