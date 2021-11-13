@@ -347,6 +347,44 @@ export class MapUtil {
     }
   }
 
+  public addAreaCaminhavel(
+    rota: Position[], 
+    map,
+    cor,
+    info: {
+      name: ''
+    }
+    ) {
+
+    
+
+    if(rota && rota.length > 0) {
+      
+      
+        
+
+        const options = {
+          path: rota,
+          geodesic: true,
+          strokeColor: cor,
+          strokeOpacity: 0.0,
+          strokeWeight: 0.0,
+          fillColor: cor,
+          fillOpacity: 0.2,
+          zIndex : 2
+        };
+
+        console.log('dentro')
+        const polygon = new google.maps.Polygon(options)
+        polygon.setMap(map)
+        const conteudo = `Área caminhável`
+        this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
+        MapUtil2.polygons.push(polygon);
+      
+    }
+  }
+
+
   public addEstacao(
     rota, 
     map,

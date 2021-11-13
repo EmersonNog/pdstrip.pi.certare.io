@@ -451,11 +451,12 @@ export class HomePage {
     if(filtro.estacoes.ativo){
       // this.mapUtil.showRodoviaPoints(this.estacoes.coordenadas, this.map, false, 'limite-municipio', false)
       this.mapUtil.addEstacao(this.estacoes.coordenadas, this.map)
+      console.log('filtro ')
     }
 
     if(filtro.areaCaminhavel.ativo){
       this.areaCaminhavel.length > 0 && this.areaCaminhavel.forEach(area => {
-        this.mapUtil.addPolyline(area.polyline, this.map, area.cor, 'bufferEstacao',area.element)
+        this.mapUtil.addAreaCaminhavel(area.polyline, this.map, area.cor,area.element)
         // this.mapUtil.addPolyline(linha.polyline, this.map, linha.cor, 'linha', linha.element)
       })
     }
@@ -1071,27 +1072,27 @@ export class HomePage {
         
        
        
-        arrayData.forEach(element => {
-          const cor = '#DD5555';
-        
+          arrayData.forEach(element => {
+            const cor = '#FA5555';
           
-
-          element.points.forEach(coordenadas => {
             
-            
-            coordenadas.forEach((singular, index) => {
+  
+            element.points.forEach(coordenadas => {
               
-              let polyline = []
-              singular.forEach(coordenada => {
-                const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
-                polyline.push(posicao)
+              
+              coordenadas.forEach((singular, index) => {
+                
+                let polyline = []
+                singular.forEach(coordenada => {
+                  const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
+                  polyline.push(posicao)
+                });
+                
+                this.areaCaminhavel.push({polyline, cor, element})
+                // this.mapUtil.addPolyline(polyline, this.map, cor, 'bufferEstacao', element)
               });
-              
-              this.areaCaminhavel.push({polyline, cor, element})
-              // this.mapUtil.addPolyline(polyline, this.map, cor, 'bufferEstacao', element)
-            });
-          })
-        });
+            })
+          });
 
         
       }
