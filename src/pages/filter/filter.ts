@@ -203,7 +203,7 @@ export class FilterPage {
     this.categorizacao = {info: 'Tipo ocupação', id: 'tipo_ocup'};
     this.graduacao = null;
 
-    this.operacao = null;
+    this.operacao = 'entre';
     this.valor1 = null;
     this.valor2 = null;
 
