@@ -234,7 +234,7 @@ export class HomePage {
         console.log('enviando arquivo ' + idx);
         const id = this.afd.createId();
         item.id = id;
-        this.afd.doc(Constants.PATH_DOCUMENTS_AREA_CAMINHAVEL + item.id).set(JSON.parse(JSON.stringify(item)));
+        this.afd.doc(Constants.PATH_DOCUMENTS_BUFFER_LINHAS + item.id).set(JSON.parse(JSON.stringify(item)));
       })
     })
   }
@@ -482,8 +482,8 @@ export class HomePage {
     }
     if(filtro.bufferLinhas.ativo){
      
-      this.bufferLinhas.length > 0 && this.bufferLinhas.forEach(buffer => {
-        this.mapUtil.addBufferLinha(buffer.polyline, this.map, buffer.cor, buffer.element)
+      this.bufferLinhas.length > 0 && this.bufferLinhas.forEach(bufferLinha => {
+        this.mapUtil.addBufferLinha(bufferLinha.polyline, this.map, bufferLinha.cor, bufferLinha.strokeColor, bufferLinha.element)
         // this.mapUtil.addPolyline(buffer.polyline, this.map, buffer.cor, 'bufferLinha', buffer.element)
       })
     }
@@ -1058,6 +1058,7 @@ export class HomePage {
       const data2 = _data.map(_item => {
         
         _item['points'] = wkt.parse(_item['wkt']).coordinates;
+       
         
         return _item;
       });
@@ -1088,6 +1089,7 @@ export class HomePage {
                   polyline.push(posicao)
                 });
                 
+                console.log('pusharea', polyline)
                 this.areaCaminhavel.push({polyline, cor, element})
                 // this.mapUtil.addPolyline(polyline, this.map, cor, 'bufferEstacao', element)
               });
@@ -1118,6 +1120,7 @@ export class HomePage {
         
         _item['points'] = wkt.parse(_item['wkt']).coordinates;
         
+        
         return _item;
       });
 
@@ -1131,27 +1134,29 @@ export class HomePage {
         
        
        
-        arrayData.forEach(element => {
-          const cor = '#CCCCCC';
-        
+          arrayData.forEach(element => {
+            const cor = '#DDBBBB';
+            const strokeColor = '#F9F11B'
           
+            element.points.forEach(coordenadas => {
+              
+              
+              coordenadas.forEach((singular, index) => {
+                
+                let polyline = []
+                singular.forEach(coordenada => {
 
-          element.points.forEach(coordenadas => {
-            
-            
-            coordenadas.forEach((singular, index) => {
-              
-              let polyline = []
-              singular.forEach(coordenada => {
-                const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
-                polyline.push(posicao)
+                  const posicao = new Position({lat: coordenada[1], lng: coordenada[0]})
+                  polyline.push(posicao)
+                });
+                
+                console.log('push', polyline)
+                this.bufferLinhas.push({polyline, cor, strokeColor, element})
+                // this.mapUtil.addPolyline(polyline, this.map, cor, 'bufferEstacao', element)
               });
-              
-              this.bufferLinhas.push({polyline, cor, element})
-              // this.mapUtil.addPolyline(polyline, this.map, cor, 'bufferEstacao', element)
-            });
-          })
-        });
+            })
+          });
+  
 
         
       }

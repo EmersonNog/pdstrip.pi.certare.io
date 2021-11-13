@@ -280,25 +280,27 @@ export class MapUtil {
     rota: Position[], 
     map,
     cor,
+    strokeColor,
     info: {
       name: ''
     }
     ) {
 
+      console.log('rota buffer linha', rota, cor, info)
 
     if(rota && rota.length > 0) {
       
-      for(let i = 0; i < rota.length; i++) {
+      console.log('bufferLinha')
        
 
         const options = {
           path: rota,
           geodesic: true,
-          strokeColor: cor,
-          strokeOpacity: 0.0,
-          strokeWeight: 0.0,
+          strokeColor: strokeColor,
+          strokeOpacity: 0,
+          strokeWeight: 0,
           fillColor: cor,
-          fillOpacity: 0.01,
+          fillOpacity: 0.3,
           zIndex : 1
         };
 
@@ -308,7 +310,7 @@ export class MapUtil {
         this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
         MapUtil2.polygons.push(polygon);
         
-      }
+      
     }
   }
   public addBufferEstacao(
@@ -374,7 +376,6 @@ export class MapUtil {
           zIndex : 2
         };
 
-        console.log('dentro')
         const polygon = new google.maps.Polygon(options)
         polygon.setMap(map)
         const conteudo = `Área caminhável`
