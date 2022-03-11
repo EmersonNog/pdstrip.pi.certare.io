@@ -60,7 +60,7 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^3.2.4",
+    "@ionic/app-scripts": "3.2.4",
     "@ionic/lab": "3.2.10",
     "cheerio": "^1.0.0-rc.10",
     "fs": "0.0.1-security",
