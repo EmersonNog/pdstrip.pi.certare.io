@@ -201,7 +201,22 @@ export class MapUtil {
     }
   }
 
-  public addPolyline(rota: Position[], map, lineColor='#FF4941', tipo, info = {name: '', tipo_ocup: '', bairro: '', endereco_forn: '', area_cons: '', area_tot: ''}) {
+  public addPolyline(rota: Position[], map, lineColor='#FF4941', tipo, info = {
+    id_gen: '',
+    preco_m2_regiao: '',
+    recomendacao: '',
+    est_prox: '',
+    i_priorizacao: '',
+    name: '', 
+    tipo_ocup: '', 
+    bairro: '', 
+    endereco_cons: '',
+    endereco_forn: '', 
+    area_cons: '', 
+    area_tot: '',
+    lat_cons: 0,
+    lon_cons: 0
+  }) {
 
     let polyline;
     if(rota && rota.length > 0) {
@@ -250,6 +265,8 @@ export class MapUtil {
           const polygon = new google.maps.Polygon(polylineOpt)
           polygon.setMap(map)
           const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}<br/>Área construída: ${info.area_cons}m²<br/>Área total: ${info.area_tot}m²`
+          // const conteudo = 
+          // `ID_GEN: ${info.id_gen}<br/>Endereço: ${info.endereco_cons}<br/>Bairro: ${info.bairro}<br/>Estação mais próxima: ${info.est_prox}<br/>Área total: ${info.area_tot}m²<br/>I Priorização: ${info.i_priorizacao}<br/>Valor m²: R$${info.preco_m2_regiao}<br/>Vocação: ${info.recomendacao}`
           this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
           MapUtil2.polygons.push(polygon);
         }else if(tipo === 'estacao'){
@@ -455,9 +472,15 @@ export class MapUtil {
     map,
     cor,
     info = {
+      id_gen: '',
+      preco_m2_regiao: '',
+      recomendacao: '',
+      est_prox: '',
+      i_priorizacao: '',
       name: '', 
       tipo_ocup: '', 
       bairro: '', 
+      endereco_cons: '',
       endereco_forn: '', 
       area_cons: '', 
       area_tot: '',
@@ -487,7 +510,9 @@ export class MapUtil {
         const polygon = new google.maps.Polygon(options)
         polygon.setMap(map)
         polyline.setMap(map)
-        const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}<br/>Área construída: ${info.area_cons}m²<br/>Área total: ${info.area_tot}m²`
+        // const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}<br/>Área construída: ${info.area_cons}m²<br/>Área total: ${info.area_tot}m²`
+        const conteudo = 
+        `ID_GEN: ${info.id_gen}<br/>Endereço: ${info.endereco_cons}<br/>Bairro: ${info.bairro}<br/>Estação mais próxima: ${info.est_prox}<br/>Área total: ${info.area_tot}m²<br/>I Priorização: ${info.i_priorizacao}<br/>Valor m²: R$${info.preco_m2_regiao}<br/>Vocação: ${info.recomendacao}`
         this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
         MapUtil2.polygons.push(polygon);
         MapUtil2.polylines.push(polyline);
