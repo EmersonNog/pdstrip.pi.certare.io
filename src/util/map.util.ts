@@ -101,7 +101,7 @@ export class MapUtil {
             position: {lat: itemArr[i].lat, lng: itemArr[i].lng},
             title: itemArr[i]['title'],
             icon: new google.maps.MarkerImage(
-                "assets/icon/" + 'iconEstacao.svg', 
+                "assets/icon/" + 'noun-metro-station.svg', 
               // 'https://mt.google.com/vt/icon?psize=16&font=fonts/Roboto-Regular.ttf&color=ff330000&name=icons/spotlight/spotlight-waypoint-a.png&ax=44&ay=48&scale=1&text=I',
               // 'https://mt.google.com/vt/icon?psize=16&font=fonts/Roboto-Regular.ttf&color=ff330000&name=icons/spotlight/spotlight-waypoint-b.png&ax=44&ay=48&scale=1&text=F',
               ),
@@ -402,7 +402,7 @@ export class MapUtil {
         marker = new google.maps.Marker({
           position: {lat: rota[i].lat, lng: rota[i].lng},
           title: rota[i]['name'],
-          icon: new google.maps.MarkerImage("assets/icon/" + 'iconEstacao.svg'),
+          icon: new google.maps.MarkerImage("assets/icon/" + 'noun-metro-station.svg'),
         })
 
         this.addInfoWindow(marker, 'Nome da estação: ' + rota[i].name, map, new google.maps.InfoWindow());
