@@ -48,7 +48,7 @@ export class Constants {
   public static PATH_DOCUMENTS_SINALIZACAOHORIZONTAL = '/sinalizacaoHorizontal/';
   public static PATH_DOCUMENTS_SRE = '/sre/';
   public static PATH_DOCUMENTS_ESTRADAS = '/estradas/';
-  public static PATH_DOCUMENTS_IMOVEIS = '/imoveisProvisorios/';
+  public static PATH_DOCUMENTS_IMOVEIS = '/imoveisAtualizados/';
   public static PATH_DOCUMENTS_LINHAS = '/linhas/';
   public static PATH_DOCUMENTS_ESTACOES = '/estacoes/';
   public static PATH_DOCUMENTS_BUFFER_ESTACOES = '/bufferEstacoes/';

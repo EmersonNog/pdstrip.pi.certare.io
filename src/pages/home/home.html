@@ -203,6 +203,44 @@
           <ion-col col-9>Falso</ion-col>
         </ion-row>
       </ion-grid>
+      <ion-grid *ngIf="legendaPotencialAdd === true">
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.verdadeiro"></div></ion-col>
+          <ion-col col-9>Verdadeiro</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.falso"></div></ion-col>
+          <ion-col col-9>Falso</ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="legendaEmbaraco === true">
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.baixa_complexidade"></div>
+          </ion-col>
+          <ion-col col-9>Baixa complexidade</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.media_complexidade"></div>
+          </ion-col>
+          <ion-col col-9>Média complexidade</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.alta_complexidade"></div>
+          </ion-col>
+          <ion-col col-9>Alta complexidade</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <div class="blocoLegenda" [style.background-color]="cores.sem_embaraco"></div>
+          </ion-col>
+          <ion-col col-9>Sem embaraço</ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   
   </ion-card>

@@ -69,6 +69,8 @@ export class HomePage {
   legendaFonte = false;
   legendaIso10 = false;
   legendaIso15 = false;
+  legendaEmbaraco = false;
+  legendaPotencialAdd = false;
 
   categorias = []
   categorizacao = {info: 'Tipo ocupação', id: 'tipo_ocup'}
@@ -81,6 +83,10 @@ export class HomePage {
     consolidadoBaixaOcupacao: '#D80351',
     imovelAbandonado: '#3F3F3F',
     naoClassificado: '#F5D908',
+    baixa_complexidade: '#00A3EE',
+    media_complexidade: '#D80351',
+    alta_complexidade: '#3F3F3F',
+    sem_embaraco: '#F5D908',
     verdadeiro: '#00FF00',
     falso: '#FF0000',
     valor1: '#FF0000',
@@ -164,6 +170,8 @@ export class HomePage {
         this.legendaFonte = false;
         this.legendaIso10 = false;
         this.legendaIso15 = false;
+        this.legendaEmbaraco = false;
+        this.legendaPotencialAdd = false;
         break;
       case 'g_priorizacao':
         this.legendaOcupacao = false;
@@ -172,6 +180,8 @@ export class HomePage {
         this.legendaFonte = false;
         this.legendaIso10 = false;
         this.legendaIso15 = false;
+        this.legendaEmbaraco = false;
+        this.legendaPotencialAdd = false;
         break;
       case 'app':
         this.legendaOcupacao = false;
@@ -180,6 +190,8 @@ export class HomePage {
         this.legendaFonte = false;
         this.legendaIso10 = false;
         this.legendaIso15 = false;
+        this.legendaEmbaraco = false;
+        this.legendaPotencialAdd = false;
         break;
       case 'fonte':
         this.legendaOcupacao = false;
@@ -188,6 +200,8 @@ export class HomePage {
         this.legendaFonte = true;
         this.legendaIso10 = false;
         this.legendaIso15 = false;
+        this.legendaEmbaraco = false;
+        this.legendaPotencialAdd = false;
         break;
       case 'iso_10':
         this.legendaOcupacao = false;
@@ -196,6 +210,8 @@ export class HomePage {
         this.legendaFonte = false;
         this.legendaIso10 = true;
         this.legendaIso15 = false;
+        this.legendaEmbaraco = false;
+        this.legendaPotencialAdd = false;
         break;
       case 'iso_15':
         this.legendaOcupacao = false;
@@ -204,8 +220,30 @@ export class HomePage {
         this.legendaFonte = false;
         this.legendaIso10 = false;
         this.legendaIso15 = true;
+        this.legendaEmbaraco = false;
+        this.legendaPotencialAdd = false;
         break;
-      default:
+        case 'comp_emb':
+          this.legendaOcupacao = false;
+          this.legendaGPriorizacao = false;
+          this.legendaApp = false;
+          this.legendaFonte = false;
+          this.legendaIso10 = false;
+          this.legendaIso15 = false;
+          this.legendaEmbaraco = true;
+          this.legendaPotencialAdd = false;
+          break;
+        case 'potencial_add':
+          this.legendaOcupacao = false;
+          this.legendaGPriorizacao = false;
+          this.legendaApp = false;
+          this.legendaFonte = false;
+          this.legendaIso10 = false;
+          this.legendaIso15 = false;
+          this.legendaEmbaraco = false;
+          this.legendaPotencialAdd = true;
+          break;
+        default:
         this.legendaOcupacao = false;
         this.legendaGPriorizacao = false;
         this.legendaApp = false;
@@ -213,6 +251,8 @@ export class HomePage {
         this.legendaIso10 = false;
         this.legendaIso15 = false;
         this.blocoLegenda = false;
+        this.legendaEmbaraco = false;
+        this.legendaPotencialAdd = false;
         break;
     }
   }
@@ -638,6 +678,37 @@ export class HomePage {
               case 'iso_15':
                 this.mudarLegenda('iso_15')
                 switch (imovel.element.iso_15.toLowerCase()) {
+                  case 'true':
+                    imovel.cor = '#00FF00';
+                    break;
+                  case 'false':
+                    imovel.cor = '#FF0000';
+                    break;
+                  default:
+                    imovel.cor = '#B15928';
+                    break;
+                }
+              break;
+              case 'comp_emb':
+                this.mudarLegenda('comp_emb')
+                switch (imovel.element.comp_emb.toLowerCase()) {
+                  case 'baixa complexidade':
+                    imovel.cor = '#00A3EE';
+                    break;
+                  case 'média complexidade':
+                    imovel.cor = '#D80351';
+                    break;
+                  case 'alta complexidade':
+                    imovel.cor = '#3F3F3F';
+                    break; 
+                  default:
+                    imovel.cor = '#F5D908';
+                    break;
+                }
+              break;
+              case 'potencial_add':
+                this.mudarLegenda('potencial_add')
+                switch (imovel.element.potencial_add.toLowerCase()) {
                   case 'true':
                     imovel.cor = '#00FF00';
                     break;

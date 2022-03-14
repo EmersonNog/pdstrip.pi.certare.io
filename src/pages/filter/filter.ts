@@ -27,7 +27,9 @@ export class FilterPage {
     {info: 'App', id: 'app'},
     {info: 'Fonte', id: 'fonte'},
     {info: 'Iso 15', id: 'iso_15'},
-    {info: 'Iso 10', id: 'iso_10'}
+    {info: 'Iso 10', id: 'iso_10'},
+    {info: 'Nível de embaraço jurídico', id: 'comp_emb'},
+    {info: 'Potencial adicional', id: 'potencial_add'}
   ]
 
   graduacao;
