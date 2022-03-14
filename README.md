@@ -30,6 +30,12 @@ https://www.figma.com/file/n1KvT9IuUujTKBOE81aHEx/UI-Icon-set-tetrisly-com?node-
 
 ---
 
+## Versão 
+
+**node 9.11.2**
+
+---
+
 ## COMANDOS
 
 ```bash

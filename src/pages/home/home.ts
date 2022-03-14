@@ -97,15 +97,15 @@ export class HomePage {
     TRENSURB: '#00FF00',
     PREFEITURA_DE_BELO_HORIZONTE: '#0000FF',
     SPIUNET: '#333333',
-    linhaPlanejada: '#800080',
-    linha: '#9B1C04',
+    linhaPlanejada: '#929292',
+    linha: '#3F3F3F',
     estacao: '#E91D63',
     faixa1: '#f9a656',
     faixa2: '#b59e73',
     faixa3: '#7d978b',
     faixa4: '#368eaa',
     faixa5: '#0187c0',
-    src: '../../assets/icon/iconEstacao.svg'
+    src: '../../assets/icon/noun-metro-station.svg'
    
   }
 
