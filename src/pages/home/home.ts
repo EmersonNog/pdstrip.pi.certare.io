@@ -77,10 +77,10 @@ export class HomePage {
 
 
   cores = {
-    terreno: '#6A3C9A',
-    consolidadoBaixaOcupacao: '#E31B1C',
-    imovelAbandonado: '#333333',
-    naoClassificado: '#F07F03',
+    terreno: '#00A3EE',
+    consolidadoBaixaOcupacao: '#D80351',
+    imovelAbandonado: '#3F3F3F',
+    naoClassificado: '#F5D908',
     verdadeiro: '#00FF00',
     falso: '#FF0000',
     valor1: '#FF0000',
@@ -91,15 +91,15 @@ export class HomePage {
     TRENSURB: '#00FF00',
     PREFEITURA_DE_BELO_HORIZONTE: '#0000FF',
     SPIUNET: '#333333',
-    linhaPlanejada: '#800080',
-    linha: '#9B1C04',
+    linhaPlanejada: '#929292',
+    linha: '#3F3F3F',
     estacao: '#E91D63',
     faixa1: '#f9a656',
     faixa2: '#b59e73',
     faixa3: '#7d978b',
     faixa4: '#368eaa',
     faixa5: '#0187c0',
-    src: '../../assets/icon/iconEstacao.svg'
+    src: '../../assets/icon/noun-metro-station.svg'
    
   }
 
@@ -574,16 +574,16 @@ export class HomePage {
                 this.mudarLegenda('tipo_ocup')
                 switch (imovel.element.tipo_ocup.toLowerCase()) {
                   case 'terreno':
-                    imovel.cor = '#6A3C9A';
+                    imovel.cor = '#00A3EE';
                     break;
                   case 'consolidado de baixa ocupação':
-                    imovel.cor = '#E31B1C';
+                    imovel.cor = '#D80351';
                     break;
                   case 'imóvel abandonado':
-                    imovel.cor = '#333333';
+                    imovel.cor = '#3F3F3F';
                     break; 
                   default:
-                    imovel.cor = '#F07F03';
+                    imovel.cor = '#F5D908';
                     break;
                 }
                 break;
@@ -665,7 +665,7 @@ export class HomePage {
                     imovel.cor = '#657199';
                     break; 
                   default:
-                    imovel.cor = '#F07F03';
+                    imovel.cor = '#F5D908';
                     break;
                 }
               break;
@@ -673,16 +673,16 @@ export class HomePage {
                 this.mudarLegenda('tipo_ocup')
                 switch (imovel.element.tipo_ocup.toLowerCase()) {
                   case 'terreno':
-                    imovel.cor = '#6A3C9A';
+                    imovel.cor = '#00A3EE';
                     break;
                   case 'consolidado de baixa ocupação':
-                    imovel.cor = '#E31B1C';
+                    imovel.cor = '#D80351';
                     break;
                   case 'imóvel abandonado':
-                    imovel.cor = '#333333';
+                    imovel.cor = '#3F3F3F';
                     break; 
                   default:
-                    imovel.cor = '#F07F03';
+                    imovel.cor = '#F5D908';
                     break;
                 }
                 break;
@@ -939,16 +939,16 @@ export class HomePage {
 
           switch (tipoOcupacao) {
             case 'terreno':
-              cor = '#6A3C9A';
+              cor = '#00A3EE';
               break;
             case 'consolidado de baixa ocupação':
-              cor = '#E31B1C';
+              cor = '#D80351';
               break;
             case 'imóvel abandonado':
-              cor = '#333333';
+              cor = '#3F3F3F';
               break; 
             default:
-              cor = '#F07F03';
+              cor = '#F5D908';
               break;
           }
 
