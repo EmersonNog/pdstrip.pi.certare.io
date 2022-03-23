@@ -517,8 +517,11 @@ export class MapUtil {
         polygon.setMap(map)
         polyline.setMap(map)
         // const conteudo = `Endereço: ${info.endereco_forn}<br/> Bairro: ${info.bairro}<br/>Tipo de ocupação: ${info.tipo_ocup}<br/>Área construída: ${info.area_cons}m²<br/>Área total: ${info.area_tot}m²`
-        const conteudo = 
-        `ID_GEN: ${info.id_gen}<br/>Endereço: ${info.endereco_cons}<br/>Bairro: ${info.bairro}<br/>Estação mais próxima: ${info.est_prox}<br/>Área total: ${info.area_tot}m²<br/>Valor m²: R$${info.preco_m2_regiao}<br/>CA básico: ${info.cabas}<br/>CA máximo: ${info.camax}<br/>Potencial adicional: ${info.potencial_add}<br/>Complexidade dos embaraços: ${info.comp_emb}<br/>Potencial de valorização percentual: ${info.perc_valoriza }<br/>Vocação: ${info.recomendacao}<br/><a href=${info.link} target="_blank">Ficha resumo</a>`
+        let conteudo
+        if (info.link === '')
+          conteudo = `ID_GEN: ${info.id_gen}<br/>Endereço: ${info.endereco_cons}<br/>Bairro: ${info.bairro}<br/>Estação mais próxima: ${info.est_prox}<br/>Área total: ${info.area_tot}m²<br/>Valor m²: R$${info.preco_m2_regiao}<br/>CA básico: ${info.cabas}<br/>CA máximo: ${info.camax}<br/>Potencial adicional: ${info.potencial_add}<br/>Complexidade dos embaraços: ${info.comp_emb}<br/>Potencial de valorização percentual: ${info.perc_valoriza }<br/>Vocação: ${info.recomendacao}<br/>Ficha resumo: Não possui`
+        else
+          conteudo = `ID_GEN: ${info.id_gen}<br/>Endereço: ${info.endereco_cons}<br/>Bairro: ${info.bairro}<br/>Estação mais próxima: ${info.est_prox}<br/>Área total: ${info.area_tot}m²<br/>Valor m²: R$${info.preco_m2_regiao}<br/>CA básico: ${info.cabas}<br/>CA máximo: ${info.camax}<br/>Potencial adicional: ${info.potencial_add}<br/>Complexidade dos embaraços: ${info.comp_emb}<br/>Potencial de valorização percentual: ${info.perc_valoriza }<br/>Vocação: ${info.recomendacao}<br/>Ficha resumo: <a href=${info.link} target="_blank">Link</a>`
         // `ID_GEN: ${info.id_gen}<br/>Endereço: ${info.endereco_cons}<br/>Bairro: ${info.bairro}<br/>Estação mais próxima: ${info.est_prox}<br/>Área total: ${info.area_tot}m²<br/>I Priorização: ${info.i_priorizacao}<br/>Valor m²: R$${info.preco_m2_regiao}<br/>Vocação: ${info.recomendacao}<br/><a href=${info.link} target="_blank">Ficha resumo</a>`
         // `ID_GEN: ${info.id_gen}<br/>Endereço: ${info.endereco_cons}<br/>Bairro: ${info.bairro}<br/>Estação mais próxima: ${info.est_prox}<br/>Área total: ${info.area_tot}m²<br/>I Priorização: ${info.i_priorizacao}<br/>Valor m²: R$${info.preco_m2_regiao}<br/>Vocação: ${info.recomendacao}`
         this.addInfoWindow(polygon, conteudo, map, new google.maps.InfoWindow());
