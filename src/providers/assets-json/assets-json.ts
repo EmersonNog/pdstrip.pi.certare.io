@@ -26,9 +26,9 @@ export class AssetsJsonProvider {
   //   return this.http.get(`${this.folder}/areas_exames.json`);
   // }
 
-  // getJsonTeste(){
-  //   return this.http.get(`${this.folder}/jsonteste.json`);
-  // }
+  getJsonTeste(){
+    return this.http.get(`${this.folder}/jsonteste.json`);
+  }
 
  
 
