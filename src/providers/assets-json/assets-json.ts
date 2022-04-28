@@ -18,17 +18,17 @@ export class AssetsJsonProvider {
   constructor(public httpHelperProvider: HttpHelperProvider, private http: HttpClient, public afd: AngularFireDatabase) {
   }
 
-  // getFotos(){
-  //   return this.http.get(`${this.folder}/fotos.json`);
-  // }
+  getFotos(){
+    return this.http.get(`${this.folder}/fotos.json`);
+  }
 
   // getExames(){
   //   return this.http.get(`${this.folder}/areas_exames.json`);
   // }
 
-  // getJsonTeste(){
-  //   return this.http.get(`${this.folder}/jsonteste.json`);
-  // }
+  getJsonTeste(){
+    return this.http.get(`${this.folder}/jsonteste.json`);
+  }
 
  
 
