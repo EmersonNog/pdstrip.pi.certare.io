@@ -62,5 +62,6 @@ export class Constants {
   // public static CLASSIFICATION_GOOD = {name: 'BOM', color: '#66CC80'};
   // public static CLASSIFICATION_REGULAR = {name: 'REGULAR', color: '#A4A437'};
   // public static CLASSIFICATION_BAD = {name: 'RUIM', color: '#B33235'};
+  // non-fast-foward
 
 }
