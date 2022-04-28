@@ -6,26 +6,26 @@ export const environment = {
 
     middleware_cors: 'https://certareinventhus.com.br/ws.php',
     // middleware_cors: 'http://localhost/middleware_cors/ws.php',
-    // middleware_cors: 'https://us-central1-pav-detect.cloudfunctions.net/requisicao_cors',
+    // middleware_cors: 'https://us-central1-sistema-onu.cloudfunctions.net/requisicao_cors',
 
     dev: {
-        apiKey: "AIzaSyCJRFe087LiR4Vca0lZcBVp-V6V7IwnBjg",
-        authDomain: "pav-detect-dev.firebaseapp.com",
-        databaseURL: "https://pav-detect-dev-default-rtdb.firebaseio.com",
-        projectId: "pav-detect-dev",
-        storageBucket: "pav-detect-dev.appspot.com",
-        messagingSenderId: "363085076310",
-        appId: "1:363085076310:web:1624c6c943f28fe6ce68f7",
-        measurementId: "G-934X55YFC9"
+        apiKey: "AIzaSyDUn1ohuP4A_0Xlt33vFfrfRb_qjhfOULY",
+        authDomain: "sistema-onu.firebaseapp.com",
+        databaseURL: "https://sistema-onu-default-rtdb.firebaseio.com",
+        projectId: "sistema-onu",
+        storageBucket: "sistema-onu.appspot.com",
+        messagingSenderId: "842894212507",
+        appId: "1:842894212507:web:bcca5676d5f89cd2da353e",
+        measurementId: "G-XDN4SZ24J7"
     },
     prod: {
-        apiKey: "AIzaSyCJRFe087LiR4Vca0lZcBVp-V6V7IwnBjg",
-        authDomain: "pav-detect-dev.firebaseapp.com",
-        databaseURL: "https://pav-detect-dev-default-rtdb.firebaseio.com",
-        projectId: "pav-detect-dev",
-        storageBucket: "pav-detect-dev.appspot.com",
-        messagingSenderId: "363085076310",
-        appId: "1:363085076310:web:1624c6c943f28fe6ce68f7",
-        measurementId: "G-934X55YFC9"
+        apiKey: "AIzaSyDUn1ohuP4A_0Xlt33vFfrfRb_qjhfOULY",
+        authDomain: "sistema-onu.firebaseapp.com",
+        databaseURL: "https://sistema-onu-default-rtdb.firebaseio.com",
+        projectId: "sistema-onu",
+        storageBucket: "sistema-onu.appspot.com",
+        messagingSenderId: "842894212507",
+        appId: "1:842894212507:web:bcca5676d5f89cd2da353e",
+        measurementId: "G-XDN4SZ24J7"
     }
 };

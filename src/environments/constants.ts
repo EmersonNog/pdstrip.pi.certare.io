@@ -56,7 +56,7 @@ export class Constants {
   public static PATH_DOCUMENTS_AREA_CAMINHAVEL = '/areaCaminhavel/';
   public static PATH_DOCUMENTS_LINHAS_PLANEJADAS ='/linhasPlanejadas/';
 
-  public static BASE_URL_FIREBASE_FUNCTIONS = environment.production ? 'https://us-central1-pav-detect.cloudfunctions.net': 'https://us-central1-pav-detect.cloudfunctions.net';
+  public static BASE_URL_FIREBASE_FUNCTIONS = environment.production ? 'https://us-central1-sistema-onu.cloudfunctions.net': 'https://us-central1-sistema-onu.cloudfunctions.net';
 
   // public static CLASSIFICATION_GREAT = {name: 'EXCELENTE', color: '#2E5C1F'};
   // public static CLASSIFICATION_GOOD = {name: 'BOM', color: '#66CC80'};

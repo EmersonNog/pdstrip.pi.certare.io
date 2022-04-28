@@ -103,7 +103,7 @@ $ firebase login
 $ firebase init
 $ firebase deploy
 $ firebase deploy --only hosting
-$ firebase use --add pav-detect
+$ firebase use --add sistema-onu
 ```
 
 ---
