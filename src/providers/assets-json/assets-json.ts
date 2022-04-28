@@ -22,43 +22,43 @@ export class AssetsJsonProvider {
   //   return this.http.get(`${this.folder}/fotos.json`);
   // }
 
-  getExames(){
-    return this.http.get(`${this.folder}/areas_exames.json`);
-  }
+  // getExames(){
+  //   return this.http.get(`${this.folder}/areas_exames.json`);
+  // }
 
-  getJsonTeste(){
-    return this.http.get(`${this.folder}/jsonteste.json`);
-  }
+  // getJsonTeste(){
+  //   return this.http.get(`${this.folder}/jsonteste.json`);
+  // }
 
  
 
-  getSemiportico(){
-    // return this.http.get(`${this.folder}/semiportico-ce085.json`);
-    return this.http.get(`${this.folder}/SEMIPORTICOS_ESTADO.json`);
-  }
+  // getSemiportico(){
+  //   // return this.http.get(`${this.folder}/semiportico-ce085.json`);
+  //   return this.http.get(`${this.folder}/SEMIPORTICOS_ESTADO.json`);
+  // }
 
-  getPorticos(){
-    // return this.http.get(`${this.folder}/porticos-ce085.json`);
-    return this.http.get(`${this.folder}/PORTICOS_ESTADO.json`);
-  }
+  // getPorticos(){
+  //   // return this.http.get(`${this.folder}/porticos-ce085.json`);
+  //   return this.http.get(`${this.folder}/PORTICOS_ESTADO.json`);
+  // }
 
-  getDefensas(){
-    // return this.http.get(`${this.folder}/defensas-ce085.json`);
-    return this.http.get(`${this.folder}/DEFENSAS_ESTADO.json`);
-  }
+  // getDefensas(){
+  //   // return this.http.get(`${this.folder}/defensas-ce085.json`);
+  //   return this.http.get(`${this.folder}/DEFENSAS_ESTADO.json`);
+  // }
 
-  getPontes(){
-    // return this.http.get(`${this.folder}/defensas-ce085.json`);
-    return this.http.get(`${this.folder}/PONTES_ESTADO.json`);
-  }
+  // getPontes(){
+  //   // return this.http.get(`${this.folder}/defensas-ce085.json`);
+  //   return this.http.get(`${this.folder}/PONTES_ESTADO.json`);
+  // }
 
-  getAcidentes(){
-    return this.http.get(`${this.folder}/acidentes-geolocalizados-2018.json`);
-  }
+  // getAcidentes(){
+  //   return this.http.get(`${this.folder}/acidentes-geolocalizados-2018.json`);
+  // }
   
-  getSreListAll(){
-    return this.http.get(`${this.folder}/SRE_2018.json`);
-  }
+  // getSreListAll(){
+  //   return this.http.get(`${this.folder}/SRE_2018.json`);
+  // }
 
   adjustContent(_data: any[]) {
     let arrayTemp = [];
@@ -78,33 +78,33 @@ export class AssetsJsonProvider {
     return arrayTemp;
   }
   
-  saveExames(arr: any[]) {
-    this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_EXAMES);
-  }
+  // saveExames(arr: any[]) {
+  //   this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_EXAMES);
+  // }
   
-  savePontes(arr: any[]) {
-    this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_PONTES);
-  }
+  // savePontes(arr: any[]) {
+  //   this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_PONTES);
+  // }
 
-  saveSemiporticos(arr: any[]) {
-    this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_SEMIPORTICO);
-  }
+  // saveSemiporticos(arr: any[]) {
+  //   this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_SEMIPORTICO);
+  // }
 
-  savePorticos(arr: any[]) {
-    this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_PORTICOS);
-  }
+  // savePorticos(arr: any[]) {
+  //   this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_PORTICOS);
+  // }
 
-  saveAcidentes(arr: any[]) {
-    this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_ACIDENTES);
-  }
+  // saveAcidentes(arr: any[]) {
+  //   this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_ACIDENTES);
+  // }
 
-  saveDefensas(arr: any[]) {
-    this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_DEFENSAS);
-  }
+  // saveDefensas(arr: any[]) {
+  //   this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_DEFENSAS);
+  // }
 
-  saveSre(arr: any[]) {
-    this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_SRE);
-  }
+  // saveSre(arr: any[]) {
+  //   this.saveFirebase(arr, Constants.PATH_DOCUMENTS_RODOVIA_SRE);
+  // }
 
   private saveFirebase(arr: any[], entity: string) {
     arr.forEach(_item => {
