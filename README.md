@@ -16,10 +16,10 @@ https://www.figma.com/file/n1KvT9IuUujTKBOE81aHEx/UI-Icon-set-tetrisly-com?node-
 
 ---
 
-## Conta do GMail
+## Conta do Firebase
 
-**email**: inventhusdev@gmail.com
-**senha**: 
+**email**: dev.certare@gmail.com
+**senha**: ********************
 
 ---
 
