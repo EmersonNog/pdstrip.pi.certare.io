@@ -13,45 +13,53 @@
         <ion-icon class="header-icon" name="ios-funnel"></ion-icon>
       </button>
     </ion-buttons>
-    
   </ion-navbar>
 </ion-header>
 
 <ion-content class="content">
+  <button
+    ion-button
+    id="btn-show-estacionar-page-2"
+    (click)="openImagensPage($event)"
+    [style.display]="'none'"
+  ></button>
 
-  <button ion-button id="btn-show-estacionar-page-2" (click)="openImagensPage($event)" [style.display]="'none'"></button>
-
- 
-
-  <ion-grid class="map-grid" no-padding [style.display]="selected == 'map' ? 'block' : 'none'">
-    <div #map id="map">
-      
-
-    </div>
+  <ion-grid
+    class="map-grid"
+    no-padding
+    [style.display]="selected == 'map' ? 'block' : 'none'"
+  >
+    <div #map id="map"></div>
   </ion-grid>
   <ion-card>
+    <ion-card-header> Legenda </ion-card-header>
 
-    <ion-card-header>
-      Legenda
-    </ion-card-header>
-  
     <ion-card-content>
       <ion-grid *ngIf="legendaOcupacao === true">
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.terreno"></div>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.terreno"
+            ></div>
           </ion-col>
           <ion-col col-9>Terreno</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.consolidadoBaixaOcupacao"></div>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.consolidadoBaixaOcupacao"
+            ></div>
           </ion-col>
           <ion-col col-9>Consolidado de baixa ocupação</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.imovelAbandonado"></div>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.imovelAbandonado"
+            ></div>
           </ion-col>
           <ion-col col-9>Imóvel abandonado</ion-col>
         </ion-row>
@@ -60,91 +68,146 @@
       <ion-grid *ngIf="legendaGPriorizacao === true">
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.valor1"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.valor1"
+            ></div
+          ></ion-col>
           <ion-col col-9>Grupo 1</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.valor2"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.valor2"
+            ></div
+          ></ion-col>
           <ion-col col-9>Grupo 2</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.valor3" ></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.valor3"
+            ></div
+          ></ion-col>
           <ion-col col-9>Grupo 3</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div  class="blocoLegenda" [style.background-color]="cores.valor4"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.valor4"
+            ></div
+          ></ion-col>
           <ion-col col-9>Grupo 4</ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid *ngIf="legendaApp === true">
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.verdadeiro"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.verdadeiro"
+            ></div
+          ></ion-col>
           <ion-col col-9>Verdadeiro</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.falso"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.falso"
+            ></div
+          ></ion-col>
           <ion-col col-9>Falso</ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid *ngIf="legendaFonte === true">
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.TRENSURB"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.TRENSURB"
+            ></div
+          ></ion-col>
           <ion-col col-9>TRENSURB</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.SIAPA"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.SIAPA"
+            ></div
+          ></ion-col>
           <ion-col col-9>SIAPA</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.PREFEITURA_DE_BELO_HORIZONTE"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.PREFEITURA_DE_BELO_HORIZONTE"
+            ></div
+          ></ion-col>
           <ion-col col-9>PREFEITURA DE BELO HORIZONTE</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.SPIUNET"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.SPIUNET"
+            ></div
+          ></ion-col>
           <ion-col col-9>SPIUNET</ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid *ngIf="legendaIso10 === true">
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.verdadeiro"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.verdadeiro"
+            ></div
+          ></ion-col>
           <ion-col col-9>Verdadeiro</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.falso"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.falso"
+            ></div
+          ></ion-col>
           <ion-col col-9>Falso</ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid *ngIf="legendaIso15 === true">
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.verdadeiro"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.verdadeiro"
+            ></div
+          ></ion-col>
           <ion-col col-9>Verdadeiro</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <div class="blocoLegenda" [style.background-color]="cores.falso"></div></ion-col>
+            <div
+              class="blocoLegenda"
+              [style.background-color]="cores.falso"
+            ></div
+          ></ion-col>
           <ion-col col-9>Falso</ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
-  
   </ion-card>
 
-  <ion-grid class="data-grid" no-padding [style.display]="selected == 'data' ? 'block' : 'none'">
-    
+  <ion-grid
+    class="data-grid"
+    no-padding
+    [style.display]="selected == 'data' ? 'block' : 'none'"
+  >
   </ion-grid>
-  
-  
-  
 </ion-content>

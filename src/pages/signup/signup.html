@@ -7,50 +7,95 @@
 </ion-header>
 
 <ion-content class="signup">
-
-    <div class="logo">
-      <ion-grid class="img img-centralize">
-        <img src="assets/imgs/logo-inventhus-branca.png" />
-      </ion-grid>
-      <ion-grid class="img-certare img-centralize">
-        <img src="assets/imgs/logo-certare-branca.png" />
-      </ion-grid>
-    </div>
-
-    <ion-grid class="grid-form">
-      <ion-row justify-content-center>
-        <div class="form-margin">
-          <form class="form" [formGroup]="signupForm" novalidate>
-            <div text-center class="mbottom">
-              <ion-input type="text" #name formControlName="name" id="name" placeholder="{{'signup.name' | translate}}" (keyup.enter)="focusInput(email)"></ion-input>
-              <ion-label class="error-message" *ngIf="signupForm.controls.name.invalid  && (submitAttempt)">{{'signup.name_desc' | translate}}</ion-label>
-            </div>
-            <div text-center class="mbottom">
-              <ion-input type="email" #email formControlName="email" id="email" placeholder="{{'signup.email' | translate}}" (keyup.enter)="focusInput(password)"></ion-input>
-              <ion-label class="error-message" *ngIf="signupForm.controls.email.invalid  && (submitAttempt)">{{'signup.email_desc' | translate}}</ion-label>
-            </div>
-            <div text-center class="mbottom">
-              <ion-input #password  type="password" formControlName="password" id="password" placeholder="{{'signup.pass' | translate}}"></ion-input>
-              <ion-label class="error-message" *ngIf="signupForm.controls.password.invalid  && (submitAttempt)">{{'signup.pass_desc' | translate}}</ion-label>
-            </div>
-            <ion-row align-items-center>
-              <ion-col col-1 class="checkbox">
-                <ion-checkbox #terms formControlName="terms" class="check"></ion-checkbox>
-              </ion-col>
-              <ion-col col-11 class="checkbox margin-checkbox">
-                <ion-label class="text btn-check">{{'signup.help1' | translate}}<a target="_blank" href="https://inventhus.com" class="info-link">{{'signup.help2' | translate}}</a>{{'signup.help3' | translate}}</ion-label>
-              </ion-col>
-            </ion-row>
-            
-          </form>
-
-          <button ion-button (click)="register()" class="btn" block>{{'signup.submit' | translate}}</button>
-
-        </div>
-      </ion-row>
-      <ion-row>
-        <ion-label class="center btn-link bold" (click)="showLogin()">{{'signup.has_account' | translate}}<span class="btn-link">{{'signup.btn_login' | translate}}</span></ion-label>
-      </ion-row>
+  <div class="logo">
+    <!-- <ion-grid class="img img-centralize">
+      <img src="assets/imgs/logo-inventhus-branca.png" />
+    </ion-grid> -->
+    <ion-grid class="img-certare img-centralize">
+      <img src="assets/imgs/logo-certare-branca.png" />
     </ion-grid>
+  </div>
 
-  </ion-content>
+  <ion-grid class="grid-form">
+    <ion-row justify-content-center>
+      <div class="form-margin">
+        <form class="form" [formGroup]="signupForm" novalidate>
+          <div text-center class="mbottom">
+            <ion-input
+              type="text"
+              #name
+              formControlName="name"
+              id="name"
+              placeholder="{{'signup.name' | translate}}"
+              (keyup.enter)="focusInput(email)"
+            ></ion-input>
+            <ion-label
+              class="error-message"
+              *ngIf="signupForm.controls.name.invalid  && (submitAttempt)"
+              >{{'signup.name_desc' | translate}}</ion-label
+            >
+          </div>
+          <div text-center class="mbottom">
+            <ion-input
+              type="email"
+              #email
+              formControlName="email"
+              id="email"
+              placeholder="{{'signup.email' | translate}}"
+              (keyup.enter)="focusInput(password)"
+            ></ion-input>
+            <ion-label
+              class="error-message"
+              *ngIf="signupForm.controls.email.invalid  && (submitAttempt)"
+              >{{'signup.email_desc' | translate}}</ion-label
+            >
+          </div>
+          <div text-center class="mbottom">
+            <ion-input
+              #password
+              type="password"
+              formControlName="password"
+              id="password"
+              placeholder="{{'signup.pass' | translate}}"
+            ></ion-input>
+            <ion-label
+              class="error-message"
+              *ngIf="signupForm.controls.password.invalid  && (submitAttempt)"
+              >{{'signup.pass_desc' | translate}}</ion-label
+            >
+          </div>
+          <ion-row align-items-center>
+            <ion-col col-1 class="checkbox">
+              <ion-checkbox
+                #terms
+                formControlName="terms"
+                class="check"
+              ></ion-checkbox>
+            </ion-col>
+            <ion-col col-11 class="checkbox margin-checkbox">
+              <ion-label class="text btn-check"
+                >{{'signup.help1' | translate}}<a
+                  target="_blank"
+                  href="https://www.grupocertare.com/"
+                  class="info-link"
+                  >{{'signup.help2' | translate}}</a
+                >{{'signup.help3' | translate}}</ion-label
+              >
+            </ion-col>
+          </ion-row>
+        </form>
+
+        <button ion-button (click)="register()" class="btn" block>
+          {{'signup.submit' | translate}}
+        </button>
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-label class="center btn-link bold" (click)="showLogin()"
+        >{{'signup.has_account' | translate}}<span class="btn-link"
+          >{{'signup.btn_login' | translate}}</span
+        ></ion-label
+      >
+    </ion-row>
+  </ion-grid>
+</ion-content>

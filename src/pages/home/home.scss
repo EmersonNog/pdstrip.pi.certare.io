@@ -1,203 +1,206 @@
 page-home {
+  font-family: "Roboto";
 
-  font-family: 'Roboto';
+  .header-icon {
+    color: #007aff;
+  }
 
-.header-icon {
-  color: #007AFF;
-}
-
-ion-col {
-  
+  ion-col {
     align-self: center;
-  
-  ion-img {
-      
+
+    ion-img {
       width: 80%;
       height: 0;
       padding-bottom: 80%;
-    img{
-      background: rgb(28, 34, 51) !important;
-      
+      img {
+        background: rgb(28, 34, 51) !important;
+      }
     }
   }
-  
-  
-}
 
-.content {
-  background: #fff;
+  .legenda-card {
+    width: 320px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
 
-  ion-card{
-    position: fixed;
-    right: 0;
-    bottom: 10px;
-    width: 16%;
-    height: 44%;
-    background: rgb(28, 34, 51);
-    
-    color: white;
+  .content {
+    background: #fff;
 
-    @include respond-to(xs) { width: 50% !important; }
-    @include respond-to(md) { width: 35% !important; }
-    @include respond-to(lg) { width: 30% !important; }
-    @include respond-to(xl) { width: 16% !important; }
-      
-    overflow-y: scroll;
-    
+    ion-card.legenda-card {
+      position: fixed;
+      right: 0;
+      bottom: 10px;
+      background: rgb(28, 34, 51);
+      color: white;
+      width: 20%;
+      max-height: 60vh;
+      overflow-y: auto;
 
+      @media (max-width: 600px) {
+        width: 230px;
+      }
+    }
 
-    ion-card-header{
+    ion-card-header {
       color: white;
     }
-    
-  }
 
-  .blocoLegenda{
-    height: 100%;
-    min-height: 20px;
-    max-height: 22px;
-  }
-
-  .blocoLegendaLinha{
-    height: 2px;
-    min-height: 2px;
-    max-height: 2px;
-  }
-
-  .btn-infowindow {
-    width: 120px;
-    height: 35px;
-    margin-top: 5px;
-    margin-left: 15%;
-    border-radius: 5px;
-    background-color: #2467b6;
-    color: #fff;
-    font-weight: bold;
-    font-size: 12pt;
-  }
-
-  .col-img {
-    text-align: center;
-    
-    img {
-      height: 350px;
-    }
-  }
-
-  .list {
-    margin-top: 10px;
-    max-width: 100%;
-    max-height: 280px;
-    overflow-y: scroll;
-    border: 1px solid #c2c2c2;
-
-    ion-item {
-      margin-left: 10px;
-      margin-right: 10px;
+    .blocoLegenda {
+      height: 100%;
+      min-height: 20px;
+      max-height: 22px;
     }
 
-    .title {
-      font-size: 11px;
-      color: #787878;
-      text-align: left;
+    .blocoLegendaLinha {
+      height: 2px;
+      min-height: 2px;
+      max-height: 2px;
     }
 
-    .label {
-      font-size: 11px;
-      color: #787878;
-      text-align: left;
+    .btn-infowindow {
+      width: 120px;
+      height: 35px;
+      margin-top: 5px;
+      margin-left: 15%;
+      border-radius: 5px;
+      background-color: #2467b6;
+      color: #fff;
+      font-weight: bold;
+      font-size: 12pt;
+    }
+
+    .col-img {
+      text-align: center;
+
+      img {
+        height: 350px;
+      }
+    }
+
+    .list {
+      margin-top: 10px;
+      max-width: 100%;
+      max-height: 280px;
+      overflow-y: scroll;
+      border: 1px solid #c2c2c2;
+
+      ion-item {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .title {
+        font-size: 11px;
+        color: #787878;
+        text-align: left;
+      }
+
+      .label {
+        font-size: 11px;
+        color: #787878;
+        text-align: left;
+        padding: 0;
+      }
+    }
+
+    .abas {
       padding: 0;
-    }
-  }
+      border-bottom: 1px solid #eee;
 
-  .abas {
-    padding: 0;
-    border-bottom: 1px solid #eee;
+      ion-row {
+        background-color: #fff;
 
-    ion-row {
-      background-color: #fff;
-      
-      ion-col {
-        cursor: pointer;
-        
-        .item-label {
-          background-color: #fff;
-          left: 0;
-          text-align: center;
-          
-          .label {
-            font-size: 10pt;
-            // color: #fff;
-            color: #2d324f;
-            text-transform: uppercase;
+        ion-col {
+          cursor: pointer;
+
+          .item-label {
+            background-color: #fff;
+            left: 0;
+            text-align: center;
+
+            .label {
+              font-size: 10pt;
+              // color: #fff;
+              color: #2d324f;
+              text-transform: uppercase;
+            }
           }
         }
       }
     }
-  }
 
-  .map-grid {
-    // margin-top: 30px;
-    height: 100%;
-
-    #map {
+    .map-grid {
+      // margin-top: 30px;
       height: 100%;
-      width: 100%;
+
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+
+      .btn-options {
+        position: absolute;
+        bottom: 3%;
+        right: 1%;
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+
+        ion-icon {
+          font-size: 3em;
+          color: #fff;
+        }
+      }
     }
 
-    .btn-options {
-      position: absolute;
-      bottom: 3%;
-      right: 1%;
-      width: 80px;
-      height: 80px;
-      border-radius: 100%;
+    .btn-filtro {
+      background-color: white !important;
+      box-shadow: none !important;
+      border: none !important;
+      padding: 0 !important;
 
       ion-icon {
-        font-size: 3em;
-        color: #fff;
+        color: #007bff !important; // azul vibrante, pode trocar por outro tom
+        font-size: 24px;
       }
     }
 
-    
+    .data-grid {
+      // margin-top: 30px;
+      padding-top: 20px;
+      height: 100%;
+      background: #fff;
+    }
   }
 
-  .data-grid {
-    // margin-top: 30px;
-    padding-top: 20px;
-    height: 100%;
-    background: #fff;
-
-   
-  }
-}
-
-.footer {
-  ion-input, ion-select, ion-datetime {
-    padding: 5px 10px 5px 10px;
-    color: #747474;
-    font-size: 13px;
-    border: 1px solid #c2c2c2;
-    border-radius: 3px;
-    margin-left: 20px;
-  }
-
-  ion-col {
-    padding: 0;
-
-    ion-item {
-      padding: 0;
+  .footer {
+    ion-input,
+    ion-select,
+    ion-datetime {
+      padding: 5px 10px 5px 10px;
+      color: #747474;
+      font-size: 13px;
+      border: 1px solid #c2c2c2;
+      border-radius: 3px;
+      margin-left: 20px;
     }
 
-    ion-label {
+    ion-col {
       padding: 0;
-      p {
+
+      ion-item {
         padding: 0;
-        margin: 0;
-        font-size: 11px;
+      }
+
+      ion-label {
+        padding: 0;
+        p {
+          padding: 0;
+          margin: 0;
+          font-size: 11px;
+        }
       }
     }
   }
-}
-
 }

@@ -7,11 +7,7 @@
 </ion-header>
 
 <ion-content class="login">
-
   <div class="logo">
-    <ion-grid class="img img-centralize">
-      <img src="assets/imgs/logo-inventhus-branca.png" />
-    </ion-grid>
     <ion-grid class="img-certare img-centralize">
       <img src="assets/imgs/logo-certare-branca.png" />
     </ion-grid>
@@ -20,31 +16,52 @@
   <ion-grid class="grid-form">
     <ion-row justify-content-center>
       <div class="form-margin">
-
         <form class="form" [formGroup]="loginForm" novalidate>
-
           <div text-center class="mbottom">
-            <ion-input type="email" #email formControlName="email" id="email" placeholder="{{'login.email' | translate}}" (keyup.enter)="focusInput(password)"></ion-input>
-            <ion-label class="error-message" *ngIf="loginForm.controls.email.invalid  && (submitAttempt)">{{'login.email_desc' | translate}}</ion-label>
+            <ion-input
+              type="email"
+              #email
+              formControlName="email"
+              id="email"
+              placeholder="{{'login.email' | translate}}"
+              (keyup.enter)="focusInput(password)"
+            ></ion-input>
+            <ion-label
+              class="error-message"
+              *ngIf="loginForm.controls.email.invalid  && (submitAttempt)"
+              >{{'login.email_desc' | translate}}</ion-label
+            >
           </div>
           <div text-center>
-            <ion-input #password type="password" formControlName="password" id="password" placeholder="{{'login.pass' | translate}}" (keyup.enter)="login()"></ion-input>
-            <ion-label class="error-message" *ngIf="loginForm.controls.password.invalid  && (submitAttempt)">{{'login.pass_desc' | translate}}</ion-label>
+            <ion-input
+              #password
+              type="password"
+              formControlName="password"
+              id="password"
+              placeholder="{{'login.pass' | translate}}"
+              (keyup.enter)="login()"
+            ></ion-input>
+            <ion-label
+              class="error-message"
+              *ngIf="loginForm.controls.password.invalid  && (submitAttempt)"
+              >{{'login.pass_desc' | translate}}</ion-label
+            >
           </div>
-
         </form>
 
         <ion-label class="right">
-          <span class="btn-link italy" (click)="showRecoverPassword()">{{'login.forgotpass' | translate}}</span>
+          <span class="btn-link italy" (click)="showRecoverPassword()"
+            >{{'login.forgotpass' | translate}}</span
+          >
         </ion-label>
-
       </div>
-
     </ion-row>
 
     <ion-row align-items-center justify-content-center>
       <div class="form-margin">
-        <button ion-button (click)="login()" class="btn" block>{{'login.submit' | translate}}</button>
+        <button ion-button (click)="login()" class="btn" block>
+          {{'login.submit' | translate}}
+        </button>
       </div>
     </ion-row>
 
@@ -55,7 +72,6 @@
       </ion-label>
     </ion-row>
 
-
     <ion-row hideWhen="cordova">
       <ion-item class="item-browser" mode="ios" no-lines>
         <p class="text-msg">{{'login.browsers' | translate}}</p>
@@ -63,24 +79,23 @@
       <ion-item class="item-browser" mode="ios" no-lines>
         <ion-avatar item-end>
           <a href="https://www.google.com.br/chrome/" target="_blank">
-            <img src="assets/imgs/icon-chrome.png">
+            <img src="assets/imgs/icon-chrome.png" />
           </a>
         </ion-avatar>
         <ion-avatar item-end>
           <a href="https://www.mozilla.org/pt-BR/firefox/new/" target="_blank">
-            <img src="assets/imgs/icon-firefox.png">
+            <img src="assets/imgs/icon-firefox.png" />
           </a>
         </ion-avatar>
       </ion-item>
     </ion-row>
-
   </ion-grid>
-
 </ion-content>
-
 
 <ion-footer mode="ios" class="footer-versao">
   <ion-toolbar mode="ios" class="custom-toolbar">
-    <ion-title mode="ios" class="toolbar-title">Versão: {{versao}}{{isDev}}</ion-title>
+    <ion-title mode="ios" class="toolbar-title"
+      >Versão: {{versao}}{{isDev}}</ion-title
+    >
   </ion-toolbar>
 </ion-footer>

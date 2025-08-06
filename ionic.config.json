@@ -13,6 +13,6 @@
       "path": "/identidade/api/permissions-token/CERTARE",
       "proxyUrl": "https://sistemas.detran.ce.gov.br"
     }
-  ]
-
+  ],
+  "app_id": ""
 }

@@ -11,157 +11,96 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-grid class="grid-content">
+    <ion-item>
+      <label item-start>
+        <span class="title-rg">Rotas de Ônibus</span>
+      </label>
+      <input
+        type="file"
+        #fileDepRotas
+        class="hidden"
+        (change)="uploadFile(fileDepRotas.files, 'rotas')"
+      />
+      <button
+        ion-button
+        color="gray"
+        mode="ios"
+        class="btn-add"
+        (click)="fileDepRotas.click()"
+        item-end
+      >
+        Carregar .CSV
+      </button>
+    </ion-item>
+  </ion-grid>
 
   <ion-grid class="grid-content">
+    <ion-item>
+      <label item-start>
+        <span class="title-rg">Ponto de Seção</span>
+      </label>
+      <input
+        type="file"
+        #fileDepPontoSecao
+        class="hidden"
+        (change)="uploadFile(fileDepPontoSecao.files, 'pontoSecao')"
+      />
+      <button
+        ion-button
+        color="gray"
+        mode="ios"
+        class="btn-add"
+        (click)="fileDepPontoSecao.click()"
+        item-end
+      >
+        Carregar .CSV
+      </button>
+    </ion-item>
+  </ion-grid>
 
+  <!-- <ion-grid class="grid-content">
     <ion-item>
       <label item-start>
         <span class="title-rg">Acidentes</span>
       </label>
-      <input type="file" #fileDepAcidentes class="hidden" (change)="uploadFile(fileDepAcidentes.files, 'acidentes')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepAcidentes.click()" item-end>Carregar .CSV</button>    
+      <input
+        type="file"
+        #fileDepAcidentes
+        class="hidden"
+        (change)="uploadFile(fileDepAcidentes.files, 'acidentes')"
+      />
+      <button
+        ion-button
+        color="gray"
+        mode="ios"
+        class="btn-add"
+        (click)="fileDepAcidentes.click()"
+        item-end
+      >
+        Carregar .CSV
+      </button>
     </ion-item>
-
-  </ion-grid>
+  </ion-grid> -->
 
   <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">Defensas</span>
-      </label>
-      <input type="file" #fileDepDefensas class="hidden" (change)="uploadFile(fileDepDefensas.files, 'defensas')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepDefensas.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-
- 
-  <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">Pórticos</span>
-      </label>
-      <input type="file" #fileDepPortico class="hidden" (change)="uploadFile(fileDepPortico.files, 'portico')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepPortico.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-
-  
-  <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">Semi-Pórticos</span>
-      </label>
-      <input type="file" #fileDepSp class="hidden" (change)="uploadFile(fileDepSp.files, 'semiPortico')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepSp.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-
-  <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">Pontes</span>
-      </label>
-      <input type="file" #fileDepPontes class="hidden" (change)="uploadFile(fileDepPontes.files, 'ponte')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepPontes.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-
-
-  <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">Fiscalização Eletrônica</span>
-      </label>
-      <input type="file" #fileDepFe class="hidden" (change)="uploadFile(fileDepFe.files, 'fiscalizacaoEletronica')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepFe.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-
-
-  <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">Ocupação de Faixa de Domínio</span>
-      </label>
-      <input type="file" #fileDepFd class="hidden" (change)="uploadFile(fileDepFd.files, 'faixaDeDominio')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepFd.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-  
-
-  <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">Limite de Município</span>
-      </label>
-      <input type="file" #fileDepLm class="hidden" (change)="uploadFile(fileDepLm.files, 'limiteMunicipio')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepLm.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-
-
-  <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">Sinalização Horizontal</span>
-      </label>
-      <input type="file" #fileDepSh class="hidden" (change)="uploadFile(fileDepSh.files, 'sinalizacaoHorizontal')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepSh.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-
-  <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">SRE</span>
-      </label>
-      <input type="file" #fileDepSre class="hidden" (change)="uploadFile(fileDepSre.files, 'sre')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepSre.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-
-  <ion-grid class="grid-content">
-
-    <ion-item>
-      <label item-start>
-        <span class="title-rg">Estradas</span>
-      </label>
-      <input type="file" #fileDepEstradas class="hidden" (change)="uploadFile(fileDepEstradas.files, 'estradas')">
-      <button ion-button color="gray" mode="ios" class="btn-add" (click)="fileDepEstradas.click()" item-end>Carregar .CSV</button>    
-    </ion-item>
-
-  </ion-grid>
-
-
-  <ion-grid class="grid-content">
-
     <ion-row>
       <ion-col col-lg-3 col-xl-3 col-12>
         <span class="file-rg">{{filename?.name}}</span>
       </ion-col>
       <ion-col col-lg-3 col-xl-3 col-12>
-        <button ion-button mode="ios" color="danger" block (click)="saveFirebase()" [disabled]="!isCarregado">Upload</button>
+        <button
+          ion-button
+          mode="ios"
+          color="danger"
+          block
+          (click)="saveFirebase()"
+          [disabled]="!isCarregado"
+        >
+          Upload
+        </button>
       </ion-col>
     </ion-row>
-
   </ion-grid>
 
   <!-- <ion-grid class="grid-content">
@@ -173,5 +112,4 @@
     </ion-row>
 
   </ion-grid> -->
-
 </ion-content>

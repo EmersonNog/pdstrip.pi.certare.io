@@ -1,23 +1,23 @@
 .split-pane-side {
-    // @include respond-to(xl) { max-width: 180px !important; }
-    @include respond-to(xl) { max-width: 20% !important; }
-    @include respond-to(lg) { max-width: 20% !important; }
+  // @include respond-to(xl) { max-width: 180px !important; }
+  @include respond-to(xl) {
+    max-width: 20% !important;
+  }
+  @include respond-to(lg) {
+    max-width: 20% !important;
+  }
 
-
-    .list{
-      height: 100%;
-      background-color: rgb(28, 34, 51) !important;
-      margin-bottom: 0 !important;
-     
-    
-      
-    }
+  .list {
+    height: 100%;
+    background-color: rgb(28, 34, 51) !important;
+    margin-bottom: 0 !important;
+  }
   .menu {
     // Variaveis
     //363441
-    $background-color: rgb(28, 34, 51) ;
+    $background-color: rgb(28, 34, 51);
     $text-color: #fff;
-    $font-family: 'Roboto';
+    $font-family: "Roboto";
     $font-size: 14px;
     height: 100% !important;
 
@@ -29,14 +29,13 @@
     .img-logo-menu {
       // height: 100%;
       // width: 100%;
-      // position: absolute; 
+      // position: absolute;
       bottom: 0;
       // margin-top: 15px;
       background-color: rgb(28, 34, 51);
       margin-top: 5%;
-      
 
-      ion-row{
+      ion-row {
         border-radius: 100px;
         background-color: #fff;
         width: 80%;
@@ -60,26 +59,24 @@
       }
 
       .color-div-menu {
-        background-color: rgb(28, 34, 51) !important; 
+        background-color: rgb(28, 34, 51) !important;
 
         ion-label {
           margin: 0 0 12px 0;
         }
       }
-      
+
       .img-logo1-menu {
-        img{
-          width: 140px;
+        img {
+          width: 60%;
           height: auto;
-          // width: 65%;
-          // height: 30%;
         }
       }
-      
+
       .img-logo3-menu {
         margin-top: 15px;
 
-        img{
+        img {
           width: 60px;
           height: auto;
           // width: 30%;
@@ -88,7 +85,7 @@
       }
 
       .img-logo2-menu {
-        img{
+        img {
           width: 60%;
           // height: 30%;
           background: rgb(28, 34, 51);
@@ -107,18 +104,13 @@
       margin-bottom: 50px;
     }
 
-    .menu-item:hover{
+    .menu-item:hover {
       cursor: pointer;
       background-color: #333399;
     }
 
-    .menu-item-logout {
-      padding-top: 30px;
-      padding-bottom: 30px;
-    }
-
     .menu-item-divider {
-      font-family: 'Roboto';
+      font-family: "Roboto";
       font-weight: 500;
       font-size: 11px;
       color: #4b646f;
@@ -126,11 +118,10 @@
       text-transform: uppercase;
     }
 
-
     .menu-item {
       background-color: $background-color;
       color: #fff;
-      font-family: 'Roboto';
+      font-family: "Roboto";
       font-weight: 500;
       font-size: $font-size;
 
@@ -142,12 +133,11 @@
       }
 
       .text-menu {
-        font-family: 'Roboto';
+        font-family: "Roboto";
         font-weight: 500;
         font-size: 14px;
       }
     }
-
   }
 
   .versao {

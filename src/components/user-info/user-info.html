@@ -1,8 +1,7 @@
 <ion-card class="card-user">
-
   <ion-item class="user-menu-item item_align" no-lines>
     <ion-avatar item-start>
-      <img [src]="user_image" class="img"/>
+      <img [src]="user_image" class="img" />
     </ion-avatar>
     <h2 class="name">{{user?.name}}</h2>
     <p class="profile" text-lowercase>{{user?.email}}</p>
@@ -10,4 +9,3 @@
     <!-- <p class="profile" *ngIf="user?.isAdmin()">Administrador</p> -->
   </ion-item>
 </ion-card>
-

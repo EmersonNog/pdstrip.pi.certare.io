@@ -16,13 +16,6 @@ https://www.figma.com/file/n1KvT9IuUujTKBOE81aHEx/UI-Icon-set-tetrisly-com?node-
 
 ---
 
-## Conta do Firebase
-
-**email**: dev.certare@gmail.com
-**senha**: ********************
-
----
-
 ## Conta de Acesso ao Sistema
 
 **email**: seu-email
@@ -30,7 +23,7 @@ https://www.figma.com/file/n1KvT9IuUujTKBOE81aHEx/UI-Icon-set-tetrisly-com?node-
 
 ---
 
-## Versão 
+## Versão
 
 **node 9.11.2**
 
@@ -82,6 +75,7 @@ $ ionic cordova build browser --release --prod
 ---
 
 ## BUILD PARA WEB
+
 ```bash
 $ npm run build --prod
 $ npm run ionic:build --prod
@@ -89,6 +83,7 @@ $ npm run build --aot --uglifyjs --minifyjs --minifycss
 ```
 
 ### BUILD (LIMPAR CACHE)
+
 ```bash
 $ ionic build --prod && npm run postbuild
 $ ionic build --minifyjs --minifycss && npm run postbuild
@@ -97,6 +92,7 @@ $ ionic build --minifyjs --minifycss && npm run postbuild
 ---
 
 ## DEPLOY PARA O FIREBASE HOSTING
+
 ```bash
 $ npm install -g firebase-tools
 $ firebase login
@@ -109,6 +105,7 @@ $ firebase use --add sistema-onu
 ---
 
 ## Otimizar imagens
+
 https://tinypng.com/
 
 ---
@@ -144,6 +141,7 @@ npm install --save @ionic-native/facebook
 ---
 
 ## Cache Ionic Browser
+
 [Arquivos JS gerados: 0.js, 1.js, etc...](https://forum.ionicframework.com/t/bundled-files-and-cache-busting-lazy-loading/109114/9)
 [Arquivos css e js gerados e atualizados no index.html](https://gist.github.com/meirmsn/9b37d6c500654b9a487e0c0a72583ef2)
 

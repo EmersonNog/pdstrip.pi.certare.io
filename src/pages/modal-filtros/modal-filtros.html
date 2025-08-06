@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Filtros de Camadas</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()" style="color: rgb(32, 255, 118)">
+        <ion-icon name="checkmark" style="color: rgb(72, 255, 142)"></ion-icon>
+        <span style="margin-left: 6px; color: rgb(72, 255, 142)"
+          >Aplicar Filtro</span
+        >
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- ROTAS -->
+  <ion-item-divider color="light">
+    <ion-label>
+      <ion-icon name="swap"></ion-icon>
+      Rotas
+    </ion-label>
+  </ion-item-divider>
+  <ion-item>
+    <ion-label>Exibir Rotas</ion-label>
+    <ion-checkbox
+      [(ngModel)]="rotasAtivas"
+      (ionChange)="emitChange()"
+    ></ion-checkbox>
+  </ion-item>
+  <div
+    *ngIf="rotasAtivas && carregandoOrigens"
+    style="text-align: center; margin: 36px 0"
+  >
+    <ion-spinner name="bubbles"></ion-spinner>
+    <div style="margin-top: 12px; color: #888">
+      Carregando origens disponíveis...
+    </div>
+  </div>
+  <ion-item *ngIf="rotasAtivas && !carregandoOrigens">
+    <ion-label>
+      <ion-icon name="pin"></ion-icon>
+      Origem
+    </ion-label>
+    <ion-select
+      [(ngModel)]="origemSelecionada"
+      (ionChange)="onOrigemChange()"
+      interface="popover"
+      placeholder="Selecione a origem"
+    >
+      <ion-option value="">Todas as origens</ion-option>
+      <ion-option *ngFor="let origem of origensDisponiveis" [value]="origem">
+        {{ origem }}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- PONTOS DE SEÇÃO -->
+  <ion-item-divider color="light">
+    <ion-label>
+      <ion-icon name="bus"></ion-icon>
+      Pontos de Seção
+    </ion-label>
+  </ion-item-divider>
+  <ion-item>
+    <ion-label>Exibir Pontos de Seção</ion-label>
+    <ion-checkbox
+      [(ngModel)]="pontosSecaoAtivos"
+      (ionChange)="onTogglePontosSecao()"
+    ></ion-checkbox>
+  </ion-item>
+  <ion-item *ngIf="pontosSecaoAtivos && carregandoCidades">
+    <div
+      *ngIf="rotasAtivas && carregandoOrigens"
+      style="text-align: center; margin: 36px 0"
+    >
+      <ion-spinner name="bubbles"></ion-spinner>
+      <div style="margin-top: 12px; color: #888">
+        Carregando origens disponíveis...
+      </div>
+    </div>
+  </ion-item>
+  <ion-item *ngIf="pontosSecaoAtivos && !carregandoCidades">
+    <ion-label>Cidade</ion-label>
+    <ion-select [(ngModel)]="cidadeSelecionada" (ionChange)="onCidadeChange()">
+      <ion-option value="">Todas</ion-option>
+      <ion-option *ngFor="let cidade of cidadesDisponiveis" [value]="cidade">
+        {{ cidade }}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- ACIDENTES -->
+  <!-- <ion-item-divider color="light">
+    <ion-label>
+      <ion-icon name="warning"></ion-icon>
+      Acidentes
+    </ion-label>
+  </ion-item-divider>
+  <ion-item>
+    <ion-label>Exibir Acidentes</ion-label>
+    <ion-checkbox
+      [(ngModel)]="acidentesAtivos"
+      (ionChange)="emitChange()"
+    ></ion-checkbox>
+  </ion-item> -->
+</ion-content>
